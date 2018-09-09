@@ -15,12 +15,12 @@ def initTabel():
     connection.commit()
     connection.close()
 
-def addBlock():
+def addBlock(block_number,create_date):
     connection = sqlite3.connect(__databaseFile)
     cursor = connection.cursor()
 
     print("Add block to table")
-    sql_command = str(qy.get_add_block_query())
+    sql_command = str(qy.get_add_block_query(block_number,create_date))
     cursor.execute(sql_command)
 
     # never forget this, if you want the changes to be saved:
@@ -36,7 +36,7 @@ def selectTable():
     cursor.execute(sql_command)
 
     print("Print table")
-    result = cursor.fetchall() 
+    result = cursor.fetchall()  
     for r in result:
         print(r)
 
