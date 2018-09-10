@@ -5,8 +5,9 @@ print("The block analysis begins.")
 
 sql.initTabel()
 
-sql.addBlock(4,"1961-10-25")
+sql.addBlock(2,"1961-10-25")
 
 sql.selectTable()
 
-parser.read_hash()
+block_trans = parser.read_hash('Blocks/blk00003.dat')
+print("Hash Values:" + str(block_trans))
