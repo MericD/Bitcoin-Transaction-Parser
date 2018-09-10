@@ -21,7 +21,10 @@ def addBlock(block_number,create_date):
 
     print("Add block to table")
     sql_command = str(qy.get_add_block_query(block_number,create_date))
-    cursor.execute(sql_command)
+    try:
+        cursor.execute(sql_command)
+    except sqlite3.IntegrityError:
+        print('Oops!  That was no valid number: '+ str(block_number))
 
     # never forget this, if you want the changes to be saved:
     connection.commit()
