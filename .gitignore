@@ -1,1 +1,8 @@
 geckodriver
+.DS_Store
+SQL/__pycache__
+blockchain.db
+*.db
+*.pyc
+*.dat
+*.log
