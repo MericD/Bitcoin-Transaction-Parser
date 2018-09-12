@@ -1,9 +1,10 @@
 from SQL import sqlite as sql
-from bitcoinrpc import rpc
+from rpc import rpc
 
 print("The block analysis begins.")
 
-#TODO get transaction raw information for block 1
+block_trans = rpc.get_transactions()
+print(block_trans)
 
 #TODO find OP_RESULT, etc 
 
