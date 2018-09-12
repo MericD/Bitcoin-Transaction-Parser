@@ -1,16 +1,13 @@
 from SQL import sqlite as sql
-from BlockParser import parser
-from ChainQueryCrawler import crwaler
+from bitcoinrpc import rpc
 
 print("The block analysis begins.")
 
-#TODO starts the function for every .dat file in ./Blocks. also wie compare from the start number and finale number
-block_trans = parser.read_hash('Blocks/blk00003.dat')
-print("Hash Values:" + str(block_trans))
+#TODO get transaction raw information for block 1
 
-json_file = crwaler.start_crwaler("492fcdecf0803a458c0240b4947063d5496df6f9b95056f33de73e391110f805")
+#TODO find OP_RESULT, etc 
 
-#TODO find OP_RESULT
+#TODO save it in database
 sql.initTabel()
 sql.addBlock(2,"1961-10-25")
 sql.selectTable()
