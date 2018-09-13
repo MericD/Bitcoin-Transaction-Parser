@@ -1,14 +1,12 @@
-from SQL import sqlite as sql
-from rpc import rpc
+from Rpc import rpc
+from Core import core
+
+__databaseFile = "blockchain.db"
 
 print("The block analysis begins.")
 
-#block_trans = rpc.get_transactions()
-#print(block_trans)
+block_trans = rpc.get_transactions()
 
-#TODO find OP_RESULT, etc 
+core.find_op_result(block_trans)
 
-#TODO save it in database
-sql.initTabel()
-sql.addBlock(1, "1961-10-25", "transaction_id2", 2, 200 ,300, 400, "op_result")
-sql.selectTable()
+core.save_result_in_databse(__databaseFile)

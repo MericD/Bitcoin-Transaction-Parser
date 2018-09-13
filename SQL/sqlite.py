@@ -1,10 +1,7 @@
 from SQL import querys as qy
 import sqlite3
 
-__databaseFile = "blockchain.db"
-
-def initTabel():
-    connection = sqlite3.connect(__databaseFile)
+def initTabel(connection):
     cursor = connection.cursor()
 
     execute_command(cursor,qy.get_create_table_query())
@@ -12,10 +9,8 @@ def initTabel():
     
     # never forget this, if you want the changes to be saved:
     connection.commit()
-    connection.close()
 
-def addBlock(block_number, create_date, transaction_id, version, tx_size ,vin_size, vout_size,op_result):
-    connection = sqlite3.connect(__databaseFile)
+def addBlock(connection, block_number, create_date, transaction_id, version, tx_size ,vin_size, vout_size,op_result):
     cursor = connection.cursor()
 
     print("Add block to table")
@@ -26,10 +21,8 @@ def addBlock(block_number, create_date, transaction_id, version, tx_size ,vin_si
 
     # never forget this, if you want the changes to be saved:
     connection.commit()
-    connection.close()
 
-def selectTable():
-    connection = sqlite3.connect(__databaseFile)
+def selectTable(connection):
     cursor = connection.cursor()
 
     execute_command(cursor,qy.get_select_table())
@@ -40,7 +33,6 @@ def selectTable():
 
     # never forget this, if you want the changes to be saved:
     connection.commit()
-    connection.close()
 
 def execute_command(cursor, sql_command):
     try:
