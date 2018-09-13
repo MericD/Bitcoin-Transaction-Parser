@@ -42,7 +42,7 @@ def get_op_result(value):
     op_result = ""
     for i in range(len(value["vout"])):
         potential_op_result = value["vout"][i]["scriptPubKey"]["asm"]
-        #if potential_op_result.startswith('0496b53'): For Block 1 to find a transcation
+        #if potential_op_result.startswith('0496b53'): #For Block 1 to find a transcation
         if potential_op_result.startswith('OP_RETURN'):
             #add every op_result to the object
             if "" == op_result:
