@@ -6,7 +6,8 @@ def find_op_result(block_trans):
     block_trans_result = {}
     for key, trans in block_trans.items():
         trans_result = transaction_contens_op_result(trans)
-        block_trans_result.update({key:trans_result})
+        if len(trans_result) > 0:
+            block_trans_result.update({key:trans_result})
     return block_trans_result
 
 def save_result_in_databse(__databaseFile, find_block_trans):
