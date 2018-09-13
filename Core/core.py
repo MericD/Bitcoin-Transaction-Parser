@@ -42,7 +42,7 @@ def get_op_result(value):
     op_result = ""
     for i in range(len(value["vout"])):
         potential_op_result = value["vout"][i]["scriptPubKey"]["asm"]
-        if potential_op_result.startswith('0496'):
+        if potential_op_result.startswith('OP_RETURN'):
             #add every op_result to the object
             if "" == op_result:
                 op_result = str(potential_op_result)

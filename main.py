@@ -1,12 +1,25 @@
 from Rpc import rpc
 from Core import core
 
+###Parametet
+# Name of the database
 __databaseFile = "blockchain.db"
-find_block_trans = {}
-print("The block analysis begins.")
 
-block_trans = rpc.get_transactions(1)
+#The first block witch be analyzed
+__start =1
+#__start =319998
 
+#The last block witch be analyzed
+__end =1
+#__end =319998 
+
+#Get all Blocks and transactions
+while __start < __end+1:
+    block_trans = rpc.get_transactions(__start)
+    __start += 1
+
+#Filter all transaction witch doesn`t include an op_result
 find_block_trans = core.find_op_result(block_trans)
  
-core.save_result_in_databse(__databaseFile, find_block_trans )
+#Save all transaction with an op_result
+core.save_result_in_databse(__databaseFile, find_block_trans)
