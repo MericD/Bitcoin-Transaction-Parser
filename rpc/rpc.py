@@ -2,9 +2,8 @@ from Lib.bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 import logging
 import json
 
-def get_transactions():
+def get_transactions(block_number):
     block_trans_dec = {}
-    block_number = 1
 
     rpc_connection= start_connection_to_rpc()
     
