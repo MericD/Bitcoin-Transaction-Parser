@@ -15,15 +15,15 @@ def save_result_in_databse(__databaseFile, find_block_trans):
     sql.initTabel(connection)
     for key_b, trans in find_block_trans.items():
         block_number=key_b
-        create_date="1961-10-25"
+        create_date="1961-10-25" #TODO
         sql.addBlock(connection,block_number, create_date)
 
         for key_t, value in trans.items():
             transaction_id= key_t
-            version=2
-            tx_size=200
-            vin_size=300
-            vout_size=400
+            version=2 #TODO
+            tx_size=200 #TODO
+            vin_size=300 #TODO
+            vout_size=400 #TODO
             op_result= get_op_result(value)
             sql.addTrans(connection,block_number, transaction_id, version, tx_size ,vin_size, vout_size,op_result)
 
