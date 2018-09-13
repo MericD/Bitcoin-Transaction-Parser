@@ -11,7 +11,6 @@ def get_transactions():
     block_hash = get_the_block_hash(rpc_connection, block_number)
 
     block_trans = get_all_transactions(rpc_connection, block_hash)
-    print('We find for the Block '+ str(block_number)+ ' ' + str(len(block_trans)) + 'transactions.')
 
     trans_decoded = decoded_transactions(rpc_connection, block_trans)
 
@@ -24,13 +23,11 @@ def start_connection_to_rpc():
     logging.getLogger("BitcoinRPC").setLevel(logging.DEBUG)
 
     rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:8332"%('rpc', 'bitmaster'))
-    print(rpc_connection.getblockchaininfo())
     return rpc_connection
 
 def get_the_block_hash(rpc_connection, block_number):
     #Step 1 Get the block hash
     block_hash = rpc_connection.getblockhash(block_number)
-    print('We are getting for block ' + str(block_number) + '  the hash value: ' + str(block_hash))
     return block_hash
 
 def get_all_transactions(rpc_connection,block_hash):
