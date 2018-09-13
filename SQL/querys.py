@@ -1,5 +1,5 @@
 #SQL-Statments are private and doesn`t exist a set function
-__create_table_qy = """CREATE TABLE if not exists blockchain ( 
+__create_table_qy = """CREATE TABLE if not exists block ( 
     block_nummber INTEGER PRIMARY KEY, 
     create_date DATE
 );"""
@@ -15,7 +15,7 @@ __create_tx_table_qy = """CREATE TABLE IF NOT EXISTS tx (
 	FOREIGN KEY (block_number) REFERENCES block (block_number)
 );"""
    
-__add_block_qy = """INSERT INTO blockchain 
+__add_block_qy = """INSERT INTO block 
     (block_nummber, create_date) 
     VALUES 
     ({block_number},"{create_date}")
@@ -27,7 +27,7 @@ __add_tx_qy = """INSERT INTO tx
     ("{transaction_id}", {version}, {tx_size}, {vin_size}, {vout_size}, "{op_result}", {block_number})
 ;"""
 
-__select_table_qy = """SELECT * FROM blockchain;"""
+__select_table_qy = """SELECT * FROM block;"""
 
 __select_table_tx_qy = """SELECT * FROM tx;"""
 

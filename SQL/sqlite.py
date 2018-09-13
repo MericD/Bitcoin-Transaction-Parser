@@ -10,15 +10,23 @@ def initTabel(connection):
     # never forget this, if you want the changes to be saved:
     connection.commit()
 
-def addBlock(connection, block_number, create_date, transaction_id, version, tx_size ,vin_size, vout_size,op_result):
+def addBlock(connection, block_number, create_date):
     cursor = connection.cursor()
 
     print("Add block to table")
     
     execute_command(cursor,qy.get_add_block_query(block_number,create_date))
-    execute_command(cursor,qy.get_add_tx_query(transaction_id, version, tx_size ,vin_size, vout_size, op_result, block_number))
     
 
+    # never forget this, if you want the changes to be saved:
+    connection.commit() 
+
+def addTrans(connection,  block_number, transaction_id, version, tx_size ,vin_size, vout_size,op_result):
+    cursor = connection.cursor()
+
+    print("Add trans to table")
+    execute_command(cursor,qy.get_add_tx_query(transaction_id, version, tx_size ,vin_size, vout_size, op_result, block_number))
+    
     # never forget this, if you want the changes to be saved:
     connection.commit()
 
