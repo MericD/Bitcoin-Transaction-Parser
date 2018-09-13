@@ -27,11 +27,6 @@ __add_tx_qy = """INSERT INTO tx
     ("{transaction_id}", {version}, {tx_size}, {vin_size}, {vout_size}, "{op_result}", {block_number})
 ;"""
 
-__select_table_qy = """SELECT * FROM block;"""
-
-__select_table_tx_qy = """SELECT * FROM tx;"""
-
-
 # Returns the query to generate the table.
 def get_create_table_query():
     return __create_table_qy
@@ -40,10 +35,6 @@ def get_create_table_query():
 def get_add_block_query(bn,cd):
     return __add_block_qy.format(block_number=bn,create_date=cd) 
 
-# Returns the query to select the table
-def get_select_table():
-    return __select_table_qy
-
 # Returns the query to generate the table transcation.
 def get_create_tx_table_query():
     return __create_tx_table_qy
@@ -51,8 +42,3 @@ def get_create_tx_table_query():
 # Returns the query to add a tx to the table
 def get_add_tx_query(tx_id, tx_v, tx_s ,tx_vin_size, tx_vout_size, tx_op_result, tx_block_id):
     return __add_tx_qy.format(transaction_id=tx_id, version=tx_v, tx_size=tx_s, vin_size=tx_vin_size, vout_size=tx_vout_size, op_result=tx_op_result, block_number=tx_block_id) 
-
-def get_select_table_tx():
-    return __select_table_tx_qy
-
-

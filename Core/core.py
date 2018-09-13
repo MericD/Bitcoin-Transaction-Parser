@@ -27,7 +27,6 @@ def save_result_in_databse(__databaseFile, find_block_trans):
             op_result= get_op_result(value)
             sql.addTrans(connection,block_number, transaction_id, version, tx_size ,vin_size, vout_size,op_result)
 
-    #sql.selectTable(connection)
     connection.close()
 
 def transaction_contens_op_result(trans):
@@ -43,6 +42,7 @@ def get_op_result(value):
     op_result = ""
     for i in range(len(value["vout"])):
         potential_op_result = value["vout"][i]["scriptPubKey"]["asm"]
+        #if potential_op_result.startswith('0496b53'): For Block 1 to find a transcation
         if potential_op_result.startswith('OP_RETURN'):
             #add every op_result to the object
             if "" == op_result:
