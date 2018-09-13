@@ -6,12 +6,12 @@ from Core import core
 __databaseFile = "blockchain.db"
 
 #The first block witch be analyzed
-__start_block =1
-#__start =319998
+#__start_block =1
+__start_block =319998
 
 #The last block witch be analyzed
-__end_block =1
-#__end =319998 
+#__end_block =1
+__end_block =319998 
 
 #Get all Blocks and transactions
 while __start_block < __end_block+1:
