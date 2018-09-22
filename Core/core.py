@@ -16,7 +16,7 @@ def find_op_return(block_trans):
         if len(trans_result) > 0:
            # save found OP_RETURN in block_trans_result ({transactionID : content of OP_RETURN})
             block_trans_result.update({key:trans_result})
-            #return new dictionary ({transactionID : content of OP_RETURN})
+            #return new dictionary ({transactionID : decoded raw transaction information})
     return block_trans_result
 
 
@@ -29,13 +29,16 @@ def save_result_in_databse(__databaseFile, find_block_trans):
     # initialized SQL tables store in file __databaseFile
     sql.initTabel(connection)
 
-    print("WHAT :" + str(find_block_trans))
-    # search in dictionary ({{block-number : content of OP_RETURN}}) 
+    # search in dictionary ({key->block-number : value->decoded raw transaction information}) 
     for key_b, trans in find_block_trans.items():
+        # the key of the dictionary find_block_trans is the blocknumber and store created-date of it
         block_number=key_b
         create_date=time.ctime(1410356926)
+        # add information from dictionary to the created SQL table
         sql.addBlock(connection,block_number, create_date)
 
+        # the specific value of the dictionary find_block_trans contains needed information for a transaction 
+        # that contains an OP_RETURN field
         for key_t, value in trans.items():
             transaction_id= key_t
             version= value['version']
@@ -43,6 +46,8 @@ def save_result_in_databse(__databaseFile, find_block_trans):
             vin_size=len(value['vin'])
             vout_size=len(value['vout'])
             op_return= get_op_return(value)
+            # add information for transaction from dictionary value 
+            # ({key->block-number : value -> decoded raw transaction information}) to the created SQL table
             sql.addTrans(connection,block_number, transaction_id, version, tx_size ,vin_size, vout_size,op_return)
 
     connection.close()
