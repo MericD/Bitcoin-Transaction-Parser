@@ -29,13 +29,11 @@ def save_result_in_databse(__databaseFile, find_block_trans):
     # initialized SQL tables store in file __databaseFile
     sql.initTabel(connection)
 
-    connection_rpc = rpc.start_connection_to_rpc
     # search in dictionary ({key->block-number : value->decoded raw transaction information}) 
     for key_b, trans in find_block_trans.items():
         # the key of the dictionary find_block_trans is the blocknumber and store created-date of it
         block_number = key_b
-        create_date_get_raw_inf= rpc.get_the_block_hash(connection_rpc, key_b)
-        create_date=time.ctime(rpc.get_all_transactions(connection_rpc,create_date_get_raw_inf)[1])
+        create_date=time.ctime(1410356926)
         # add information from dictionary to the created SQL table
         sql.addBlock(connection, block_number, create_date)
 
