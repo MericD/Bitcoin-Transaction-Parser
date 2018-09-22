@@ -21,7 +21,7 @@ def start_connection_to_rpc():
     logging.basicConfig()
     logging.getLogger("BitcoinRPC").setLevel(logging.DEBUG)
 
-    rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:8332"%('rpc', 'bitmaster'))
+    rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:18332"%('rpc', 'bitmaster'))
     return rpc_connection
 
 def get_the_block_hash(rpc_connection, block_number):

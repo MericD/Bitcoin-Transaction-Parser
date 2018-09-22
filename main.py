@@ -14,6 +14,8 @@ __start_block =319998
 __end_block =319999
 
 #Get all Blocks and transactions
+block_trans={}
+
 while __start_block < __end_block:
     block_trans = rpc.get_transactions(__start_block)
     __start_block += 1
