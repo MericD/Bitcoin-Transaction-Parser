@@ -21,7 +21,7 @@ def save_result_in_databse(__databaseFile, find_block_trans):
 
         for key_t, value in trans.items():
             transaction_id= key_t
-            version=2 #TODO
+            version= value['version']
             tx_size=200 #TODO
             vin_size=300 #TODO
             vout_size=400 #TODO
