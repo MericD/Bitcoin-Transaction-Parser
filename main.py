@@ -7,16 +7,16 @@ __databaseFile = "blockchain.db"
 
 #The first block witch be analyzed
 #__start_block =1
-__start_block =319998
+__start_block =399819
 
 #The last block witch be analyzed
 #__end_block =1
-__end_block =319999
+__end_block =320153
 
 #Get all Blocks and transactions
 block_trans={}
 
-while __start_block < __end_block:
+while __start_block < __end_block + 1:
     block_trans = rpc.get_transactions(__start_block)
     __start_block += 1
 
