@@ -22,9 +22,9 @@ def save_result_in_databse(__databaseFile, find_block_trans):
         for key_t, value in trans.items():
             transaction_id= key_t
             version= value['version']
-            tx_size=200 #TODO
-            vin_size=300 #TODO
-            vout_size=400 #TODO
+            tx_size=value['size']
+            vin_size=len(value['vin'])
+            vout_size=len(value['vout'])
             op_result= get_op_result(value)
             sql.addTrans(connection,block_number, transaction_id, version, tx_size ,vin_size, vout_size,op_result)
 
