@@ -54,8 +54,9 @@ def get_all_transactions(rpc_connection,block_hash):
     #
     block_json = rpc_connection.getblock(block_hash)
     print("\n" + "-----------------------------------------------------" + str(block_json['time']) + "\n")
+    
     block_trans = block_json['tx']
-    block_time = str(block_json['time'])
+    block_time = block_json['time']
     return block_trans, block_time
 
 
