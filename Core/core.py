@@ -29,7 +29,7 @@ def save_result_in_databse(__databaseFile, find_block_trans):
     # initialized SQL tables store in file __databaseFile
     sql.initTabel(connection)
 
-    print("WHAT :" + find_block_trans)
+    print("WHAT :" + str(find_block_trans))
     # search in dictionary ({{block-number : content of OP_RETURN}}) 
     for key_b, trans in find_block_trans.items():
         block_number=key_b
