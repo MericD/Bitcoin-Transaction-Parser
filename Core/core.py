@@ -34,7 +34,7 @@ def save_result_in_databse(__databaseFile, find_block_trans):
     for key_b, trans in find_block_trans.items():
         # the key of the dictionary find_block_trans is the blocknumber and store created-date of it
         block_number = key_b
-        create_date=time.ctime(rpc.get_all_transactions(connection,find_block_trans)[1]
+        create_date = time.ctime(int(rpc.get_all_transactions(rpc.rpc_connection, find_block_trans)[1]))
         # add information from dictionary to the created SQL table
         sql.addBlock(connection, block_number, create_date)
 
