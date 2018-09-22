@@ -7,7 +7,7 @@ __databaseFile = "blockchain.db"
 
 #The first block witch be analyzed
 #__start_block =1
-__start_block =399819
+__start_block =319998
 
 #The last block witch be analyzed
 #__end_block =1
