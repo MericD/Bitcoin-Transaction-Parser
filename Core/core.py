@@ -1,6 +1,7 @@
 import sqlite3
 from SQL import sqlite as sql
 from rpc import rpc
+import time
 
 def find_op_result(block_trans):
     block_trans_result = {}
@@ -15,7 +16,7 @@ def save_result_in_databse(__databaseFile, find_block_trans):
     sql.initTabel(connection)
     for key_b, trans in find_block_trans.items():
         block_number=key_b
-        create_date="1961-10-25" #TODO
+        create_date=time.ctime(1410356926)
         sql.addBlock(connection,block_number, create_date)
 
         for key_t, value in trans.items():
