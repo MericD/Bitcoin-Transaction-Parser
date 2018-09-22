@@ -22,18 +22,19 @@ def find_op_return(block_trans):
 
 
 # save all searched information in database file _databaseFIle
-# find_block_trans contains ({transactionID : content of OP_RETURN})
+# find_block_trans contains ({key->block-number : value -> decoded raw transaction information})
 def save_result_in_databse(__databaseFile, find_block_trans):
     # opens a connection to the SQLite database file __databaseFile
     connection = sqlite3.connect(__databaseFile)
     # initialized SQL tables store in file __databaseFile
     sql.initTabel(connection)
 
+    time = rpc
     # search in dictionary ({key->block-number : value->decoded raw transaction information}) 
     for key_b, trans in find_block_trans.items():
         # the key of the dictionary find_block_trans is the blocknumber and store created-date of it
         block_number = key_b
-        create_date=time.ctime(1410356926)
+        create_date=time.ctime(rpc.get_all_transactions(connection,find_block_trans)[1]
         # add information from dictionary to the created SQL table
         sql.addBlock(connection, block_number, create_date)
 
