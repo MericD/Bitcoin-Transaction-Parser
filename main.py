@@ -17,7 +17,7 @@ __end_block =320153
 block_trans={}
 
 while __start_block < __end_block + 1:
-    block_trans = rpc.get_transactions(__start_block)
+    block_trans.update(rpc.get_transactions(__start_block))
     __start_block += 1
 
 #Filter all transaction witch doesn`t include an op_result
