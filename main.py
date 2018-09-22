@@ -19,11 +19,11 @@ __end_block = config.CONFIG['end_block']
 block_trans = {}
 
 while __start_block < __end_block + 1:
-    block_trans.update(rpc.get_transactions(__start_block))
+    block_trans.update(rpc.get_transactions(__start_block)[0])
     __start_block += 1
 
 #Filter all transactions that contain a field OP_RETURN 
 find_block_trans = core.find_op_return(block_trans)
  
 #Save all transaction with a OP_RETURN field
-core.save_result_in_databse(__databaseFile, find_block_trans)
+core.save_result_in_database(__databaseFile, find_block_trans)
