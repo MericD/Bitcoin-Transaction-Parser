@@ -15,7 +15,7 @@ def get_transactions(block_number):
 
     rpc_connection= start_connection_to_rpc()
     block_hash = get_the_block_hash(rpc_connection, block_number)
-    block_trans = get_all_transactions(rpc_connection, block_hash)[0]
+    block_trans = get_all_transactions(rpc_connection, block_hash)
     trans_decoded = decoded_transactions(rpc_connection, block_trans)
     block_trans_dec.update({block_number : trans_decoded})
 
@@ -54,9 +54,9 @@ def get_all_transactions(rpc_connection,block_hash):
     #
     block_json = rpc_connection.getblock(block_hash)
     print("\n" + "-----------------------------------------------------" + str(block_json['time']) + "\n")
-    
-    block_trans = (block_json['tx'], str(block_json['time']))
-    return block_trans
+    block_trans = block_json['tx']
+    block_time = str(block_json['time'])
+    return block_trans, block_time
 
 
 
