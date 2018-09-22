@@ -1,4 +1,4 @@
-from Rpc import rpc
+from rpc import rpc
 from Core import core
 
 ###Parametet

@@ -1,4 +1,4 @@
-from Lib.bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
+from lib.bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 import logging
 import json
 
