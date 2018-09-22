@@ -1,6 +1,12 @@
 from lib.bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 import logging
 import json
+import config
+
+rpc_user=config.CONFIG['rpc_user']
+rpc_password=config.CONFIG['rpc_password']
+rpc_ip=config.CONFIG['rpc_ip']
+rpc_port=config.CONFIG['rpc_port']
 
 def get_transactions(block_number):
     block_trans_dec = {}
@@ -21,7 +27,7 @@ def start_connection_to_rpc():
     logging.basicConfig()
     logging.getLogger("BitcoinRPC").setLevel(logging.DEBUG)
 
-    rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:18332"%('rpc', 'bitmaster'))
+    rpc_connection = AuthServiceProxy("http://%s:%s@%s:%s"%(rpc_user, rpc_password, rpc_ip, rpc_port))
     return rpc_connection
 
 def get_the_block_hash(rpc_connection, block_number):

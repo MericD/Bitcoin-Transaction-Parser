@@ -4,8 +4,8 @@ import sqlite3
 def initTabel(connection):
     cursor = connection.cursor()
 
-    execute_command(cursor,qy.get_create_table_query())
-    execute_command(cursor,qy.get_create_tx_table_query())
+    __execute_command(cursor,qy.get_create_table_query())
+    __execute_command(cursor,qy.get_create_tx_table_query())
     
     # never forget this, if you want the changes to be saved:
     connection.commit()
@@ -15,7 +15,7 @@ def addBlock(connection, block_number, create_date):
 
     print("Add block to table")
     
-    execute_command(cursor,qy.get_add_block_query(block_number,create_date))
+    __execute_command(cursor,qy.get_add_block_query(block_number,create_date))
     
 
     # never forget this, if you want the changes to be saved:
@@ -25,12 +25,12 @@ def addTrans(connection,  block_number, transaction_id, version, tx_size ,vin_si
     cursor = connection.cursor()
 
     print("Add trans to table")
-    execute_command(cursor,qy.get_add_tx_query(transaction_id, version, tx_size ,vin_size, vout_size, op_result, block_number))
+    __execute_command(cursor,qy.get_add_tx_query(transaction_id, version, tx_size ,vin_size, vout_size, op_result, block_number))
     
     # never forget this, if you want the changes to be saved:
     connection.commit()
 
-def execute_command(cursor, sql_command):
+def __execute_command(cursor, sql_command):
     try:
         sql_command = str(sql_command)
         cursor.execute(sql_command)
