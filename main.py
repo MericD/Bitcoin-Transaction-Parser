@@ -27,4 +27,3 @@ find_block_trans = core.find_op_return(block_trans)
  
 #Save all transaction with a OP_RETURN field
 core.save_result_in_databse(__databaseFile, find_block_trans)
-print("WHAT :" + str(find_block_trans))
