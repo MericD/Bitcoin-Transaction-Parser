@@ -23,7 +23,7 @@ def find_op_return(block_trans):
 
 # save all searched information in database file _databaseFIle
 # find_block_trans contains ({transactionID : content of OP_RETURN})
-def save_result_in_databse(__databaseFile, find_block_trans):
+def save_result_in_database(__databaseFile, find_block_trans):
     # opens a connection to the SQLite database file __databaseFile
     connection = sqlite3.connect(__databaseFile)
     # initialized SQL tables store in file __databaseFile
