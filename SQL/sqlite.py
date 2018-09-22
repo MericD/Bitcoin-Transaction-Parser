@@ -21,11 +21,11 @@ def addBlock(connection, block_number, create_date):
     # never forget this, if you want the changes to be saved:
     connection.commit() 
 
-def addTrans(connection,  block_number, transaction_id, version, tx_size ,vin_size, vout_size,op_result):
+def addTrans(connection,  block_number, transaction_id, version, tx_size ,vin_size, vout_size,op_return):
     cursor = connection.cursor()
 
     print("Add trans to table")
-    __execute_command(cursor,qy.get_add_tx_query(transaction_id, version, tx_size ,vin_size, vout_size, op_result, block_number))
+    __execute_command(cursor,qy.get_add_tx_query(transaction_id, version, tx_size ,vin_size, vout_size, op_return, block_number))
     
     # never forget this, if you want the changes to be saved:
     connection.commit()

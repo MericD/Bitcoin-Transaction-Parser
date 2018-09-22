@@ -3,7 +3,7 @@ from SQL import sqlite as sql
 from rpc import rpc
 import time
 
-def find_op_result(block_trans):
+def find_op_return(block_trans):
     block_trans_result = {}
     for key, trans in block_trans.items():
         trans_result = transaction_contens_op_result(trans)

@@ -1,3 +1,4 @@
+# files to ignore by pushing in github
 geckodriver
 .DS_Store
 SQL/__pycache__
