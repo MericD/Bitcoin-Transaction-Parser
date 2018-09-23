@@ -45,6 +45,7 @@ __add_tx_qy = """INSERT INTO tx
     ("{transaction_id}", {version}, {tx_size}, {vin_size}, {vout_size}, "{op_return}", {block_number})
 ;"""
 
+
 # Returns the query to generate the table
 def get_create_table_query():
     return __create_table_qy
