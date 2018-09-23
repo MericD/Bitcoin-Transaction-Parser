@@ -31,6 +31,7 @@ def save_result_in_database(__databaseFile, find_block_trans):
 
     # search in dictionary ({key->block-number : value->decoded raw transaction information}) 
     for key_b, trans in find_block_trans.items():
+       
         # the key of the dictionary find_block_trans is the blocknumber and store created-date of it
         block_number = key_b
         # set created date of block and convert int in time stamp

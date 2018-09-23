@@ -39,6 +39,7 @@ def get_the_block_hash(rpc_connection, block_number):
 
 
 
+
 def get_all_transactions(rpc_connection,block_hash):
     #Step 2 get transactions of the block
     #One trancation look like this Example:
