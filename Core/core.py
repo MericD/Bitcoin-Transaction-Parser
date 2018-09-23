@@ -47,7 +47,7 @@ def save_result_in_database(__databaseFile, find_block_trans):
             tx_size = value['size']
             vin_size = len(value['vin'])
             vout_size = len(value['vout'])
-            tx_value = "00"#TODO
+            tx_value = get_op_return(value) #TODO
             op_return = get_op_return(value)
             # add information for transaction from dictionary value 
             # ({key->block-number : value -> decoded raw transaction information}) to the created SQL table
@@ -73,6 +73,26 @@ def transaction_contains_op_return(trans):
                 trans_result.update({key:value})
     # return dictionary ({transactionID: OP_RETURN content})
     return trans_result
+
+
+
+def get_tx_value(value):
+    tx_val=""
+    for i in range(len(value["vout"])):
+        potential_tx_value = value["vout"][i]
+        #if potential_op_return.startswith('0496b53'): #For Block 1 to find a transcation
+        # if you find a 'OP_RETURN' string in "vout"
+        if potential_tx_value.startswith('value'):
+            # if no more OP_RETURN is found return the object
+            if "" == tx_val:
+                tx_val = str(potential_tx_value)
+
+             # else add every OP_RETURN to the object if one more is found 
+            else:
+                tx_val = tx_val + ", " + str(potential_tx_value)
+    # return string of found OP_RETURN fields
+    return tx_val 
+
 
 
 
