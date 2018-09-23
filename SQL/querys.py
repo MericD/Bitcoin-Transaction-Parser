@@ -12,8 +12,8 @@ __create_table_qy = """CREATE TABLE if not exists block (
 # a private (SQL statment) query for creating table tx --> contains information of corresponding transaction with columns 
 # version integer - version number of transaction
 # tx_size integer - size of transaction in byte
-# vin_size integer -
-# vout_size integer -
+# vin_size integer - number of elements in vin
+# vout_size integer - number of elements in vout
 # op_return text - additional information in a transaction and need not be specified
 # block_number - block number where the corresponding transaction is save
 #
