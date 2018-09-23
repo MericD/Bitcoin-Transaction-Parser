@@ -79,7 +79,7 @@ def transaction_contains_op_return(trans):
 def get_tx_value(value):
     tx_val=""
     for i in range(len(value["vout"])):
-        potential_tx_value = value["vout"][i]
+        potential_tx_value = value["vout"]
         if potential_tx_value.startswith['value']:
             tx_val = str(potential_tx_value)
         else:
