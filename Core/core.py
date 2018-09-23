@@ -80,17 +80,11 @@ def get_tx_value(value):
     tx_val=""
     for i in range(len(value["vout"])):
         potential_tx_value = value["vout"][i]
-        #if potential_op_return.startswith('0496b53'): #For Block 1 to find a transcation
-        # if you find a 'OP_RETURN' string in "vout"
         if potential_tx_value.startswith('value'):
-            # if no more OP_RETURN is found return the object
-            if "" == tx_val:
-                tx_val = str(potential_tx_value)
-
-             # else add every OP_RETURN to the object if one more is found 
+            if "0" == tx_val:
+                tx_val = "0"
             else:
-                tx_val = tx_val + ", " + str(potential_tx_value)
-    # return string of found OP_RETURN fields
+                tx_val = str(potential_tx_value)
     return tx_val 
 
 
