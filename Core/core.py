@@ -80,7 +80,7 @@ def get_tx_value(value):
     tx_val=""
     for i in range(len(value["vout"])):
         potential_tx_value = value["vout"][i]["n"]
-        if potential_tx_value == value["vout"]["value"]:
+        if potential_tx_value.startswith['"value"']:
             if "" == tx_val:
                 tx_val = str(potential_tx_value)
             else:
