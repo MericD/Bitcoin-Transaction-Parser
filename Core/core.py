@@ -48,7 +48,7 @@ def save_result_in_database(__databaseFile, find_block_trans):
             vin_size = len(value['vin'])
             vout_size = len(value['vout'])
             tx_time = value['time']
-            tx_value = "0" #TODO
+            tx_value = str(value['value'])
             op_return = get_op_return(value)
             # add information for transaction from dictionary value 
             # ({key->block-number : value -> decoded raw transaction information}) to the created SQL table
