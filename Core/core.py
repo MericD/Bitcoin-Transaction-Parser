@@ -52,7 +52,7 @@ def save_result_in_database(__databaseFile, find_block_trans):
             op_return = get_op_return(value)
             # add information for transaction from dictionary value 
             # ({key->block-number : value -> decoded raw transaction information}) to the created SQL table
-            sql.addTrans(connection,block_number, transaction_id, version, tx_size ,vin_size, vout_size, stx_time, tx_value, op_return)
+            sql.addTrans(connection,block_number, transaction_id, version, tx_size ,vin_size, vout_size, tx_time, tx_value, op_return)
 
     connection.close()
 
