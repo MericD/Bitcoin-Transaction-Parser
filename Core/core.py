@@ -83,8 +83,6 @@ def get_tx_value(value):
         potential_tx_value = value["vout"][i]["value"]
         if (not tx_val):
             tx_val = tx_val + ", " + str(potential_tx_value)
-        else:
-            pass
     return tx_val 
 
 
