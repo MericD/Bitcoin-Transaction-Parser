@@ -77,16 +77,20 @@ def transaction_contains_op_return(trans):
 
 
 
+# return all sent Bitcoin value fields in an transaction 
+# value contains decoded raw transaction information 
 def get_tx_value(value):
-    tx_val=""
+    tx_val = ""
+    # search in "vout" (decoded raw transaction information) for value-field 
     for i in range(len(value["vout"])):
         potential_tx_value = value["vout"][i]["value"]
+        # if no one value-field is found return empty string
         if "" == tx_val:
             tx_val = str(potential_tx_value)
+        # else return value-field in transaction or add found value-field to tx_val
         else:
             tx_val = tx_val + ", " + str(potential_tx_value)
     return tx_val 
-
 
 
 
