@@ -6,8 +6,8 @@
 
 CONFIG = {
     'database_file_name': 'blockchain.db',
-    'start_block': 100001,
-    'end_block':125000,
+    'start_block': 125000,
+    'end_block':150000,
     'rpc_user':'rpc',
     'rpc_password':'bitmaster',
     'rpc_ip':'127.0.0.1',
