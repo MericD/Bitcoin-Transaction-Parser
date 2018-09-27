@@ -1,5 +1,6 @@
 from rpc import rpc
 from Core import core
+from Diagram import diagram
 import config
 
 ###Parametet
@@ -18,12 +19,15 @@ __end_block = config.CONFIG['end_block']
 #Get all Blocks and transactions in range of __start_block to __end_block
 block_trans = {}
 
-while __start_block < __end_block + 1:
-    block_trans.update(rpc.get_transactions(__start_block)[0])
-    __start_block += 1
+#while __start_block < __end_block + 1:
+  #  block_trans.update(rpc.get_transactions(__start_block)[0])
+   # __start_block += 1
 
 #Filter all transactions that contain a field OP_RETURN 
-find_block_trans = core.find_op_return(block_trans)
+#find_block_trans = core.find_op_return(block_trans)
  
 #Save all transaction with a OP_RETURN field
-core.save_result_in_database(__databaseFile, find_block_trans)
+#core.save_result_in_database(__databaseFile, find_block_trans)
+
+
+diagram.read_blabla()
