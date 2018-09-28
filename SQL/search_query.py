@@ -6,8 +6,10 @@ WHERE block_number = block_nummber
 GROUP BY block_nummber
 ORDER BY COUNT(*) DESC;"""
 
-
-test= "SELECT block_nummber, create_date FROM block"
+content_op_return = "SELECT op_return FROM tx"
 
 def get_count_number_of_op_return():
     return count_number_of_op_return
+
+def get_content_op_return():
+    return content_op_return

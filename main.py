@@ -29,5 +29,5 @@ block_trans = {}
 #Save all transaction with a OP_RETURN field
 #core.save_result_in_database(__databaseFile, find_block_trans)
 
-
-diagram.read_blabla()
+# create diagram by using created database
+diagram.create_diagrams()
