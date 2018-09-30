@@ -6,6 +6,7 @@ import numpy as np
 import pandas as ps
 import sqlite3
 
+sb.set(style="whitegrid")
 
 
 # connect the sqllite database and return connection
@@ -58,20 +59,24 @@ def diagram_content_OP_RETURN (connection):
     x_val = [y for _,y in result_array]
 
     #plot bar chart with corresponing x and y values and show it
-    f, (ax1,ax2,ax3) = pyplot.subplots(3, 1, figsize=(7, 5), sharex=True)
-    sb.barplot(x=y_val, y=x_val, palette="rocket", ax=ax1)
-    ax1.axhline(0, color="k", clip_on=True)
-    ax1.set_ylabel("Qualitative")
+    #f, (ax1,ax2,ax3) = pyplot.subplots(1, 1, figsize=(7, 5), sharex=True)
+    #sb.barplot(x=x_val, y=y_val, palette="rocket", ax=ax1)
+    #ax1.axhline(0, color="k", clip_on=True)
+    #ax1.set_ylabel("Qualitative")
     
-    sb.despine(bottom=True)
-    pyplot.setp(f.axes, yticks=[])
-    pyplot.tight_layout(h_pad=2)
+    #sb.despine(bottom=True)
+    #pyplot.setp(f.axes, yticks=[])
+    #pyplot.tight_layout(h_pad=2)
+
+
+    sb.catplot(x=y_val, kind=y_val, palette="ch:.25")
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig2 = pyplot.gcf()
     pyplot.show()
     pyplot.draw()
     fig2.savefig('number.png', dpi = 100)
     pyplot.close()
+
 
 
 
@@ -85,8 +90,6 @@ def diagram_burned_btc(connection):
 
 
 
-
-
 # funtion to analyse the op-return content
 def analyze_op_hex (op_array):
     clean_list = [] 
@@ -94,11 +97,7 @@ def analyze_op_hex (op_array):
     for i in op_array:
         for opR in i:
             clean_list = np.append(clean_list , np.array(opR.replace('OP_RETURN ', '')))
-    #print("list:" + str(clean_list.tolist()))
-
-    ############# analyze part here #############
-    print (hex_converting.check_hex(clean_list.tolist()))
-
+    #analyze the hex strings
+    check_hex = (hex_converting.check_hex(clean_list.tolist()))
     # return a list with number of different OP_RETURN field contents
-    content = [[1,'a'],[2,'b'],[3,'c'],[4,'d']]
-    return content
+    return check_hex

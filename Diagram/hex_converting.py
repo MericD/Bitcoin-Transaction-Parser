@@ -5,39 +5,31 @@ import matplotlib.pyplot as pyplot
 
 
 def check_hex(arrayList):
-    hex_ascii(arrayList)
-    #hex_int(arrayList)
-    #hex_large_size(arrayList)
-
-
+    return hex_ascii(arrayList)
 
 
 def hex_ascii(arrayList):
-    print(arrayList)
     count_http = 0
     count_txt = 0
     count_ud = 0
-    ascii = []
 
     for i in arrayList:
-        print(len(i))
         print("sratr for: " +str(i))
-        bin1 = by.unhexlify(i)
-        bin =bin1.decode('unicode-escape')
+        binary = by.unhexlify(i)
+        bin_dec =binary.decode('unicode-escape')
 
-        print("--------------> :" +bin)
+        print("--------------> :" + bin_dec)
 
-        if "https:" in bin:
+        if "https:" in bin_dec:
             count_http = count_http + 1
             print("HTTPS:"+ str(count_http))
             
-        elif "http:" in bin:
+        elif "http:" in bin_dec:
             count_http = count_http + 1
             print("HTTP:"+ str(count_http))
-
         else:
             try:
-                bin.encode('ascii')
+                bin_dec.encode('ascii')
                 print(" ascii")
                 count_txt = count_txt + 1
                 print(count_txt)
@@ -49,13 +41,17 @@ def hex_ascii(arrayList):
             else:
                 count_txt = count_txt + 1
                 print("add 2. : " + str(count_txt))
+    
+    x = ['Website', 'Text/ Number', 'Undefined']
+    y = [count_http, count_txt, count_ud]
+    ascii = list(zip(x,y))
     print (ascii)
+    return ascii
 
 
 
 def isAscii(s):
     return all(ord(c) < 128 for c in s)
-
 
 
 
@@ -67,16 +63,3 @@ def hex_int(i):
     else:   
         print("---------------NOT INT------------")     
     return int_counter
-
-
-def hex_large_size(arrayList):
-    counter = 0
-    for i in arrayList:
-        if 40 <= len(by.unhexlify(i)):
-            counter = counter +1
-            print( "Big size")
-        else:
-            print('small' + str(len(by.unhexlify(i))))
-            pass    
-    return counter 
-       
