@@ -1,5 +1,6 @@
 import matplotlib.pyplot as pyplot
 from SQL import search_query as sql
+from Diagram import hex_converting
 import seaborn as sb
 import numpy as np
 import pandas as ps
@@ -10,8 +11,11 @@ import sqlite3
 # connect the sqllite database and return connection
 def create_diagrams():
     connection = sqlite3.connect("blockchain.db")
+    connection1 = sqlite3.connect("blockchain1.db")
     diagram_history_op_return(connection)
-    diagram_content_OP_RETURN(connection)
+    diagram_content_OP_RETURN(connection1)
+    diagram_burned_btc(connection)
+
 
 
 # create a chart showing the use of the OP_RETURN field in relation to time
@@ -29,9 +33,13 @@ def diagram_history_op_return (connection):
     # bulid with the values for x and y an series for plotting 
     s = ps.Series(y_val, index=x_val)
     # plot line diagram with corresponing x and y values and show it
-    #s.plot()
-    #pyplot.show()
-
+    s.plot()
+    # store current diagram, show it, store it as file and close it for drawing other diagrams
+    fig1 = pyplot.gcf()
+    pyplot.show()
+    pyplot.draw()
+    fig1.savefig('time.png', dpi=100)
+    pyplot.close()
 
 
 
@@ -58,25 +66,40 @@ def diagram_content_OP_RETURN (connection):
     sb.despine(bottom=True)
     pyplot.setp(f.axes, yticks=[])
     pyplot.tight_layout(h_pad=2)
+    # store current diagram, show it, store it as file and close it for drawing other diagrams
+    fig2 = pyplot.gcf()
     pyplot.show()
+    pyplot.draw()
+    fig2.savefig('number.png', dpi = 100)
+    pyplot.close()
+
+
+
+# create a chart showing the number of burned Bitcoins in relation to OP_RETURN content  
+def diagram_burned_btc(connection):
+    read_data = ps.read_sql_query(sql.content_op_return, connection)
+    # put values in data frame in an array
+    list_str_op_retrun = np.array(read_data)
+    return 0
+
+
+
 
 
 
 # funtion to analyse the op-return content
 def analyze_op_hex (op_array):
-    clean_list = []
+    clean_list = [] 
     # remove all 'OP_RETURN' as word in array and store hex in new array 'clean_list'
     for i in op_array:
         for opR in i:
             clean_list = np.append(clean_list , np.array(opR.replace('OP_RETURN ', '')))
-    print(clean_list)
+    print("list:" + str(clean_list.tolist()))
 
     ############# analyze part here #############
 
+    print (hex_converting.check_hex(clean_list.tolist()))
 
     # return a list with number of different OP_RETURN field contents
     content = [[1,'a'],[2,'b'],[3,'c'],[4,'d']]
     return content
-    
-    
-
