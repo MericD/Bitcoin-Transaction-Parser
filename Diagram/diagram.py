@@ -14,7 +14,7 @@ def create_diagrams():
     connection1 = sqlite3.connect("blockchain1.db")
     diagram_history_op_return(connection)
     diagram_content_OP_RETURN(connection1)
-    diagram_burned_btc(connection)
+    #diagram_burned_btc(connection)
 
 
 
@@ -94,10 +94,9 @@ def analyze_op_hex (op_array):
     for i in op_array:
         for opR in i:
             clean_list = np.append(clean_list , np.array(opR.replace('OP_RETURN ', '')))
-    print("list:" + str(clean_list.tolist()))
+    #print("list:" + str(clean_list.tolist()))
 
     ############# analyze part here #############
-
     print (hex_converting.check_hex(clean_list.tolist()))
 
     # return a list with number of different OP_RETURN field contents
