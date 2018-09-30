@@ -54,13 +54,13 @@ def diagram_content_OP_RETURN (connection):
     # values for diagram with content of OP_RETURN an number of different contents
     result_array = analyze_op_hex(list_str_op_retrun)
     # get object for y-axisl    
-    y_val = [x for x,_ in result_array]
+    x_val = [x for x,_ in result_array]
     # get values for x-axis
-    x_val = [y for _,y in result_array]
+    y_val = [y for _,y in result_array]
 
     #plot bar chart with corresponing x and y values and show it
     #f, (ax1,ax2,ax3) = pyplot.subplots(1, 1, figsize=(7, 5), sharex=True)
-    #sb.barplot(x=x_val, y=y_val, palette="rocket", ax=ax1)
+    sb.barplot(x_val, y_val, palette="rocket")
     #ax1.axhline(0, color="k", clip_on=True)
     #ax1.set_ylabel("Qualitative")
     
@@ -69,7 +69,7 @@ def diagram_content_OP_RETURN (connection):
     #pyplot.tight_layout(h_pad=2)
 
 
-    sb.catplot(x=y_val, kind=y_val, palette="ch:.25")
+    #sb.catplot(x_val,y_val, palette="ch:.25")
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig2 = pyplot.gcf()
     pyplot.show()
