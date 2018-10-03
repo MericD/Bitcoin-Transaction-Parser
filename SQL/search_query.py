@@ -8,6 +8,8 @@ ORDER BY COUNT(*) DESC;"""
 
 content_op_return = "SELECT op_return FROM tx"
 
+count_same_op = "SELECT op_return, COUNT(*) FROM tx GROUP BY op_return HAVING COUNT(*) > 1"
+
 def get_count_number_of_op_return():
     return count_number_of_op_return
 

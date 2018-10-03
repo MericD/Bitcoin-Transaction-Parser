@@ -16,13 +16,12 @@ def hex_ascii(arrayList):
     count_txt = 0
     count_ud = 0
     count_dig = 0
-
+    count_doc = 0
 
     for i in arrayList:
         #print("sratr for: " +str(i))
         try:
             binary = by.unhexlify(i)
-            #print("CHECKER:" + str(binary))
             if (len(binary)%2 == 0) or (len(binary)%2 != 0):
                 bin_dec =binary.decode('unicode-escape')
 
@@ -32,28 +31,31 @@ def hex_ascii(arrayList):
                     count_dig += 1
                 else:
                     try:
-                        #print("---------------" + str(check_text(bin_dec)))
                         bin_dec.encode('ascii')
                         count_txt = count_txt + 1
-                        #print("------------ TEXT -----------" + str(bin_dec))
-
                     except:
-                        count_ud= count_ud + 1
-                        #print("NOT -----------" + str(bin_dec))
-                        
+                        if docproof(bin_dec):
+                            count_doc= count_doc + 1     
+                        else:
+                            count_ud = count_ud +1                   
                     else:
-                        if ( 2 <= len(bin_dec.split(" "))) or (bin_dec.encode('ascii')):
+                        if ( 1 <= len(bin_dec.split(" "))) or (bin_dec.encode('ascii')):
                             count_txt = count_txt + 1
         except:
-            count_ud= count_ud + 1
-            print("attentionnnnnnnnnnn----NOOOOOTTTT        " + str(bin_dec))
+            if check_website(str(binary)):
+                #print("----NOOOOOTTTT        " + str(binary) )
+                count_http = count_http + 1
+            else:
+                if docproof(bin_dec):
+                    count_doc= count_doc + 1     
+                else:
+                    count_ud = count_ud +1  
+                    print("----NOOOOOTTTT        " + str(binary) )
 
 
-    x = ['Website', 'Digit', 'Text', 'Undefined']
-    y = [count_http, count_dig, count_txt, count_ud]
+    x = ['Website', 'Digit', 'Text', 'Document', 'Undefined']
+    y = [count_http, count_dig, count_txt, count_doc, count_ud]
     ascii = list(zip(x,y))
-    #print (ascii)
-    #print (ec.list_languages())
     return ascii
 
 
@@ -61,6 +63,13 @@ def hex_ascii(arrayList):
 def isAscii(s):
     return all(ord(c) < 128 for c in s)
 
+
+def docproof(bin_dec):
+    sub = ('DOCPROOG')
+    if any(i in bin_dec for i in sub):
+        return True
+    else:
+        return False
 
 def check_website(bin_dec):
     sub = ('https:', 'http:', 'www.', '.com')
