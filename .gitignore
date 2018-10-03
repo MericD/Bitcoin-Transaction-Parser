@@ -7,3 +7,4 @@ blockchain.db
 *.pyc
 *.dat
 *.log
+*.png
