@@ -56,6 +56,7 @@ def hex_ascii(arrayList):
 
     x = ['Empty','Website', 'Digit', 'Text', 'Document', 'Undefined']
     y = [count_op, count_http, count_dig, count_txt, count_doc, count_ud]
+   
     ascii = list(zip(x,y))
     return ascii
 
