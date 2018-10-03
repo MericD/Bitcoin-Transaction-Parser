@@ -12,9 +12,8 @@ sb.set(style="whitegrid")
 # connect the sqllite database and return connection
 def create_diagrams():
     connection = sqlite3.connect("blockchain.db")
-    connection1 = sqlite3.connect("blockchain1.db")
     diagram_history_op_return(connection)
-    diagram_content_OP_RETURN(connection1)
+    diagram_content_OP_RETURN(connection)
     #diagram_burned_btc(connection)
 
 
@@ -57,19 +56,9 @@ def diagram_content_OP_RETURN (connection):
     x_val = [x for x,_ in result_array]
     # get values for x-axis
     y_val = [y for _,y in result_array]
-
     #plot bar chart with corresponing x and y values and show it
-    #f, (ax1,ax2,ax3) = pyplot.subplots(1, 1, figsize=(7, 5), sharex=True)
     sb.barplot(x_val, y_val, palette="rocket")
-    #ax1.axhline(0, color="k", clip_on=True)
-    #ax1.set_ylabel("Qualitative")
-    
-    #sb.despine(bottom=True)
-    #pyplot.setp(f.axes, yticks=[])
-    #pyplot.tight_layout(h_pad=2)
-
-
-    #sb.catplot(x_val,y_val, palette="ch:.25")
+   
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig2 = pyplot.gcf()
     pyplot.show()
