@@ -53,7 +53,7 @@ def hex_ascii(arrayList):
                     print("----NOOOOOTTTT        " + str(binary) )
 
 
-    x = ['Website', 'Digit', 'Text', 'Document', 'Undefined']
+    x = ['Website', 'Digit', 'Text', 'Document', 'Not decodable']
     y = [count_http, count_dig, count_txt, count_doc, count_ud]
     ascii = list(zip(x,y))
     return ascii
