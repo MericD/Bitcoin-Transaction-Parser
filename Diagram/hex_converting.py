@@ -17,6 +17,7 @@ def hex_ascii(arrayList):
     count_ud = 0
     count_dig = 0
     count_doc = 0
+    count_op = 0
 
     for i in arrayList:
         #print("sratr for: " +str(i))
@@ -48,13 +49,14 @@ def hex_ascii(arrayList):
             else:
                 if docproof(bin_dec):
                     count_doc= count_doc + 1     
+                elif 'OP_RETURN' == str(i):
+                    count_op = count_op +1  
                 else:
                     count_ud = count_ud +1  
-                    print("----NOOOOOTTTT        " + str(binary) )
+                    
+    x = ['Empty','Website', 'Digit', 'Text', 'Document', 'Not decodable']
+    y = [count_op, count_http, count_dig, count_txt, count_doc, count_ud]
 
-
-    x = ['Website', 'Digit', 'Text', 'Document', 'Not decodable']
-    y = [count_http, count_dig, count_txt, count_doc, count_ud]
     ascii = list(zip(x,y))
     return ascii
 
