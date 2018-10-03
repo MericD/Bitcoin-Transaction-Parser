@@ -1,7 +1,7 @@
 from threading import Thread 
 import main
 
-e = 321000
+e = 315000
 r = 2000
 
 for i in range(10):
