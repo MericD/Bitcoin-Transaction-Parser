@@ -2,6 +2,8 @@ from lib.bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 import logging
 import json
 import config
+import sys
+import errno
 
 
 # setted parameters in config.py needed for rpy-connection
@@ -74,8 +76,12 @@ def decoded_transactions(rpc_connection,block_trans):
     #Step 3 get decode raw transactions
     for i in range(len(block_trans)):
         txid = block_trans[i]
-        rawtx = rpc_connection.getrawtransaction(txid)
-        decodedtx = rpc_connection.decoderawtransaction(rawtx)
-        print(decodedtx)
-        trans_decoded.update({txid : decodedtx})
+        try:
+            rawtx = rpc_connection.getrawtransaction(txid)
+            decodedtx = rpc_connection.decoderawtransaction(rawtx)
+            print(decodedtx)
+            trans_decoded.update({txid : decodedtx})
+        except IOError as e:
+            if e.errno == errno.EPIPE:
+                return trans_decoded
     return trans_decoded
