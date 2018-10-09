@@ -1,17 +1,19 @@
 import numpy as np
 import enchant as ec
 import binascii as by
+import pandas as ps
 import matplotlib.pyplot as pyplot
 from enchant.checker import SpellChecker
 
 
 
+ckeck_ud = []
 
 def check_hex(arrayList):
-    return hex_ascii(arrayList)
+    return hex_analyze(arrayList)
 
 
-def hex_ascii(arrayList):
+def hex_analyze(arrayList):
     count_http = 0
     count_txt = 0
     count_ud = 0
@@ -38,7 +40,8 @@ def hex_ascii(arrayList):
                         if docproof(bin_dec):
                             count_doc= count_doc + 1     
                         else:
-                            count_ud = count_ud +1                   
+                            count_ud = count_ud +1
+                            ckeck_ud.append(i)
                     else:
                         if ( 1 <= len(bin_dec.split(" "))) or (bin_dec.encode('ascii')):
                             count_txt = count_txt + 1
@@ -52,8 +55,10 @@ def hex_ascii(arrayList):
                 elif 'OP_RETURN' == str(i):
                     count_op = count_op +1  
                 else:
-                    count_ud = count_ud +1  
-                    
+                    count_ud = count_ud +1
+                    ckeck_ud.append(i)
+  
+              
     x = ['Empty','Website', 'Digit', 'Text', 'Document', 'Not decodable']
     y = [count_op, count_http, count_dig, count_txt, count_doc, count_ud]
 
@@ -94,16 +99,12 @@ def hex_int(digit):
         return False 
          
         
-    
 
+def print_select_op(db):
+    print(db)
+    db_op = np.array(db['op_return'])
+    for i in ckeck_ud:
+        for j in db_op:
+            if i in j: 
+                print (str(i) + "                " + str(j))
 
-def check_text (hex_str):
-    chkr = SpellChecker("en_UK","en_US", "en_AU", "fr_FR","de_DE")
-    chkr.set_text(hex_str)
-    is_word = 0
-    for err in chkr:
-        sug = err.suggest()[0]
-        err.replace(sug)
-        is_word = is_word + 1
-    #Spellchecked = chkr.get_text()
-    #print(Spellchecked)

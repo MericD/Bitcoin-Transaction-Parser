@@ -15,7 +15,8 @@ def create_diagrams():
     diagram_history_op_return(connection)
     diagram_content_OP_RETURN(connection)
     #diagram_burned_btc(connection)
-
+    #db = ps.read_sql_query(sql.select_analyze_op, connection)
+    #hex_converting.print_select_op(ps.DataFrame(db,columns=['transaction_id' , 'tx_value','op_return']))
 
 
 # create a chart showing the use of the OP_RETURN field in relation to time
@@ -90,3 +91,4 @@ def analyze_op_hex (op_array):
     check_hex = (hex_converting.check_hex(clean_list.tolist()))
     # return a list with number of different OP_RETURN field contents
     return check_hex
+
