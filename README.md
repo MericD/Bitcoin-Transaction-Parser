@@ -4,6 +4,10 @@ A python3 script that searches the Bitcoin blockchain and filters the transactio
 ## Motivation
 This script was developed to analyze the op_return fields of bitcoin transactions on different contents and to find illegal activities.
 
+## More Information
+
+After the corresponding transactions have been filtered, the found transactions are saved in a SQLite Database with their corresponding information. Finally, the transactions can be graphically displayed with the seaborn library.
+
 ##  Installing
 Further development requires python3 and pip3.
 
@@ -40,11 +44,12 @@ For reading files:
 pip3 install pandas
 ```
 
+Conection to bitcoin server:
+```
+pip install python-bitcoinrpc
+```
 
-from lib.bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 
-
-### More Information
 
 ## Built With
 
