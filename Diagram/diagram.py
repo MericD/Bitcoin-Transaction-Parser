@@ -5,6 +5,9 @@ import seaborn as sb
 import numpy as np
 import pandas as ps
 import sqlite3
+import threading 
+import time
+
 
 sb.set(style="whitegrid")
 
@@ -14,15 +17,14 @@ def create_diagrams():
     connection = sqlite3.connect("blockchain.db")
     diagram_history_op_return(connection)
     diagram_content_OP_RETURN(connection)
-    #diagram_burned_btc(connection)
-    #db = ps.read_sql_query(sql.select_analyze_op, connection)
-    #hex_converting.print_select_op(ps.DataFrame(db,columns=['transaction_id' , 'tx_value','op_return']))
+
+
 
 
 # create a chart showing the use of the OP_RETURN field in relation to time
 def diagram_history_op_return (connection):
     # create dataframe by using pandas with corresponding SQL statement and the connection to database
-    read_data = ps.read_sql_query(sql.count_number_of_op_return, connection)
+    read_data = ps.read_sql_query(sql.get_count_number_of_op_return(), connection)
     
     # get corresponding columns for the axes
     data = ps.DataFrame(read_data,columns=['create_date','Count_Duplicate'])
@@ -43,14 +45,13 @@ def diagram_history_op_return (connection):
     pyplot.close()
 
 
-
 # create a chart showing the content of the OP_RETURN fields in relation to number of the content
 def diagram_content_OP_RETURN (connection):
     # create dataframe by using pandas with corresponding SQL statement and the connection to database
-    read_data = ps.read_sql_query(sql.content_op_return, connection)
+    read_data = ps.read_sql_query(sql.get_rmv_op_and_analyze_hex(), connection)
+    #print(read_data)
     # put values in data frame in an array
     list_str_op_retrun = np.array(read_data)
-
     # values for diagram with content of OP_RETURN an number of different contents
     result_array = analyze_op_hex(list_str_op_retrun)
     # get object for y-axisl    
@@ -58,8 +59,8 @@ def diagram_content_OP_RETURN (connection):
     # get values for x-axis
     y_val = [y for _,y in result_array]
     #plot bar chart with corresponing x and y values and show it
-    sb.barplot(x_val, y_val, palette="rocket")
-   
+    dia = sb.barplot(x=x_val,y= y_val, palette="rocket")
+    dia.set_xticklabels(labels=x_val, rotation=45, ha='right')
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig2 = pyplot.gcf()
     pyplot.show()
@@ -69,26 +70,13 @@ def diagram_content_OP_RETURN (connection):
 
 
 
-
-# create a chart showing the number of burned Bitcoins in relation to OP_RETURN content  
-def diagram_burned_btc(connection):
-    read_data = ps.read_sql_query(sql.content_op_return, connection)
-    # put values in data frame in an array
-    list_str_op_retrun = np.array(read_data)
-    return 0
-
-
-
-
 # funtion to analyse the op-return content
 def analyze_op_hex (op_array):
-    clean_list = [] 
-    # remove all 'OP_RETURN' as word in array and store hex in new array 'clean_list'
-    for i in op_array:
-        for opR in i:
-            clean_list = np.append(clean_list , np.array(opR.replace('OP_RETURN ', '')))
     #analyze the hex strings
-    check_hex = (hex_converting.check_hex(clean_list.tolist()))
+    #print(op_array)
+    #print(op_array.toList())
+    check_hex = (hex_converting.check_hex(op_array.tolist()))
     # return a list with number of different OP_RETURN field contents
     return check_hex
+   
 

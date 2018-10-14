@@ -1,11 +1,13 @@
 from SQL import querys as qy
 import sqlite3
+from SQL import search_query as sqy
 
 # initialise the two tables for database 
 def initTabel(connection):
     cursor = connection.cursor()
     __execute_command(cursor,qy.get_create_table_query())
     __execute_command(cursor,qy.get_create_tx_table_query())
+    __execute_command(cursor,sqy.get_create_filtered_OP())
     # never forget this, if you want that the changes are saved
     connection.commit()
 
@@ -27,6 +29,14 @@ def addTrans(connection,  block_number, transaction_id, version, tx_size ,vin_si
     # never forget this, if you want that the changes are saved
     connection.commit()
 
+# adding a op_return field that is undefinable
+def addOP(connection, block_number, transaction_id, tx_value, op_return):
+    cursor = connection.cursor()
+    print("Add trans to table")
+    __execute_command(cursor,sqy.get_add_filtered_OP(block_number, transaction_id, tx_value, op_return))
+    # never forget this, if you want that the changes are saved
+    connection.commit()
+
 
 # catch error if a block was added in table-block before
 # catch error if a transaction was added in table-tx with corresponding information before
@@ -36,3 +46,4 @@ def __execute_command(cursor, sql_command):
         cursor.execute(sql_command)
     except sqlite3.IntegrityError:
         print('Oops!  That was no valid number: '+ str(sql_command) + 'Maybe the PRIMARY KEY exist!')
+
