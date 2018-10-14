@@ -108,7 +108,11 @@ diagram.create_diagrams()
 
 ### Example outputs
 
-after running the script a database file is created that contains two tables. This file can be open with the tool * [DB Browser for SQLite](https://sqlitebrowser.org)
+after running the script a database file is created that contains two tables. This file can be open with the tool [DB Browser for SQLite](https://sqlitebrowser.org)
+
+
+![alt text](file:///Users/meric-doga/Desktop/Bildschirmfoto%202018-10-14%20um%2020.19.23.png)
+
 
 ## Built With
 
