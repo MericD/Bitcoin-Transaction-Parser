@@ -121,7 +121,7 @@ diagram.create_diagrams()
 - After running the script a database file is created that contains two tables. This file can be open with the tool [DB Browser for SQLite](https://sqlitebrowser.org)
 
 
-![alt text](file:///Users/meric-doga/Desktop/Bildschirmfoto%202018-10-14%20um%2020.19.23.png)
+![block](https://user-images.githubusercontent.com/23129546/46921075-15896e00-cff7-11e8-843c-01482e678674.png)
 
 - and diagrams are builded as well. They contain the timeline of used OP_RETURN fields
  
