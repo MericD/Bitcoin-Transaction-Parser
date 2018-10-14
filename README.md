@@ -1,8 +1,5 @@
 # Bitcoin-Transaction-Parser
-
-# Project Title
-
-One Paragraph of project description goes here
+A python script that searches the blockchain and filters the transactions which contains an OP_RETURN field
 
 ## Getting Started
 
