@@ -106,6 +106,9 @@ core.save_result_in_database(__databaseFile, find_block_trans)
 diagram.create_diagrams()
 ```
 
+### Example outputs
+
+after running the script a database file is created that contains two tables. This file can be open with the tool * [DB Browser for SQLite](https://sqlitebrowser.org)
 
 ## Built With
 
@@ -120,8 +123,3 @@ diagram.create_diagrams()
 
 ## License
 
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
