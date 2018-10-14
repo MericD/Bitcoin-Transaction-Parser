@@ -1,4 +1,4 @@
-# bitcoin-Transaction-Parser
+# Bitcoin-Transaction-Parser
 
 # Project Title
 
