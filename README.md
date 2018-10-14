@@ -108,7 +108,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Emine Saracoglu** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Emine Saracoglu** - *Initial work* - [Python-Bitcoin-Transaction-Parser]()
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
