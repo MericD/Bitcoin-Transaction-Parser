@@ -1,8 +1,8 @@
 # Bitcoin-Transaction-Parser
-A python3 script that searches the Bitcoin blockchain and filters the transactions which contains an OP_RETURN field
+A python3 script that searches the Bitcoin blockchain and filters the transactions which contains an OP_RETURN field. The found transactions are saved in a SQLite Database with their corresponding information. Finally, the transactions can be graphically displayed with the seaborn library.
 
 ## Motivation
-This script was developed to analyze the op_return fields of bitcoin transactions on different contents an to find illegal activities.
+This script was developed to analyze the op_return fields of bitcoin transactions on different contents and to find illegal activities.
 
 ##  Prerequisites
 Further development requires python3 and pip3.
@@ -18,9 +18,36 @@ Instructions for installing Pip3:
 sudo apt-get install python3-pip
 ```
 
+After installing/updating python and pip the following libraries are needed:
+
+For displaying diagrams:
+```
+pip3 install seaborn
+```
+
+For used arrays:
+```
+pip3 install numpy
+```
+
+For plotting diagrams:
+```
+pip3 install -U matplotlib
+```
+
+For reading files:
+```
+pip3 install pandas
+```
+
+
+from lib.bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
+
+
 ### More Information
 
-The project was developed with Visual Studio Code.
+
+The project was developed with Visual Studio Code.  
 
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
