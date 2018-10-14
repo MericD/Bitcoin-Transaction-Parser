@@ -1,94 +1,149 @@
 # Bitcoin-Transaction-Parser
-#add TODOs
+A python3 script that searches the Bitcoin blockchain and filters the transactions which contains an OP_RETURN field.
 
-#the *.dat Files are not pushed to the git-repository because there are size are bigger than 100mb!
+## Motivation
+This script was developed to analyze the op_return fields of bitcoin transactions on different contents and to find illegal activities.
 
-#I am using the following Project: https://github.com/garethjns/PyBC to parse the .dat Files
+## More Information
 
-# Project Title
+After the corresponding transactions have been filtered, the found transactions are saved in a SQLite Database with their corresponding information. Finally, the transactions can be graphically displayed with the seaborn library.
 
-One Paragraph of project description goes here
+##  Installing
+Further development requires python3 and pip3.
 
-## Getting Started
+Instructions for installing Python3 for Linux and Mac OS operating systems:
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+https://realpython.com/installing-python/
+
+
+Instructions for installing Pip3:
+
+```
+sudo apt-get install python3-pip
+```
+
+After installing/updating python and pip the following libraries are needed:
+
+For displaying diagrams:
+```
+pip3 install seaborn
+```
+
+For used arrays:
+```
+pip3 install numpy
+```
+
+For plotting diagrams:
+```
+pip3 install -U matplotlib
+```
+
+For reading files:
+```
+pip3 install pandas
+```
+
+Conection to bitcoin server:
+```
+pip install python-bitcoinrpc
+```
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Befor running the script 
+
+1. The blocks of the Bitcoin blockchain are needed. They can be download with:
+* [Bitcoin-Core](https://bitcoin.org/de/download)
+#the *.dat Files are not pushed to the git-repository because their size are bigger than 100mb!
+
+2. Before running the script the parameters for a full node connection in config.py must be set
+- Desired block range ('start_block' :xxx  and  'end_block':xxx) 
 
 ```
-Give examples
+.../bitcoin-0.16.2/bin$ ./bitcoind 
 ```
 
-### Installing
+or 
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+ run a Bitcoin Full Node with specific parameters in the downloaded file (here it is bitcoin-0.16.2):
+ 
 ```
-Give the example
+.../bitcoin-0.16.2/bin$ ./bitcoind -server=1 -txindex=1 -rpcuser=rpc -rpcpassword=bitmaster -printtoconsole -testnet=0 
+```
+--> Attention the parameters for desired block range must be set in config.py
+
+3. run the script in the file Python-Bitcoin-Transaction-Parser :
+```
+$ python3 main.py
+```
+- if you want to use multithreading run it as:
+```
+$ python3 process.py
+```
+4. The following Project is used to parse the .dat files [PyBC](https://github.com/garethjns/PyBC)
+
+##Befor Running
+
+- VM and multithreading were used for faster execution. For a general run, modify the main.py file as follows:
+
+```python
+
+###Parameter
+# name of the database 
+__databaseFile = config.CONFIG['database_file_name']
+
+
+# the first block to analyze
+__start_block = config.CONFIG['start_block']
+
+# the last block to analyze
+__end_block = config.CONFIG['end_block']
+
+# get all Blocks and transactions in range of __start_block to __end_block
+block_trans = {}
+while __start_block < __end_block + 1:
+block_trans.update(rpc.get_transactions(__start_block)[0])
+__start_block += 1
+
+# filter all transactions that contain a field OP_RETURN 
+find_block_trans = core.find_op_return(block_trans)
+
+# save all transaction with a OP_RETURN field
+core.save_result_in_database(__databaseFile, find_block_trans)
+
+# create diagram by using created database (can be removed if diagrams are not desired)
+diagram.create_diagrams()
 ```
 
-And repeat
+### Example outputs
 
-```
-until finished
-```
+- After running the script a database file is created that contains two tables. This file can be open with the tool [DB Browser for SQLite](https://sqlitebrowser.org)
 
-End with an example of getting some data out of the system or using it for a little demo
+- Table of found blocks:
+![MacDown Screenshot](/Users/meric-doga/Desktop/block.png)
 
-## Running the tests
+- Table of found trnsactions:
+![MacDown Screenshot](/Users/meric-doga/Desktop/tx.png)
 
-Explain how to run the automated tests for this system
+- and diagrams are builded as well. They contain the timeline of used OP_RETURN fields
+ ![MacDown Screenshot](/Users/meric-doga/Desktop/time.png)
 
-### Break down into end to end tests
 
-Explain what these tests test and why
+ - and filter the content of these OP_RETURN fields by following contents:
+  ![MacDown Screenshot](/Users/meric-doga/Desktop/number.png)
 
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Visual Studio Code](https://code.visualstudio.com) - Programming tool
+* [DB Browser for SQLite](https://sqlitebrowser.org) - Showing Database
 
-## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Emine Saracoglu** - *Initial work* - [Python-Bitcoin-Transaction-Parser](https://github.com/MericD/Python-Bitcoin-Transaction-Parser.git)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
