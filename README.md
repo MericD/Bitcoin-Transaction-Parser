@@ -1,7 +1,9 @@
 # Bitcoin-Transaction-Parser
-A python script that searches the blockchain and filters the transactions which contains an OP_RETURN field
+A python3 script that searches the blockchain and filters the transactions which contains an OP_RETURN field
 
 ## Getting Started
+
+Attention: This project is developed with python 3 and can only be executed with python3!
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
