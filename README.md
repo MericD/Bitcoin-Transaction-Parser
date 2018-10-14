@@ -125,7 +125,7 @@ diagram.create_diagrams()
 ![block](https://user-images.githubusercontent.com/23129546/46921075-15896e00-cff7-11e8-843c-01482e678674.png)
 
 - Table of found trnsactions:
-![MacDown Screenshot](/Users/meric-doga/Desktop/tx.png)
+![tx](https://user-images.githubusercontent.com/23129546/46921206-b298d680-cff8-11e8-9786-33359748b376.png)
 
 - and diagrams are builded as well. They contain the timeline of used OP_RETURN fields
  ![MacDown Screenshot](/Users/meric-doga/Desktop/time.png)
