@@ -117,17 +117,24 @@ diagram.create_diagrams()
 ```
 
 ### Example outputs
+### Example outputs
 
 - After running the script a database file is created that contains two tables. This file can be open with the tool [DB Browser for SQLite](https://sqlitebrowser.org)
 
-
+- Table of found blocks:
 ![block](https://user-images.githubusercontent.com/23129546/46921075-15896e00-cff7-11e8-843c-01482e678674.png)
 
+- Table of found trnsactions:
+![MacDown Screenshot](/Users/meric-doga/Desktop/tx.png)
+
 - and diagrams are builded as well. They contain the timeline of used OP_RETURN fields
- 
- 
+ ![MacDown Screenshot](/Users/meric-doga/Desktop/time.png)
+
+
  - and filter the content of these OP_RETURN fields by following contents:
-  
+  ![MacDown Screenshot](/Users/meric-doga/Desktop/number.png)
+
+
 
 ## Built With
 
