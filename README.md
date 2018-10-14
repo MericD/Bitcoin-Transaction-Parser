@@ -4,7 +4,7 @@ A python3 script that searches the Bitcoin blockchain and filters the transactio
 ## Motivation
 This script was developed to analyze the op_return fields of bitcoin transactions on different contents an to find illegal activities.
 
-### More Information
+## More Information
 
 Further development requires python3 and pip3.
 
