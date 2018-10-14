@@ -55,6 +55,7 @@ Befor running the script
 
 1. The blocks of the Bitcoin blockchain are needed. They can be download with:
 * [Bitcoin-Core](https://bitcoin.org/de/download)
+#the *.dat Files are not pushed to the git-repository because their size are bigger than 100mb!
 
 2. Before running the script the parameters for a full node connection in config.py must be set
 - Desired block range ('start_block' :xxx  and  'end_block':xxx) 
@@ -72,6 +73,15 @@ or
 ```
 --> Attention the parameters for desired block range must be set in config.py
 
+3. run the script in the file Python-Bitcoin-Transaction-Parser :
+```
+$ python3 main.py
+```
+- if you want to use multithreading run it as:
+```
+$ python3 process.py
+```
+4. #I am using the following Project: https://github.com/garethjns/PyBC to parse the .dat Files
 
 ##Befor Running
 
@@ -108,14 +118,15 @@ diagram.create_diagrams()
 
 ### Example outputs
 
- after running the script a database file is created that contains two tables. This file can be open with the tool [DB Browser for SQLite](https://sqlitebrowser.org)
+- After running the script a database file is created that contains two tables. This file can be open with the tool [DB Browser for SQLite](https://sqlitebrowser.org)
 
 
 ![alt text](file:///Users/meric-doga/Desktop/Bildschirmfoto%202018-10-14%20um%2020.19.23.png)
 
- and diagrams are builded as well. They contain the timeline of used OP_RETURN fields
+- and diagrams are builded as well. They contain the timeline of used OP_RETURN fields
  
-  and filter the content of these OP_RETURN fields by following contents:
+ 
+ - and filter the content of these OP_RETURN fields by following contents:
   
 
 ## Built With
