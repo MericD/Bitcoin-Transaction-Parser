@@ -128,7 +128,7 @@ diagram.create_diagrams()
 ![tx](https://user-images.githubusercontent.com/23129546/46921206-b298d680-cff8-11e8-9786-33359748b376.png)
 
 - and diagrams are builded as well. They contain the timeline of used OP_RETURN fields
- ![MacDown Screenshot](/Users/meric-doga/Desktop/time.png)
+![time](https://user-images.githubusercontent.com/23129546/46921217-cd6b4b00-cff8-11e8-9f83-60798e45db25.png)
 
 
  - and filter the content of these OP_RETURN fields by following contents:
