@@ -18,19 +18,21 @@ __rmv_op_and_analyze_hex = "SELECT transaction_id, block_number, tx_value, REPLA
 # transaction_id - ID of transaction
 # tx_value - sent Bitcoin
 # op_return - additional information in a transaction and need not be specified
+# op_length length of op_retun field
 __filtered_OP = """CREATE TABLE IF NOT EXISTS filter_op (
 block_number integer INTEGER PRIMARY KEY,
 transaction_id text,
 tx_value text,
 op_return text,
+op_length integer,
 FOREIGN KEY (transaction_id) REFERENCES tx (transaction_id));"""
 
 
 # SQL statment to add corresponding transaction information in filter_op 
 __add_op_qy = """INSERT INTO filter_op 
-    (block_number, transaction_id, tx_value, op_return) 
+    (block_number, transaction_id, tx_value, op_return, op_length) 
     VALUES 
-    ("{block_number}", "{transaction_id}", "{tx_value}", "{op_return}")
+    ("{block_number}", "{transaction_id}", "{tx_value}", "{op_return}", "{op_length}")
 ;"""
 
 
@@ -48,6 +50,6 @@ def get_create_filtered_OP():
     return __filtered_OP
 
 # Returns the query to add a transaction with undefinable op_returns to table filtered_OP
-def get_add_filtered_OP(bn,tx_id, tx_v,tx_op_return):
-    return __add_op_qy.format(block_number=bn, transaction_id=tx_id,  tx_value=tx_v, op_return=tx_op_return) 
+def get_add_filtered_OP(bn, tx_id, tx_v, tx_op_return, op_l):
+    return __add_op_qy.format(block_number=bn, transaction_id=tx_id,  tx_value=tx_v, op_return=tx_op_return, op_length=op_l) 
 

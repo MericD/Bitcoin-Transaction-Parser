@@ -18,12 +18,12 @@ f3 = open('out3.txt', 'w')
 def save_op_sql(numarray):
     connection = sqlite3.connect('blockchain.db')
     sql.initTabel(connection)
-    print(numarray)
     block_number =  numarray[0] 
     transaction_id  = numarray[1]
     tx_value = numarray[2]
     op_return = 'OP_RETURN ' + numarray[3]
-    sql.addOP(connection,block_number, transaction_id, tx_value, op_return)
+    op_length = numarray[4]
+    sql.addOP(connection,block_number, transaction_id, tx_value, op_return, op_length)
     connection.close()
 
 
@@ -56,7 +56,7 @@ def check_hex(arrayList):
             elif '[error]' in str(j):
                 count_error = count_error + 1
             else:
-                count_not_hex = count_not_hex + 1               
+                count_not_hex = count_not_hex + 1  
         # hex is odd length add '0' at beginning
         elif len(j) %2 != 0:
             j = '0' + j
@@ -74,26 +74,25 @@ def check_hex(arrayList):
                 # check if content is document/proof of existent etc. 
                 elif docproof(bin_dec):
                     count_doc = count_doc + 1
+                    f.write("%s\n" % str(bin_dec))
                 # check if content is asset/app 
                 elif is_assets(bin_dec):
                     count_asset = count_asset +1
+                    f1.write("%s\n" % str(bin_dec))
                 # check content is digit
                 elif  hex_int(bin_dec):
                     count_dig += 1
+                    f2.write("%s\n" % str(bin_dec))
                 # check content is text message
                 elif  (is_ascii(bin_dec)) and ((' ' in bin_dec) and (1 < len(bin_dec.split(" ")))):
                     count_txt = count_txt + 1
-                    f.write("%s\n" % str(bin_dec)) 
+                    #f.write("%s\n" % str(bin_dec)) 
                 elif (is_ascii(bin_dec) and no_digit(bin_dec)):
                     count_txt = count_txt + 1
-                    f.write("%s\n" % str(bin_dec)) 
                 elif is_ascii(bin_dec) and is_text(bin_dec):
-                    #print("              " + str(bin_dec)) 
-                    f.write("%s\n" % str(bin_dec)) 
                     count_txt = count_txt + 1
                 # check if content is not definable but is ascii
                 else:
-                    f1.write("%s\n" % str(bin_dec))
                     count_ascii = count_ascii +1
             except:
                 try:
@@ -111,19 +110,16 @@ def check_hex(arrayList):
                         count_dig += 1
                     elif is_ascii(str(binary)) and is_text(str(binary.decode('ascii'))):
                         count_txt = count_txt + 1
-                        f2.write("%s\n" % str(binary.decode('unicode-escape')))
                     else:
-                        f3.write("%s\n" % str(binary.decode('unicode-escape')))
                         count_ud = count_ud +1
-                        save_op_sql(i)
-                        #print(i)
+                        i.append(len(j))
+                        save_op_sql(j)
                 # hex not decodable 
                 except:
-                    f3.write("%s\n" % str(j))
                     #f.write("%s\n" % str(binary))
                     count_ud = count_ud +1
-                    save_op_sql(i)
-                    #print(i)
+                    i.append(len(j))
+                    save_op_sql(j)
 
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error',     'Not Hex',    'Odd Lenght', 'Website',   
