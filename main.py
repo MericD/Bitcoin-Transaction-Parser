@@ -34,3 +34,4 @@ import config
   # create diagram by using created database
 
 diagram.create_diagrams()
+

@@ -39,7 +39,7 @@ def diagram_history_op_return (connection):
     s.plot()
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig1 = pyplot.gcf()
-    pyplot.show()
+    #pyplot.show()
     pyplot.draw()
     fig1.savefig('time.png', dpi=100)
     pyplot.close()
@@ -60,10 +60,10 @@ def diagram_content_OP_RETURN (connection):
     y_val = [y for _,y in result_array]
     #plot bar chart with corresponing x and y values and show it
     dia = sb.barplot(x=x_val,y= y_val, palette="rocket")
-    dia.set_xticklabels(labels=x_val, rotation=45, ha='right')
+    dia.set_xticklabels(fontsize = 7, labels=x_val, rotation=45, ha='right')
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig2 = pyplot.gcf()
-    pyplot.show()
+    #pyplot.show()
     pyplot.draw()
     fig2.savefig('number.png', dpi = 100)
     pyplot.close()

@@ -10,7 +10,7 @@ ORDER BY COUNT(*) DESC;"""
 
 # a private (SQL statment) query for selecting columns in tx 
 # remove specific sting 'OP_RETURN' in ich line in column op_return
-__rmv_op_and_analyze_hex = "SELECT transaction_id, block_number, tx_value, REPLACE(op_return, 'OP_RETURN ', '') FROM tx"
+__rmv_op_and_analyze_hex = "SELECT block_number, transaction_id, tx_value, REPLACE(op_return, 'OP_RETURN ', '') FROM tx"
 
 # a private (SQL statment) query for creating table filter_op 
 # contains information of corresponding transaction with columns
@@ -25,14 +25,16 @@ transaction_id text,
 tx_value text,
 op_return text,
 op_length integer,
+tx_address text,
 FOREIGN KEY (transaction_id) REFERENCES tx (transaction_id));"""
+
 
 
 # SQL statment to add corresponding transaction information in filter_op 
 __add_op_qy = """INSERT INTO filter_op 
-    (block_number, transaction_id, tx_value, op_return, op_length) 
+    (block_number, transaction_id, tx_value, op_return, op_length, tx_address) 
     VALUES 
-    ("{block_number}", "{transaction_id}", "{tx_value}", "{op_return}", "{op_length}")
+    ("{block_number}", "{transaction_id}", "{tx_value}", "{op_return}", "{op_length}", "{tx_address}")
 ;"""
 
 
@@ -50,6 +52,6 @@ def get_create_filtered_OP():
     return __filtered_OP
 
 # Returns the query to add a transaction with undefinable op_returns to table filtered_OP
-def get_add_filtered_OP(bn, tx_id, tx_v, tx_op_return, op_l):
-    return __add_op_qy.format(block_number=bn, transaction_id=tx_id,  tx_value=tx_v, op_return=tx_op_return, op_length=op_l) 
+def get_add_filtered_OP(bn, tx_id, tx_v, tx_op_return, op_l, tx_a):
+    return __add_op_qy.format(block_number=bn, transaction_id=tx_id,  tx_value=tx_v, op_return=tx_op_return, op_length=op_l,tx_address = tx_a) 
 

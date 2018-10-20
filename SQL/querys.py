@@ -65,3 +65,6 @@ def get_create_tx_table_query():
 # Returns the query to add a transaction and the information of it to the table-tx
 def get_add_tx_query(tx_id, tx_v, tx_s ,tx_vin_size, tx_vout_size, tx_ti, tx_val, tx_op_return, tx_block_id):
     return __add_tx_qy.format(transaction_id=tx_id, version=tx_v, tx_size=tx_s, vin_size=tx_vin_size, vout_size=tx_vout_size, tx_time=tx_ti, tx_value=tx_val, op_return=tx_op_return, block_number=tx_block_id) 
+
+
+

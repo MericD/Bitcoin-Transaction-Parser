@@ -30,10 +30,10 @@ def addTrans(connection,  block_number, transaction_id, version, tx_size ,vin_si
     connection.commit()
 
 # adding a op_return field that is undefinable
-def addOP(connection, block_number, transaction_id, tx_value, op_return, op_length):
+def addOP(connection, block_number, transaction_id, tx_value, op_return, op_length, tx_address):
     cursor = connection.cursor()
     print("Add trans to table")
-    __execute_command(cursor,sqy.get_add_filtered_OP(block_number, transaction_id, tx_value, op_return, op_length))
+    __execute_command(cursor,sqy.get_add_filtered_OP(block_number, transaction_id, tx_value, op_return, op_length, tx_address))
     # never forget this, if you want that the changes are saved
     connection.commit()
 

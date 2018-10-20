@@ -113,3 +113,17 @@ def get_op_return(value):
                 op_return = op_return + ", " + str(potential_op_return)
     # return string of found OP_RETURN fields
     return op_return 
+
+# return addresses in a transaction
+def get_address_of_op_tx(value):
+    address = ""
+    # search in "vout" (decoded raw transaction information) for value-field 
+    for i in range(len(value["vout"])):
+        potential_tx_value = value["vout"]["scriptPubKey"]["addresses"][i]
+        # if no one value-field is found return empty string
+        if "" == tx_val:
+            tx_val = str(potential_tx_value)
+        # else return value-field in transaction or add found value-field to tx_val
+        else:
+            tx_val = tx_val + ", " + str(potential_tx_value)
+    return address 

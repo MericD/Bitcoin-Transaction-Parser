@@ -3,19 +3,20 @@ import binascii as by
 import string
 from SQL import sqlite as sql
 import sqlite3
+from rpc import rpc
+from Core import core as c
 
 
+rpc_connection = rpc.start_connection_to_rpc()
 
-
-f = open('out.txt', 'w')
-f1 = open('out1.txt', 'w')
-f2 = open('out2.txt', 'w')
-f3 = open('out3.txt', 'w')
 
 # save undefinable OP_RETURN fields in an additional table for more analysis
 # databse table contains only the transaction id, block number and 
 # transaction value of the corresponding op_return field 
 def save_op_sql(numarray):
+
+    raw_tx = rpc.decoded_transactions(rpc_connection, numarray[1])
+
     connection = sqlite3.connect('blockchain.db')
     sql.initTabel(connection)
     block_number =  numarray[0] 
@@ -23,9 +24,10 @@ def save_op_sql(numarray):
     tx_value = numarray[2]
     op_return = 'OP_RETURN ' + numarray[3]
     op_length = numarray[4]
-    sql.addOP(connection,block_number, transaction_id, tx_value, op_return, op_length)
-    connection.close()
+    tx_address = c.get_address_of_op_tx(raw_tx)
 
+    sql.addOP(connection,block_number, transaction_id, tx_value, op_return, op_length, tx_address)
+    connection.close()
 
 
 # analyze content of OP_RETURN fields
@@ -39,7 +41,6 @@ def check_hex(arrayList):
     count_op = 0
     count_odd = 0
     count_error = 0
-    count_short = 0
     count_not_hex = 0
     count_asset = 0
     count_ascii = 0
@@ -74,26 +75,23 @@ def check_hex(arrayList):
                 # check if content is document/proof of existent etc. 
                 elif docproof(bin_dec):
                     count_doc = count_doc + 1
-                    f.write("%s\n" % str(bin_dec))
                 # check if content is asset/app 
                 elif is_assets(bin_dec):
                     count_asset = count_asset +1
-                    f1.write("%s\n" % str(bin_dec))
                 # check content is digit
                 elif  hex_int(bin_dec):
                     count_dig += 1
-                    f2.write("%s\n" % str(bin_dec))
                 # check content is text message
-                elif  (is_ascii(bin_dec)) and ((' ' in bin_dec) and (1 < len(bin_dec.split(" ")))):
+                elif  (is_ascii(bin_dec)) and ((' ' in bin_dec)):
                     count_txt = count_txt + 1
-                    #f.write("%s\n" % str(bin_dec)) 
                 elif (is_ascii(bin_dec) and no_digit(bin_dec)):
                     count_txt = count_txt + 1
-                elif is_ascii(bin_dec) and is_text(bin_dec):
-                    count_txt = count_txt + 1
-                # check if content is not definable but is ascii
-                else:
-                    count_ascii = count_ascii +1
+                elif is_ascii(bin_dec):
+                    # check if content is not definable but is ascii
+                    if is_text(bin_dec):
+                        count_ascii = count_ascii +1
+                    else:
+                        count_txt = count_txt + 1
             except:
                 try:
                     # check binary data contains url 
@@ -102,6 +100,7 @@ def check_hex(arrayList):
                     # check binary data contains document 
                     elif docproof(str(binary)):
                         count_doc = count_doc + 1
+
                     # check binary data contains assets/Apps 
                     elif is_assets(str(binary)):
                         count_asset = count_asset +1
@@ -112,14 +111,14 @@ def check_hex(arrayList):
                         count_txt = count_txt + 1
                     else:
                         count_ud = count_ud +1
-                        i.append(len(j))
-                        save_op_sql(j)
+                        i.append(len(j)/2)
+                        save_op_sql(i)
                 # hex not decodable 
                 except:
                     #f.write("%s\n" % str(binary))
                     count_ud = count_ud +1
-                    i.append(len(j))
-                    save_op_sql(j)
+                    i.append(len(j)/2)
+                    save_op_sql(i)
 
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error',     'Not Hex',    'Odd Lenght', 'Website',   
@@ -157,7 +156,9 @@ def docproof(bin_dec):
         'S1', 'S2', 'S3', 'S4', 'S5', 'BS', 'FA' )   
     if any(str(bin_dec).startswith(i) for i in sub):
         return True
-    elif any(i in str(bin_dec) for i in sub):
+    elif any(str(bin_dec).startswith('b"'+i)  for i in sub):
+        return True
+    elif any(str(bin_dec).startswith("""b'"""+i)  for i in sub):
         return True
     else:
         return False
@@ -179,7 +180,9 @@ def is_assets(bin_dec):
             return True
         elif str(bin_dec).startswith('@') and bin_dec.encode('ascii'):
             return True
-        elif any(i in str(bin_dec) for i in sub):
+        elif any(str(bin_dec).startswith('b"'+i) for i in sub):
+            return True
+        elif any(str(bin_dec).startswith("""b'"""+i)  for i in sub):
             return True
     except:
         return False
