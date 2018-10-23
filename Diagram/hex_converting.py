@@ -6,28 +6,32 @@ import sqlite3
 from rpc import rpc
 from Core import core as c
 
+__ASCII__= 'ascii'
+
 
 rpc_connection = rpc.start_connection_to_rpc()
+
 
 
 # save undefinable OP_RETURN fields in an additional table for more analysis
 # databse table contains only the transaction id, block number and 
 # transaction value of the corresponding op_return field 
-def save_op_sql(numarray):
+#def save_op_sql():
+x = {'39e4439fab8b65a319584d51f69439264d235964467ef5305149805f045e4dc6': {'hash': '39e4439fab8b65a319584d51f69439264d235964467ef5305149805f045e4dc6', 'size': 275, 'vsize': 275, 'locktime': 0, 'version': 1, 'vin': [{'sequence': 4294967295, 'vout': 0, 'txid': '0c9df6a2c82cca4ea85ac80e7e8efafa9b2adcbbec879ea4ac62e8a40afc771f', 'scriptSig': {'hex': '483045022100b74a195d84c5a9550dfcfd0cd1409ab56139de46535099049a4704b62da1392502200ae5dfbd9f75d8629b07f225cd52d7ad435876bd9b489178edbf4d7dc76db6e6012103d6445fd89e2a7b64de3210cbe07938e3388fd19c6d5f469abaa02b78436195fb', 'asm': '3045022100b74a195d84c5a9550dfcfd0cd1409ab56139de46535099049a4704b62da1392502200ae5dfbd9f75d8629b07f225cd52d7ad435876bd9b489178edbf4d7dc76db6e6[ALL] 03d6445fd89e2a7b64de3210cbe07938e3388fd19c6d5f469abaa02b78436195fb'}}], 'txid': '39e4439fab8b65a319584d51f69439264d235964467ef5305149805f045e4dc6', 'vout': [{'value': '0E-8', 'scriptPubKey': {'type': 'nulldata', 'hex': '6a26069a9ec2600321764f132fcae2e7df2069a32538c5ae489f3e5f0dd2c3e057c1efe608be74de', 'asm': 'OP_RETURN 069a9ec2600321764f132fcae2e7df2069a32538c5ae489f3e5f0dd2c3e057c1efe608be74de'}, 'n': 0}, {'value':'0.00080000', 'scriptPubKey': {'type': 'pubkeyhash', 'hex': '76a914a7552d89b0e655b8c6199899669792cb54d954c588ac', 'addresses': ['1GFmtJKoYtGkXJWSXUZgxnyjqd6itJGxvn'], 'asm': 'OP_DUP OP_HASH160 a7552d89b0e655b8c6199899669792cb54d954c5 OP_EQUALVERIFY OP_CHECKSIG', 'reqSigs': 1}, 'n': 1}, {'value': '0.00010000', 'scriptPubKey': {'type': 'pubkeyhash', 'hex': '76a914f96b59fb1c136df27642f746813a32e9d80e54a288ac', 'addresses': ['1PjorgKWXFFBaLDiW5EXJPViVPo3fu1zYB'], 'asm': 'OP_DUP OP_HASH160 f96b59fb1c136df27642f746813a32e9d80e54a2 OP_EQUALVERIFY OP_CHECKSIG', 'reqSigs': 1}, 'n': 2}]}}
 
-    raw_tx = rpc.decoded_transactions(rpc_connection, numarray[1])
+    #raw_tx = rpc.decoded_transactions_address(rpc_connection, numarray[1])
 
-    connection = sqlite3.connect('blockchain.db')
-    sql.initTabel(connection)
-    block_number =  numarray[0] 
-    transaction_id  = numarray[1]
-    tx_value = numarray[2]
-    op_return = 'OP_RETURN ' + numarray[3]
-    op_length = numarray[4]
-    tx_address = c.get_address_of_op_tx(raw_tx)
+connection = sqlite3.connect('bc.db')
+sql.initTabel(connection)
+block_number =  1 #numarray[0] 
+transaction_id  = '1'# numarray[1]
+tx_value = '1'##numarray[2]
+op_return = '1'#'OP_RETURN ' + numarray[3]
+op_length = 1 #numarray[4]
+tx_address = c.get_address_of_op_tx(x)
 
-    sql.addOP(connection,block_number, transaction_id, tx_value, op_return, op_length, tx_address)
-    connection.close()
+sql.addOP(connection,block_number, transaction_id, tx_value, op_return, op_length, tx_address)
+connection.close()
 
 
 # analyze content of OP_RETURN fields
@@ -68,7 +72,7 @@ def check_hex(arrayList):
             binary = by.unhexlify(j) 
             try: 
                 #convert binary data to ascii
-                bin_dec =binary.decode('ascii')     
+                bin_dec =binary.decode(__ASCII__)     
                 # check content is website/email address
                 if check_website(bin_dec):
                     count_http = count_http + 1
@@ -107,18 +111,18 @@ def check_hex(arrayList):
                     # else binary data not definable
                     elif  hex_int(str(binary)):
                         count_dig += 1
-                    elif is_ascii(str(binary)) and is_text(str(binary.decode('ascii'))):
+                    elif is_ascii(str(binary)) and is_text(str(binary.decode(__ASCII__))):
                         count_txt = count_txt + 1
                     else:
                         count_ud = count_ud +1
                         i.append(len(j)/2)
-                        save_op_sql(i)
+                        #save_op_sql(i)
                 # hex not decodable 
                 except:
                     #f.write("%s\n" % str(binary))
                     count_ud = count_ud +1
                     i.append(len(j)/2)
-                    save_op_sql(i)
+                    #save_op_sql(i)
 
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error',     'Not Hex',    'Odd Lenght', 'Website',   

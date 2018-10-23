@@ -29,7 +29,7 @@ def save_result_in_database(__databaseFile, find_block_trans):
     # initialized SQL tables store in file __databaseFile
     sql.initTabel(connection)
 
-    # search in dictionary ({key->block-number : value->decoded raw transaction information}) 
+    # search in dictionary ({key->block-number : value{key-> tx_ID : value->decoded raw transaction information}}) 
     for key_b, trans in find_block_trans.items():
        
         # the key of the dictionary find_block_trans is the blocknumber and store created-date of it
@@ -114,16 +114,25 @@ def get_op_return(value):
     # return string of found OP_RETURN fields
     return op_return 
 
+
+
 # return addresses in a transaction
 def get_address_of_op_tx(value):
     address = ""
+    
     # search in "vout" (decoded raw transaction information) for value-field 
-    for i in range(len(value["vout"])):
-        potential_tx_value = value["vout"]["scriptPubKey"]["addresses"][i]
-        # if no one value-field is found return empty string
-        if "" == tx_val:
-            tx_val = str(potential_tx_value)
-        # else return value-field in transaction or add found value-field to tx_val
-        else:
-            tx_val = tx_val + ", " + str(potential_tx_value)
+    for k , v in value.items():
+        for i in range(len(v["vout"])):
+            potential_tx_value = v["vout"][i]["scriptPubKey"]
+            if 'addresses' in potential_tx_value:
+                potential_tx_value = potential_tx_value["addresses"]
+                for i in range(len(potential_tx_value)):
+                    if "" != address:
+                        address = address + ", " + str(potential_tx_value)
+                    else:
+                        address = str(potential_tx_value)
+            else:
+                pass
     return address 
+
+    
