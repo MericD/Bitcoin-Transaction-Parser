@@ -119,7 +119,7 @@ def get_op_return(value):
 # return addresses in a transaction
 def get_address_of_op_tx(value):
     address = ""
-    
+    c = 0
     # search in "vout" (decoded raw transaction information) for value-field 
     for k , v in value.items():
         for i in range(len(v["vout"])):
@@ -127,10 +127,12 @@ def get_address_of_op_tx(value):
             if 'addresses' in potential_tx_value:
                 potential_tx_value = potential_tx_value["addresses"]
                 for i in range(len(potential_tx_value)):
-                    if "" != address:
-                        address = address + ", " + str(potential_tx_value)
-                    else:
+                    if "" == address:
                         address = str(potential_tx_value)
+                        c = c+1
+                    else:
+                        address = address + ", " + str(potential_tx_value)
+                        c = c+1
             else:
                 pass
     return address 

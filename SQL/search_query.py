@@ -26,15 +26,16 @@ tx_value text,
 op_return text,
 op_length integer,
 tx_address text,
+address_number integer,
 FOREIGN KEY (transaction_id) REFERENCES tx (transaction_id));"""
 
 
 
 # SQL statment to add corresponding transaction information in filter_op 
 __add_op_qy = """INSERT INTO filter_op 
-    (block_number, transaction_id, tx_value, op_return, op_length, tx_address) 
+    (block_number, transaction_id, tx_value, op_return, op_length, tx_address, address_number) 
     VALUES 
-    ("{block_number}", "{transaction_id}", "{tx_value}", "{op_return}", "{op_length}", "{tx_address}")
+    ("{block_number}", "{transaction_id}", "{tx_value}", "{op_return}", "{op_length}", "{tx_address}", "{address_number}")
 ;"""
 
 
@@ -52,6 +53,6 @@ def get_create_filtered_OP():
     return __filtered_OP
 
 # Returns the query to add a transaction with undefinable op_returns to table filtered_OP
-def get_add_filtered_OP(bn, tx_id, tx_v, tx_op_return, op_l, tx_a):
-    return __add_op_qy.format(block_number=bn, transaction_id=tx_id,  tx_value=tx_v, op_return=tx_op_return, op_length=op_l,tx_address = tx_a) 
+def get_add_filtered_OP(bn, tx_id, tx_v, tx_op_return, op_l, tx_a, a_num):
+    return __add_op_qy.format(block_number=bn, transaction_id=tx_id,  tx_value=tx_v, op_return=tx_op_return, op_length=op_l,tx_address = tx_a, address_number=a_num) 
 

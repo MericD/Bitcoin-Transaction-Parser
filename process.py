@@ -10,12 +10,11 @@ result =[]
 # call method from main and store result of threads in array
 #def fun_thrd(s,e):
 #    result.append(main.thread_fun(s,e))
-
-
+    
 # range of blocks threads search for transactions with OP_RETURN    e= end of range
 # r is range for each thread to search 
-e = 315000
-r = 2000
+e = 1000000
+r = 10000
 
 # search while you reach last block in range 
 #while (e < 400000) or (len(result) != 0):
@@ -41,6 +40,7 @@ r = 2000
 #        main.write_sql(config.CONFIG['database_file_name'], i)
 
     # set thread array and result to default 
-#    threads = []
 #    result = []
+#    threads = []
+
 
