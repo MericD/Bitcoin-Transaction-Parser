@@ -189,9 +189,9 @@ def is_metadata(bin_dec):
         return True
     elif any(i in str(bin_dec) for i in sub):
         return True
-    elif any(str(bin_dec).statwith("b'"+i) for i in sub):
+    elif any(bin_dec.startwith("b'"+i) for i in sub):
         return True
-    elif any(str(bin_dec).startwith("b"+str('"')+i) for i in sub):
+    elif any(bin_dec.startwith("b"+str('"')+i) for i in sub):
         return True
     else:
         return False

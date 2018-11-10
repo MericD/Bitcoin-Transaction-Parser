@@ -1,13 +1,12 @@
 from SQL import querys as qy
 import sqlite3
-from SQL import search_query as sqy
 
 # initialise the two tables for database 
 def initTabel(connection):
     cursor = connection.cursor()
     __execute_command(cursor,qy.get_create_table_query())
     __execute_command(cursor,qy.get_create_tx_table_query())
-    __execute_command(cursor,sqy.get_create_filtered_OP())
+    __execute_command(cursor,qy.get_create_filtered_OP())
     # never forget this, if you want that the changes are saved
     connection.commit()
 
@@ -33,7 +32,7 @@ def addTrans(connection,  block_number, transaction_id, version, tx_size ,vin_si
 def addOP(connection, block_number, transaction_id, tx_value, op_return, op_length, tx_address, address_number):
     cursor = connection.cursor()
     print("Add trans to table")
-    __execute_command(cursor,sqy.get_add_filtered_OP( transaction_id,block_number,  tx_value, op_return, op_length, tx_address, address_number))
+    __execute_command(cursor,qy.get_add_filtered_OP( transaction_id,block_number,  tx_value, op_return, op_length, tx_address, address_number))
     # never forget this, if you want that the changes are saved
     connection.commit()
 

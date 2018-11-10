@@ -1,5 +1,5 @@
 import matplotlib.pyplot as pyplot
-from SQL import search_query as sql
+from SQL import query as sql
 from Diagram import hex_converting
 import seaborn as sb
 import numpy as np

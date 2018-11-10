@@ -1,1 +1,1 @@
-__all__ =["sqlite","querys", "search_query"]
+__all__ =["sqlite","querys"]
