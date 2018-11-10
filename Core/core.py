@@ -135,6 +135,6 @@ def get_address_of_op_tx(value):
                         c = c+1
             else:
                 pass
-    return address 
+    return address,c 
 
     

@@ -27,12 +27,12 @@ __create_tx_table_qy = """CREATE TABLE IF NOT EXISTS tx (
 	tx_size integer,
 	vin_size integer,
 	vout_size integer,
-    tx_time integer,
-    tx_value text,
+        tx_time integer,
+        tx_value text,
 	op_return text,
 	block_number integer,
 	FOREIGN KEY (block_number) REFERENCES block (block_number)
-);"""
+        );"""
 
 
 # SQL statment to add corresponding block information in table-block 
