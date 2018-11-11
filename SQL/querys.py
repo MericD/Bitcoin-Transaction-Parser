@@ -58,6 +58,7 @@ __filtered_OP = """CREATE TABLE IF NOT EXISTS filter_op(
                 transaction_id text INTEGER PRIMARY KEY,
                 tx_value real,
                  op_return text,
+                 op_dec text,
                  op_length integer,
                  tx_address text,
                  address_number integer,
@@ -78,9 +79,9 @@ __filtered_OP = """CREATE TABLE IF NOT EXISTS filter_op(
 
 # SQL statment to add corresponding transaction information in filter_op 
 __add_op_qy = """INSERT INTO filter_op 
-    ( block_number, transaction_id, tx_value, op_return, op_length, tx_address, address_number) 
+    ( block_number, transaction_id, tx_value, op_return, op_dec, op_length, tx_address, address_number) 
     VALUES 
-    ( "{transaction_id}","{block_number}", "{tx_value}", "{op_return}", "{op_length}", "{tx_address}", "{address_number}")
+    ( "{transaction_id}","{block_number}", "{tx_value}", "{op_return}", "{op_dec}", "{op_length}", "{tx_address}", "{address_number}")
 ;"""
 
 # SQL statment to add corresponding block information in table-block 
@@ -112,8 +113,8 @@ def get_create_filtered_OP():
     return __filtered_OP
 
 # Returns the query to add a transaction with undefinable op_returns to table filtered_OP
-def get_add_filtered_OP( tx_id,bn,  tx_v, tx_op_return, op_l, tx_a, a_num):
-    return __add_op_qy.format(transaction_id = tx_id, block_number = bn, tx_value=tx_v, op_return=tx_op_return, op_length=op_l,tx_address = tx_a, address_number=a_num) 
+def get_add_filtered_OP( tx_id,bn,  tx_v, tx_op_return, op_d, op_l, tx_a, a_num):
+    return __add_op_qy.format(transaction_id = tx_id, block_number = bn, tx_value=tx_v, op_return=tx_op_return, op_dec = op_d, op_length=op_l,tx_address = tx_a, address_number=a_num) 
 
 
 

@@ -48,7 +48,7 @@ r = 1
 #        main.write_sql(config.CONFIG['database_file_name'], i)
 
     # set thread array and result to default 
-    result = []
-    threads = []
-    c=0
+    #result = []
+    #threads = []
+    #c=0
 
