@@ -63,7 +63,7 @@ def check_hex(arrayList):
                     c[9] = c[9] +1
                     f1.write("%s\n" % str(binary))
                 # unknown ascii string 
-                elif hf.unknown_ascii(bin_dec) and not(hf.no_digit(bin_dec)):
+                elif len(a)>12 and hf.unknown_ascii(bin_dec) and not(hf.no_digit(bin_dec)):
                     c[10] = c[10] + 1
                     f2.write("%s\n" % str(binary))
 
@@ -93,7 +93,7 @@ def check_hex(arrayList):
                 elif hf.is_hex_op(a):
                     c[9] = c[9] +1
                     f1.write("%s\n" % str(binary))
-                elif hf.unknown_ascii(a) and not(hf.no_digit(a)):
+                elif len(a)>12 and hf.unknown_ascii(a) and not(hf.no_digit(a)):
                     c[10] = c[10] +1
                     f2.write("%s\n" % str(binary))
                 # not asci decodable

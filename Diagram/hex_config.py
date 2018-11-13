@@ -16,7 +16,7 @@ digit = ('1','2','3','4','5','6','7','8','9','0')
 
 hex_dig = ('0','1','2','3','4','5','6','7','8','9','a','A','b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F') 
 
-text_check = ('bitc0in','est','usd','USD','uds','script','bitcamp','_SUCKS','NVBT','Satoshi','d-r1',
+text_check = ('word','Test','ello','test','bitc0in','est','usd','USD','uds','script','bitcamp','_SUCKS','NVBT','Satoshi','d-r1',
         's-r1', '!','"','#', '$', '%', '&','*','-','==','&','(',')','.', 'undefined', 'lol', 'tt2', 
         'PropertyProtected', 'data', '_', 'link', '?', '|', 'KC{','tt3', 'Bitcoin over capacity',
         'Bitcoin: A Peer-to-Peer Electronic Cash System', ' double-spend attempt')
