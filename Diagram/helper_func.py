@@ -39,12 +39,12 @@ def check_website(bin_dec):
 def is_metadata(bin_dec):
     if any(str(bin_dec).startswith(i) for i in hc.metadata):
         return True
-    elif any(i in str(bin_dec) for i in hc.metadata):
-        return True
-    elif any(bin_dec.startwith("b'"+i) for i in hc.metadata):
-        return True
-    elif any(bin_dec.startwith("b"+str('"')+i) for i in hc.metadata):
-        return True
+    #elif any(i in str(bin_dec) for i in hc.metadata):
+    #    return True
+    #elif any(bin_dec.startwith("b'"+i) for i in hc.metadata):
+    #    return True
+    #elif any(bin_dec.startwith("b"+str('"')+i) for i in hc.metadata):
+    #    return True
     else:
         return False
 
