@@ -8,6 +8,7 @@ f = open('a.txt','w')
 f1 = open('a1.txt','w')
 f2 = open('a2.txt','w')
 f3 = open('a3.txt','w')
+f4 = open('a4.txt','w')
 
 # analyze content of OP_RETURN fields
 def check_hex(arrayList):
@@ -102,9 +103,10 @@ def check_hex(arrayList):
                     i.append(len(j)/2)
                     hf.save_op_sql(i)
                     f.write("%s\n" % str(binary))
+                elif hf.is_ascii(a):
+                    f3.write("%s\n" % str(binary.decode(__ASCII__)))
                 else:
-                    f3.write("%s\n" % str(binary))
-
+                    f4.write("%s\n" % str(binary))
 
 
               #  elif hf.is_ascii(a) and hf.no_digit(a):
