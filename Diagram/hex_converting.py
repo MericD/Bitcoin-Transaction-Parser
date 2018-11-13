@@ -38,16 +38,16 @@ def save_op_sql(numarray):
     tx_value = a
     op_return = 'OP_RETURN ' + numarray[3]
     op_length = numarray[4]
-    tx_address = c.get_address_of_op_tx(raw_tx)
-    address_number = len(tx_address)
-    op_dec = numarray[5]
+    address_info = c.get_address_of_op_tx(raw_tx)
+    tx_address = address_info[0]
+    address_number = address_info[1]
 
-    sql.addOP(connection, transaction_id, block_number, tx_value, op_return, op_dec, op_length, tx_address, address_number)
+    sql.addOP(connection, transaction_id, block_number, tx_value, op_return, op_length, tx_address, address_number)
     connection.close()
 
 
 f = open('o.txt','w')
-
+f1 = open('a.txt','w')
 # analyze content of OP_RETURN fields
 def check_hex(arrayList):
     # parameters for counting different contents
@@ -118,15 +118,19 @@ def check_hex(arrayList):
                     # else binary data not definable
                     elif hex_int(a):
                         count_dig = count_dig + 1
-                    elif (is_ascii(a) and no_digit(a)):
+                    elif is_hex_op(a) or undef_hexstring(a):
+                        count_ud = count_ud +1
+                        i.append(len(j)/2)
+                        save_op_sql(i)
+                    elif is_ascii(a) and no_digit(a):
                         count_txt = count_txt + 1
+                    elif is_ascii(a) and not(no_digit(a)):
+                        count_txt = count_txt +1
                     elif is_text(a):
                         count_txt = count_txt + 1
                     else:
-                        f.write("%s\n" % str(binary))
                         count_ud = count_ud +1
                         i.append(len(j)/2)
-                        i.append(binary)
                         save_op_sql(i)
 
 
@@ -138,6 +142,7 @@ def check_hex(arrayList):
     y = [count_op, count_error, count_not_hex, count_odd,    count_http, 
         count_dig, count_txt, count_doc,  count_ud]
 
+    f1.write("%s\n" % y)
 
     print(y)
     # concatinate found solutions in a list and return it
@@ -195,7 +200,15 @@ def is_metadata(bin_dec):
 
 
 
-
+def spacer(binary):
+    c =0
+    for i in binary:
+        if i == ' ':
+            c = c+1
+    if c > 2:
+        return True
+    else: 
+        return False
 
 
 # check if hex is a integer
@@ -212,6 +225,39 @@ def hex_int(digit):
     else:
         return False 
          
+
+def undef_hexstring(a):
+    sub = ('1','2','3','4','5','6','7','8','9','0') 
+    c= False
+    if ' ' not in a :
+        for i in range(len(a)):
+            if (i+1) < len(a):
+                if a[i].islower() and a[i+1].isupper():
+                    c = True
+                    break                            
+                elif a[i].islower() and (a[i+1] in sub):
+                    c = True
+                    break
+            elif (i+1) > len(a):
+                break
+    return c
+
+
+
+
+def is_hex_op(binary):
+    sub = ('0','1','2','3','4','5','6','7','8','9','a','A','b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F') 
+    c = 0
+    for i in binary:
+        if i in sub:
+            c = c+1
+        else:
+            break
+    if c == len(binary):
+        return True
+    else:
+        return False
+
 
 
 # check if hex is ascii and contains only letters or words --> TEXT
@@ -239,19 +285,20 @@ def is_text(bin_dec):
     sub = ('bitc0in','est','usd','USD','uds','script','bitcamp','_SUCKS','NVBT','Satoshi','d-r1',
         's-r1', '!','"','#', '$', '%', '&','*','-','==','&','(',')','.', 'undefined', 'lol', 'tt2', 
         'PropertyProtected', 'data', '_', 'link', '?', '|', 'KC{','tt3', 'Bitcoin over capacity',
-        'Bitcoin: A Peer-to-Peer Electronic Cash System', ' double-spend attempt')
+        'Bitcoin: A Peer-to-Peer Electronic Cash System', ' double-spend attempt', 'bitfleks', 'cornbit')
+    
+    
+    sub1 = {'a','b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+            's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
+
     if any(i in bin_dec for i in sub):
         return True
     elif (len(bin_dec) ==1) and (' ' in bin_dec):
         return True
-    elif( bin_dec.startswith('@')):
+    elif (len(bin_dec) ==1) and ( sub1 in bin_dec):
         return True
-    elif ' ' in bin_dec:
-        for i in bin_dec:
-            if ' ' == i:
-                c = c+1
-        if c > 2:
-            return True          
+    elif( bin_dec.startswith('@')):
+        return True       
     else:
         return False
 
