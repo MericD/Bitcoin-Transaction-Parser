@@ -103,9 +103,10 @@ def check_hex(arrayList):
                     i.append(len(j)/2)
                     hf.save_op_sql(i)
                     f.write("%s\n" % str(binary))
-                elif hf.is_ascii(a) and binary.decodable(__ASCII__):
+                try:
+                    asc = by.a2b_uu(binary)
                     f3.write("%s\n" % str(binary.decode(__ASCII__)))
-                else:
+                except:
                     f4.write("%s\n" % str(binary))
 
 
