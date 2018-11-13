@@ -1,0 +1,184 @@
+from Diagram import hex_config as hc
+from SQL import sqlite as sql
+from Core import core as c
+from rpc import rpc
+import sqlite3
+import string
+
+__OP_PRETUN__= 'OP_RETURN'
+
+# check if given object contains only hex
+def is_hex(op):
+    if all(c in string.hexdigits for c in str(op)):
+        return True
+    else:
+        return False
+
+
+
+# check if hex is a OP_RETURN
+def is_OP(op):
+    if __OP_PRETUN__ in str(op):
+        return True
+    else:
+        return False
+
+
+
+# check if hex is a website/Email
+def check_website(bin_dec):
+    if any(i in str(bin_dec) for i in hc.website):
+        return True
+    else:
+        return False
+
+
+
+
+# check if hex is a document
+def is_metadata(bin_dec):
+    if any(str(bin_dec).startswith(i) for i in hc.metadata):
+        return True
+    elif any(i in str(bin_dec) for i in hc.metadata):
+        return True
+    elif any(bin_dec.startwith("b'"+i) for i in hc.metadata):
+        return True
+    elif any(bin_dec.startwith("b"+str('"')+i) for i in hc.metadata):
+        return True
+    else:
+        return False
+
+
+
+#check ascii decodable but not text
+def undef_hexstring(a):
+    c= False
+    if ' ' not in a :
+        for i in range(len(a)):
+            if (i+1) < len(a):
+                if a[i].islower() and a[i+1].isupper():
+                    c = True
+                    break                            
+                elif a[i].islower() and (a[i+1] in hc.digit):
+                    c = True
+                    break
+            elif (i+1) > len(a):
+                break
+    return c
+      
+
+def spacer(binary):
+    c =0
+    for i in binary:
+        if i == ' ':
+            c = c+1
+    if c > 3:
+        return True
+    else: 
+        return False
+
+
+# check if hex is a integer
+def hex_int(digit):
+    count = 0 
+    for i in hc.digit:
+        if i in digit:
+            count += 1 
+        else:
+            break
+    if count == len(digit):
+        return True
+    else:
+        return False 
+         
+
+
+def is_hex_op(binary):
+    c = 0
+    for i in binary:
+        if i in hc.hex_dig:
+            c = c+1
+        else:
+            break
+    if c == len(binary):
+        return True
+    else:
+        return False
+
+
+
+# check if hex is ascii and contains only letters or words
+def no_digit(bin_dec):
+    if any(i in bin_dec for i in hc.digit):
+        return False
+    else:
+        return True
+
+
+
+# check if hex is ascii 
+def is_ascii(bin_dec):
+    if(all(ord(char) < 128 for char in bin_dec)):
+        return True
+    else:
+        return False
+
+
+
+# personal text checker to find some words in OP_Retrun and classify as text
+def is_text(bin_dec):   
+    if any(i in bin_dec for i in hc.text_check):
+        return True
+    elif (len(bin_dec) ==1) and (' ' in bin_dec):
+        return True
+    elif( bin_dec.startswith('@')):
+        return True       
+    else:
+        return False
+
+
+#check is metadata starter prefix in hexstring
+def is_metadata_hex(hex_str):
+    if any(str(hex_str).startswith(i) for i in hc.prefix_meta):
+        return True
+    else:
+        return False
+
+
+# save undefinable OP_RETURN fields in an additional table for more analysis
+# databse table contains only the transaction id, block number and 
+# transaction value of the corresponding op_return field 
+
+rpc_connection = rpc.start_connection_to_rpc()
+
+def save_op_sql(numarray):
+    connection = sqlite3.connect('blockchain.db')
+    sql.initTabel(connection)
+  
+    raw_tx = rpc.decoded_transactions_address(rpc_connection, numarray[1])
+    arr=[]
+    b = 0.0
+    a = []
+    arr = numarray[2].split(", ")
+    print(arr)
+
+
+    for i in range(len(arr)):
+        if 'E' in arr[i]:
+            b = arr[i][0]
+            b = float(b)
+        else:
+            b = float(arr[i])
+        a.append(b)
+        
+    block_number = numarray[0] 
+    transaction_id  =  numarray[1]
+    tx_value = a
+    op_return = __OP_PRETUN__ + ' ' + numarray[3]
+    op_length = numarray[4]
+    address_info = c.get_address_of_op_tx(raw_tx)
+    tx_address = address_info[0]
+    address_number = address_info[1]
+
+    sql.addOP(connection, transaction_id, block_number, tx_value, op_return, op_length, tx_address, address_number)
+    connection.close()

@@ -9,6 +9,11 @@ f1 = open('a.txt','w')
 # analyze content of OP_RETURN fields
 def check_hex(arrayList):
     # parameters for counting different contents
+  
+  
+    counter = np.zeros(9)   
+
+
     count_http = 0
     count_txt = 0
     count_ud = 0
