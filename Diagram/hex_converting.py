@@ -85,9 +85,9 @@ def check_hex(arrayList):
                 elif  hf.hex_int(a):
                     c[6] = c[6] +1
                 # check content is hexstring
-                elif hf.is_hex_op(bin_dec):
+                elif hf.is_hex_op(a):
                     c[9] = c[9] +1
-                elif hf.unknown_ascii(bin_dec):
+                elif hf.unknown_ascii(a):
                     c[10] = c[10] +1
                 # not asci decodable
                 elif not(hf.is_ascii(a)):
