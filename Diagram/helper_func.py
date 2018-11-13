@@ -94,13 +94,7 @@ def hex_int(digit):
 
 
 def is_hex_op(binary):
-    c = 0
-    for i in binary:
-        if i in hc.hex_dig:
-            c = c+1
-        else:
-            break
-    if c == len(binary):
+    if all(i in hc.hex_dig for i in binary):
         return True
     else:
         return False
@@ -133,6 +127,14 @@ def is_text(bin_dec):
         return True
     elif( bin_dec.startswith('@')):
         return True       
+    else:
+        return False
+
+# find all unknown ascii 
+def unknown_ascii(bin_dec):
+    alpha = hc.lower_alph + hc.upper_alph
+    if all(i in alpha for i in bin_dec):
+        return True
     else:
         return False
 
