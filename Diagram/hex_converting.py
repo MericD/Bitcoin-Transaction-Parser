@@ -105,7 +105,7 @@ def check_hex(arrayList):
                     f.write("%s\n" % str(binary))
                 try:
                     asc = by.a2b_uu(binary)
-                    f3.write("%s\n" % str(binary.decode(__ASCII__)))
+                    f3.write("%s\n" % str(asc))
                 except:
                     f4.write("%s\n" % str(binary))
 

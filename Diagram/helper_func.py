@@ -80,13 +80,7 @@ def spacer(binary):
 
 # check if hex is a integer
 def hex_int(digit):
-    count = 0 
-    for i in hc.digit:
-        if i in digit:
-            count += 1 
-        else:
-            break
-    if count == len(digit):
+    if all(i in hc.digit for i in digit):
         return True
     else:
         return False 
