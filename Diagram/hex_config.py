@@ -7,7 +7,7 @@ upper_alph =('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N
 
 website = ('https', 'http', 'www.', '.com', '.org')
 
-metadata = ('** PROOF.COM **','DOCPROOF','FACTOM00' ,'Factom!!', 'Fa', 'CryptoTests-', 'CryptoProof-', 'STAMPD##', 'BITPROOF', 
+metadata = ('LICTIP10','** PROOF.COM **','DOCPROOF','FACTOM00' ,'Factom!!', 'Fa', 'CryptoTests-', 'CryptoProof-', 'STAMPD##', 'BITPROOF', 
             'ProveBit', 'RMBe', 'RMBd', 'ORIGMY', 'LaPreuve', 'UNicDC','POET', 'EXONUM', 'BARD','omni', 'ASCRIBE', 
           'CNTRPRTY','SLDX:', 'CC', 'SPK', 'S1', 'S2', 'S3', 'S4', 'S5', 'BS', 'FA' ,'OA', 'id', 'MG', 'EW', 'SB.D', 
           'SW', 'DS' , 'OC', 'Mined by 1hash.com', 'FluxST', 'XY','XW', 'SS', 'KMD', 'OKT', 'CP110400', 'XX','TBT-T') 

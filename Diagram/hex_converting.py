@@ -6,6 +6,9 @@ __ASCII__= 'ascii'
 
 f = open('a.txt','w')
 f1 = open('a1.txt','w')
+f2 = open('a2.txt','w')
+f3 = open('a3.txt','w')
+
 # analyze content of OP_RETURN fields
 def check_hex(arrayList):
   
@@ -58,9 +61,11 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(bin_dec):
                     c[9] = c[9] +1
+                    f1.write("%s\n" % str(binary))
                 # unknown ascii string 
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
+                    f2.write("%s\n" % str(binary))
 
 
                 # check content is text message
@@ -87,8 +92,10 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(a):
                     c[9] = c[9] +1
+                    f1.write("%s\n" % str(binary))
                 elif hf.unknown_ascii(a):
                     c[10] = c[10] +1
+                    f2.write("%s\n" % str(binary))
                 # not asci decodable
                 elif not(hf.is_ascii(a)):
                     c[8] = c[8] +1
@@ -96,7 +103,7 @@ def check_hex(arrayList):
                     hf.save_op_sql(i)
                     f.write("%s\n" % str(binary))
                 else:
-                    f1.write("%s\n" % str(binary))
+                    f3.write("%s\n" % str(binary))
 
 
 
