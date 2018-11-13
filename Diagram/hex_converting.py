@@ -64,13 +64,13 @@ def check_hex(arrayList):
 
 
                 # check content is text message
-                elif  (hf.is_ascii(bin_dec)) and (' ' in bin_dec):
-                    c[7] = c[7] + 1
-                elif (hf.is_ascii(bin_dec) and hf.no_digit(bin_dec)):
-                    c[7] = c[7] + 1
-                elif hf.is_text(bin_dec):
-                    # check if content is not definable but is ascii
-                    c[7]= c[7] +1
+              #  elif  (hf.is_ascii(bin_dec)) and (' ' in bin_dec):
+               #     c[7] = c[7] + 1
+              #  elif (hf.is_ascii(bin_dec) and hf.no_digit(bin_dec)):
+               #     c[7] = c[7] + 1
+                #elif hf.is_text(bin_dec):
+                 #   # check if content is not definable but is ascii
+                  #  c[7]= c[7] +1
             
             
             except:
@@ -100,28 +100,15 @@ def check_hex(arrayList):
 
 
 
-                elif hf.is_ascii(a) and hf.no_digit(a):
-                    c[7] = c[7] + 1
+              #  elif hf.is_ascii(a) and hf.no_digit(a):
+               #     c[7] = c[7] + 1
                
-                elif hf.is_text(a):
-                    c[7] = c[7] + 1
-                else:
-                    c[8] = c[8] +1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
-
-
-  # c[0] count content with only 'OP_RETURN '
-    # c[1] count error content
-    # c[2] count content not hex
-    # c[3] count content odd length
-    # c[4] count content website
-    # c[5] count content  metadata
-    # c[6] count content  digit
-    # c[7] count content  text
-    # c[8] count content  undefinable
-    # c[9] count content  ascii hexstring
-    # c[10] count content  unknown ascii 
+               # elif hf.is_text(a):
+                #    c[7] = c[7] + 1
+               # else:
+                #    c[8] = c[8] +1
+                 #   i.append(len(j)/2)
+                  #  hf.save_op_sql(i)
 
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error',     'Not Hex',    'Odd Lenght', 'Website',   
