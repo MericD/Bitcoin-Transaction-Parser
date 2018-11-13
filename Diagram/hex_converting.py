@@ -5,7 +5,7 @@ from Diagram import helper_func as hf
 __ASCII__= 'ascii'
 
 f = open('o.txt','w')
-
+f1 = open('a.txt','w')
 # analyze content of OP_RETURN fields
 def check_hex(arrayList):
     # parameters for counting different contents
