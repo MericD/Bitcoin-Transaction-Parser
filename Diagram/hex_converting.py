@@ -89,8 +89,9 @@ def check_hex(arrayList):
                 if hf.check_website(a):
                     c[4] = c[4] + 1 
                 # check binary data contains document 
-                elif hf.is_metadata(a) or hf.is_metadata_hex(j) or hf.is_metadata(str(binary)):
+                elif hf.is_metadata(a) or hf.is_metadata_hex(j):
                     c[5] = c[5] + 1
+                    f1.write("%s\n" % str(binary))
                 # check content is digit
                 elif  hf.hex_int(a):
                     c[6] = c[6] +1
@@ -111,7 +112,10 @@ def check_hex(arrayList):
                     asc = by.a2b_uu(binary)
                     f3.write("%s\n" % str(asc))
                 except:
-                    f4.write("%s\n" % str(binary))
+                    if hf.is_metadata(str(binary)):
+                        c[5] = c[5] + 1
+                    else:
+                        f4.write("%s\n" % str(binary))
 
 
               #  elif hf.is_ascii(a) and hf.no_digit(a):
