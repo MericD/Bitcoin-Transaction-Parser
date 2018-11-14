@@ -23,7 +23,8 @@ def check_hex(arrayList):
     # c[8] count content  undefinable
     # c[9] count content  ascii hexstring
     # c[10] count content  unknown ascii 
-    c = np.zeros(11)   
+    # c[11] count content  unknown ascii 
+    c = np.zeros(12)   
 
     # in given array[array] get hexstring, store in j and check content an OP_RETRUN has
     for i in arrayList:
@@ -65,6 +66,8 @@ def check_hex(arrayList):
                 elif hf.only_alpha(bin_dec) and hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
                     f2.write("%s\n" % str(bin_dec))
+                elif (len(bin_dec) < 15) and hf.only_alpha(bin_dec) and not(' ' in bin_dec):
+                    c[11] = c[1] + 1
                 elif ' ' in a and not(hf.count_slash(bin_dec)):
                     f3.write("%s\n" % str(bin_dec))
                 else:
@@ -98,6 +101,8 @@ def check_hex(arrayList):
                 elif not(hf.only_alpha) and hf.unknown_ascii(a):
                     c[10] = c[10] +1
                     f2.write("%s\n" % str(a))
+                elif (len(a) < 15) and hf.only_alpha(a) and not(' ' in a):
+                    c[11] = c[1] + 1
                 # not asci decodable
                 elif (' ' in a) and not(hf.count_slash(a)):
                     f3.write("%s\n" % str(a))
