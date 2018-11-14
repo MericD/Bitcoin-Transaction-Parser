@@ -66,7 +66,7 @@ def check_hex(arrayList):
                     c[9] = c[9] +1
                     f1.write("%s\n" % str(bin_dec))
                 # unknown ascii string 
-                elif hf.unknown_ascii(bin_dec):
+                elif (len(a) > 10) and hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
                     f2.write("%s\n" % str(bin_dec))
                 elif ' ' in a:
