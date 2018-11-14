@@ -129,6 +129,8 @@ def unknown_ascii(bin_dec):
     alpha = hc.lower_alph + hc.upper_alph
     if all(i in alpha for i in bin_dec):
         return True
+    elif any(str(bin_dec).startswith(i) for i in hc.unknown_ascii_word):
+        return True
     else:
         return False
 
