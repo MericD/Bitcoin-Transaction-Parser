@@ -105,7 +105,7 @@ def check_hex(arrayList):
                     c[10] = c[10] +1
                     f2.write("%s\n" % str(a))
                 # not asci decodable
-                elif ' ' in bin_dec:
+                elif ' ' in a:
                     f3.write("%s\n" % str(a))
                 else:
                     c[8] = c[8] +1
