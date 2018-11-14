@@ -66,7 +66,7 @@ def check_hex(arrayList):
                     c[9] = c[9] +1
                     f1.write("%s\n" % str(bin_dec))
                 # unknown ascii string 
-                elif (len(a) > 14) and hf.unknown_ascii(bin_dec):
+                elif (len(a) > 7) and hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
                     f2.write("%s\n" % str(bin_dec))
                 elif ' ' in a:
@@ -101,7 +101,7 @@ def check_hex(arrayList):
                 elif hf.is_hex_op(a):
                     c[9] = c[9] +1
                     f1.write("%s\n" % str(a))
-                elif len(a)>14 and hf.unknown_ascii(a):
+                elif (len(a) > 7) and hf.unknown_ascii(a):
                     c[10] = c[10] +1
                     f2.write("%s\n" % str(a))
                 # not asci decodable
