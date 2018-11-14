@@ -90,6 +90,8 @@ def hex_int(digit):
 def is_hex_op(binary):
     if all(i in hc.hex_dig for i in binary):
         return True
+    elif any(str(bin_dec).startswith(i) for i in hc.hex_string_prefix):
+        return True
     else:
         return False
 
