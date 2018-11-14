@@ -113,7 +113,7 @@ def is_ascii(bin_dec):
     else:
         return False
 
-def only_alpha(bin_dec):
+def short_text(bin_dec):
     a = hc.lower_alph + hc.upper_alph
     if all(i in a for i in bin_dec):
         return True
