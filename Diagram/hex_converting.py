@@ -63,7 +63,7 @@ def check_hex(arrayList):
                 elif hf.is_hex_op(bin_dec):
                     c[9] = c[9] +1
                 # unknown ascii string 
-                elif hf.only_alpha(bin_dec) and hf.unknown_ascii(bin_dec):
+                elif not(hf.only_alpha(bin_dec)) and hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
                     f2.write("%s\n" % str(bin_dec))
                 elif (len(bin_dec) < 15) and hf.only_alpha(bin_dec) and not(' ' in bin_dec):
