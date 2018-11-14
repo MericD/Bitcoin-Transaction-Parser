@@ -5,6 +5,8 @@ lower_alph = ('a','b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n
 upper_alph =('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
 'U', 'V', 'W', 'X', 'Y', 'Z', '=', '/', '+', '-', '*', '%')
 
+unknown_ascii_word ={'EUK', 'BERNSTEIN', 'COPYROBO', 'POR: ', 'POTX: '}
+
 website = ('https', 'http', 'www.', '.com', '.org')
 
 metadata = ('LICTIP10','** PROOF.COM **','DOCPROOF','FACTOM00' ,'Factom!!', 'Fa', 'CryptoTests-', 'CryptoProof-', 'STAMPD##', 'BITPROOF', 
