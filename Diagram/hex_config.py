@@ -8,7 +8,7 @@ upper_alph =('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N
 unknown_ascii_word ={'TTB-T'}
 
 
-hex_string_prefix ={'EUK', 'BERNSTEIN', 'COPYROBO', 'POR: ', 'POTX: ', 'AuroM', '@proof.'}
+hex_string_prefix ={'EUK', 'BERNSTEIN', 'COPYROBO', 'POR: ', 'POTX: ', 'AuroM', '@proof.', 'XLX', '"h":'}
 
 
 website = ('https', 'http', 'www.', '.com', '.org')
