@@ -98,10 +98,10 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(a):
                     c[9] = c[9] +1
-                elif not(hf.only_alpha) and hf.unknown_ascii(a):
+                elif not(hf.short_text) and hf.unknown_ascii(a):
                     c[10] = c[10] +1
                     f2.write("%s\n" % str(a))
-                elif (len(a) < 15) and hf.only_alpha(a) and not(' ' in a):
+                elif (len(a) < 15) and hf.short_text(a) and not(' ' in a):
                     c[11] = c[1] + 1
                 # not asci decodable
                 elif (' ' in a) and not(hf.count_slash(a)):
