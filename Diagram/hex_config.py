@@ -3,9 +3,9 @@ lower_alph = ('a','b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n
 's', 't', 'u', 'v', 'w', 'x', 'y', 'z','0','1','2','3','4','5','6','7','8','9')
 
 upper_alph =('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-'U', 'V', 'W', 'X', 'Y', 'Z', '=', '/', '+', '-', '*', '%', '_')
+'U', 'V', 'W', 'X', 'Y', 'Z', '=', '/', '+', '-', '*', '%', '_', '"',"\\")
 
-unknown_ascii_word ={'TTB-T'}
+unknown_ascii_word ={'TTB-T', 'PROPERTY_PROTECT'}
 
 
 hex_string_prefix ={'EUK', 'BERNSTEIN', 'COPYROBO', 'POR: ', 'POTX: ', 'AuroM', '@proof.', 'XLX', '"h":'}
