@@ -137,6 +137,10 @@ def unknown_ascii(bin_dec):
 def is_metadata_hex(hex_str):
     if any(str(hex_str).startswith(i) for i in hc.prefix_meta):
         return True
+    elif any(str(hex_str).startswith("b"+"'"+i) for i in hc.prefix_meta):
+        return True
+    elif any(str(hex_str).startswith("b"+'"'+i) for i in hc.prefix_meta):
+        return True
     else:
         return False
 
