@@ -69,7 +69,7 @@ def check_hex(arrayList):
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
                     f2.write("%s\n" % str(bin_dec))
-                elif ' ' in bin_dec:
+                elif ' ' in a:
                     f3.write("%s\n" % str(bin_dec))
                 else:
                     f4.write("%s\n" % str(bin_dec))
