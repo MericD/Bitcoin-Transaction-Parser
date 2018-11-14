@@ -113,6 +113,12 @@ def is_ascii(bin_dec):
     else:
         return False
 
+def only_alpha(bin_dec):
+    a = hc.lower_alph + hc.upper_alph
+    if all(i in a for i in bin_dec):
+        return True
+    else:
+        return False
 
 
 # personal text checker to find some words in OP_Retrun and classify as text
@@ -126,9 +132,21 @@ def is_text(bin_dec):
     else:
         return False
 
+def count_slash(bin_dec):
+    count =0
+    if any(i =="\\" for i in bin_dec):
+        count +=1
+    if count >3:
+        return True
+    else:
+        return False
+
+
+
+
 # find all unknown ascii 
 def unknown_ascii(bin_dec):
-    alpha = hc.lower_alph + hc.upper_alph
+    alpha = hc.lower_alph + hc.upper_alph + hc.symbol + hc.digit
     if all(i in alpha for i in bin_dec):
         return True
     elif any(str(bin_dec).startswith(i) for i in hc.unknown_ascii_word):
