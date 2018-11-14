@@ -9,6 +9,7 @@ f1 = open('a1.txt','w')
 f2 = open('a2.txt','w')
 f3 = open('a3.txt','w')
 f4 = open('a4.txt','w')
+f5 = open('a5.txt','w')
 
 # analyze content of OP_RETURN fields
 def check_hex(arrayList):
@@ -56,6 +57,7 @@ def check_hex(arrayList):
                 # check if content is metadata
                 elif hf.is_metadata(bin_dec):
                     c[5] = c[5] + 1
+                    f.write("%s\n" % str(bin_dec))
                 # check content is digit
                 elif  hf.hex_int(bin_dec):
                     c[6] = c[6] +1
@@ -64,7 +66,7 @@ def check_hex(arrayList):
                     c[9] = c[9] +1
                     f1.write("%s\n" % str(bin_dec))
                 # unknown ascii string 
-                elif len(a)>20 and hf.unknown_ascii(bin_dec) and not(hf.no_digit(bin_dec)):
+                elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
                     f2.write("%s\n" % str(bin_dec))
                 elif ' ' in bin_dec:
@@ -91,31 +93,33 @@ def check_hex(arrayList):
                 # check binary data contains document 
                 elif hf.is_metadata(a) or hf.is_metadata_hex(j):
                     c[5] = c[5] + 1
-                    f1.write("%s\n" % str(binary))
+                    f.write("%s\n" % str(a))
                 # check content is digit
                 elif  hf.hex_int(a):
                     c[6] = c[6] +1
                 # check content is hexstring
                 elif hf.is_hex_op(a):
                     c[9] = c[9] +1
-                    f1.write("%s\n" % str(binary))
+                    f1.write("%s\n" % str(a))
                 elif len(a)>12 and hf.unknown_ascii(a):
                     c[10] = c[10] +1
-                    f2.write("%s\n" % str(binary))
+                    f2.write("%s\n" % str(a))
                 # not asci decodable
-                elif not(hf.is_ascii(a)):
+                elif ' ' in bin_dec:
+                    f3.write("%s\n" % str(a))
+                else:
                     c[8] = c[8] +1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
-                    f.write("%s\n" % str(binary))
-                try:
-                    asc = by.a2b_uu(binary)
-                    f3.write("%s\n" % str(asc))
-                except:
-                    if hf.is_metadata(str(binary)):
-                        c[5] = c[5] + 1
-                    else:
-                        f4.write("%s\n" % str(binary))
+                    #i.append(len(j)/2)
+                    #hf.save_op_sql(i)
+                    f5.write("%s\n" % str(a))
+                #try:
+                #    asc = by.a2b_uu(binary)
+                #    f3.write("%s\n" % str(asc))
+                #except:
+                #    if hf.is_metadata(str(binary)):
+                #        c[5] = c[5] + 1
+                #    else:
+                #        f4.write("%s\n" % str(binary))
 
 
               #  elif hf.is_ascii(a) and hf.no_digit(a):
