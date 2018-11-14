@@ -133,6 +133,8 @@ def unknown_ascii(bin_dec):
         return True
     elif any(str(bin_dec).startswith(i) for i in hc.unknown_ascii_word):
         return True
+    elif str(bin_dec.startswith('KC')) or str(bin_dec.startswith('RT')):
+        return True
     else:
         return False
 
