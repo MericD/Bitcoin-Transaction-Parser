@@ -4,10 +4,6 @@ from Diagram import helper_func as hf
 
 __ASCII__= 'ascii'
 
-f2 = open('a2.txt','w')
-f3 = open('a3.txt','w')
-f4 = open('a4.txt','w')
-f5 = open('a5.txt','w')
 
 # analyze content of OP_RETURN fields
 def check_hex(arrayList):
@@ -65,23 +61,18 @@ def check_hex(arrayList):
                 # unknown ascii string 
                 elif not(hf.short_text(bin_dec)) and hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
-                    f2.write("%s\n" % str(bin_dec))
                 elif (len(bin_dec) < 15) and hf.short_text(bin_dec) and not(' ' in bin_dec):
                     c[11] = c[1] + 1
                 elif ' ' in a and not(hf.count_slash(bin_dec)):
-                    f3.write("%s\n" % str(bin_dec))
-                else:
-                    f4.write("%s\n" % str(bin_dec))
-
-
+                #else:
                 # check content is text message
-              #  elif  (hf.is_ascii(bin_dec)) and (' ' in bin_dec):
-               #     c[7] = c[7] + 1
-              #  elif (hf.is_ascii(bin_dec) and hf.no_digit(bin_dec)):
-               #     c[7] = c[7] + 1
+                #  elif  (hf.is_ascii(bin_dec)) and (' ' in bin_dec):
+                #     c[7] = c[7] + 1
+                #  elif (hf.is_ascii(bin_dec) and hf.no_digit(bin_dec)):
+                #     c[7] = c[7] + 1
                 #elif hf.is_text(bin_dec):
-                 #   # check if content is not definable but is ascii
-                  #  c[7]= c[7] +1
+                #   # check if content is not definable but is ascii
+                #  c[7]= c[7] +1
             
             
             except:
@@ -100,17 +91,14 @@ def check_hex(arrayList):
                     c[9] = c[9] +1
                 elif not(hf.short_text) and hf.unknown_ascii(a):
                     c[10] = c[10] +1
-                    f2.write("%s\n" % str(a))
                 elif (len(a) < 15) and hf.short_text(a) and not(' ' in a):
                     c[11] = c[1] + 1
                 # not asci decodable
                 elif (' ' in a) and not(hf.count_slash(a)):
-                    f3.write("%s\n" % str(a))
                 else:
                     c[8] = c[8] +1
                     #i.append(len(j)/2)
                     #hf.save_op_sql(i)
-                    f5.write("%s\n" % str(a))
                 #try:
                 #    asc = by.a2b_uu(binary)
                 #    f3.write("%s\n" % str(asc))
@@ -121,15 +109,15 @@ def check_hex(arrayList):
                 #        f4.write("%s\n" % str(binary))
 
 
-              #  elif hf.is_ascii(a) and hf.no_digit(a):
-               #     c[7] = c[7] + 1
+                #  elif hf.is_ascii(a) and hf.no_digit(a):
+                #     c[7] = c[7] + 1
                
-               # elif hf.is_text(a):
+                # elif hf.is_text(a):
                 #    c[7] = c[7] + 1
-               # else:
+                # else:
                 #    c[8] = c[8] +1
-                 #   i.append(len(j)/2)
-                  #  hf.save_op_sql(i)
+                #   i.append(len(j)/2)
+                #  hf.save_op_sql(i)
 
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error',     'Not Hex',    'Odd Lenght', 'Website',   
