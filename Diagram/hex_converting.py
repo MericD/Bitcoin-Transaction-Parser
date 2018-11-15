@@ -64,6 +64,7 @@ def check_hex(arrayList):
                 elif (len(bin_dec) < 15) and hf.short_text(bin_dec) and not(' ' in bin_dec):
                     c[11] = c[1] + 1
                 elif ' ' in a and not(hf.count_slash(bin_dec)):
+                    pass
                 #else:
                 # check content is text message
                 #  elif  (hf.is_ascii(bin_dec)) and (' ' in bin_dec):
