@@ -5,9 +5,9 @@
 # IP and port for rpc rpc_ip and rpc_port
 
 CONFIG = {
-    'database_file_name': 'bc_db.db',
-    'start_block': 130001,
-    'end_block':15000,
+    'database_file_name': 'db_blockchain.db',
+    'start_block': 226000,
+    'end_block':546000,
     'rpc_user':'rpc',
     'rpc_password':'bitmaster',
     'rpc_ip':'127.0.0.1',

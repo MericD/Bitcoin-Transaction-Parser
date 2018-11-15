@@ -114,8 +114,9 @@ def is_ascii(bin_dec):
         return False
 
 def short_text(bin_dec):
-    a = hc.lower_alph + hc.upper_alph
-    if all(i in a for i in bin_dec):
+
+    a = hc.lower_alph + hc.upper_alph+ hc.digit
+    if (len(bin_dec)< 15)and all(i in a for i in bin_dec):
         return True
     else:
         return False
