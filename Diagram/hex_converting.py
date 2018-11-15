@@ -96,6 +96,7 @@ def check_hex(arrayList):
                     c[11] = c[1] + 1
                 # not asci decodable
                 elif (' ' in a) and not(hf.count_slash(a)):
+                    pass
                 else:
                     c[8] = c[8] +1
                     #i.append(len(j)/2)
