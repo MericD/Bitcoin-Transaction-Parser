@@ -1,1 +1,1 @@
-__all__ =["diagram", "hex_converting","hex_config", "helper_fun"]
+__all__ =["diagram", "hex_converting","hex_config", "helper_func"]
