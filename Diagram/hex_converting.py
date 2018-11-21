@@ -1,10 +1,10 @@
 import numpy as np
 import binascii as by
 from Diagram import helper_func as hf
+import array
+
 
 __ASCII__= 'ascii'
-
-
 # analyze content of OP_RETURN fields
 def check_hex(arrayList):
   
@@ -16,11 +16,13 @@ def check_hex(arrayList):
     # c[5] count content  metadata
     # c[6] count content  digit
     # c[7] count content  text
-    # c[8] count content  undefinable
+    # c[8] count content  undefinable 
     # c[9] count content  ascii hexstring
     # c[10] count content  unknown ascii 
-    # c[11] count content  unknown ascii 
-    c = np.zeros(12)   
+    c = np.array(11)   
+    c.astype(int)
+    c= array.array('i',(0 for _ in range(13)))
+ 
 
     # in given array[array] get hexstring, store in j and check content an OP_RETRUN has
     for i in arrayList:
@@ -52,6 +54,8 @@ def check_hex(arrayList):
                 # check if content is metadata
                 elif hf.is_metadata(bin_dec):
                     c[5] = c[5] + 1
+                    #i.append(len(j)/2)
+                    #hf.save_op_sql(i)
                 # check content is digit
                 elif  hf.hex_int(bin_dec):
                     c[6] = c[6] +1
@@ -59,30 +63,19 @@ def check_hex(arrayList):
                 elif hf.is_hex_op(bin_dec):
                     c[9] = c[9] +1
                 # unknown ascii string 
-                elif not(hf.short_text(bin_dec)) and hf.unknown_ascii(bin_dec):
+                elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
-                elif (len(bin_dec) < 15) and hf.short_text(bin_dec) and not(' ' in bin_dec):
-                    c[11] = c[1] + 1
-                elif ' ' in a and not(hf.count_slash(bin_dec)):
-                    pass
-                #else:
-                # check content is text message
-                #  elif  (hf.is_ascii(bin_dec)) and (' ' in bin_dec):
-                #     c[7] = c[7] + 1
-                #  elif (hf.is_ascii(bin_dec) and hf.no_digit(bin_dec)):
-                #     c[7] = c[7] + 1
-                #elif hf.is_text(bin_dec):
-                #   # check if content is not definable but is ascii
-                #  c[7]= c[7] +1
-            
-            
+                elif  (' ' in bin_dec) or (len(bin_dec)==1):
+                    c[7] = c[7] + 1
+                else:
+                    c[10] = c[10] + 1
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains url 
                 if hf.check_website(a):
                     c[4] = c[4] + 1 
                 # check binary data contains document 
-                elif hf.is_metadata(a) or hf.is_metadata_hex(j):
+                elif hf.is_metadata(a):
                     c[5] = c[5] + 1
                 # check content is digit
                 elif  hf.hex_int(a):
@@ -90,41 +83,22 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(a):
                     c[9] = c[9] +1
-                elif not(hf.short_text) and hf.unknown_ascii(a):
+                elif hf.unknown_ascii(a):
                     c[10] = c[10] +1
-                elif (len(a) < 15) and hf.short_text(a) and not(' ' in a):
-                    c[11] = c[1] + 1
-                # not asci decodable
-                elif (' ' in a) and not(hf.count_slash(a)):
-                    pass
-                else:
-                    c[8] = c[8] +1
-                    #i.append(len(j)/2)
-                    #hf.save_op_sql(i)
-                #try:
-                #    asc = by.a2b_uu(binary)
-                #    f3.write("%s\n" % str(asc))
-                #except:
-                #    if hf.is_metadata(str(binary)):
-                #        c[5] = c[5] + 1
-                #    else:
-                #        f4.write("%s\n" % str(binary))
-
-
-                #  elif hf.is_ascii(a) and hf.no_digit(a):
-                #     c[7] = c[7] + 1
-               
-                # elif hf.is_text(a):
-                #    c[7] = c[7] + 1
-                # else:
-                #    c[8] = c[8] +1
-                #   i.append(len(j)/2)
-                #  hf.save_op_sql(i)
+                #elif (len(a) < 25) and hf.unknown_ascii(a):
+                #    c[11] = c[11] +1
+                else: #if len(binary) < 40:
+                    c[8] = c[8] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
+                    
+                    
 
     #  (x,_) part of a tuple --> number of found contents
-    x = ['Empty',  'Error',     'Not Hex',    'Odd Lenght', 'Website',   
-        'DOCPROOF', 'Number',  'Text',  'Undecodable', 'Ascii hexstring', 'Unknown ascii']
-
+    x = ['Empty',  'Error', 'Not Hex', 'Odd Lenght', 'Website',   
+        'Metadata', 'Digit', 'Text', 'Undefinable < 40', 'Ascii hexstring', 'Unknown ascii > 24', 
+        'Unknown ascii < 25', 'Undefinable > 39']
+    
     # concatinate found solutions in a list and return it
     ascii = list(zip(x,c))
     return ascii

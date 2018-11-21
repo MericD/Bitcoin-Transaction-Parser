@@ -1,7 +1,9 @@
 import sqlite3
 from SQL import sqlite as sql
 from rpc import rpc
+from Core import sender_add as ads
 import time
+import re
 
 
 
@@ -137,4 +139,21 @@ def get_address_of_op_tx(value):
                 pass
     return address,c
 
-    
+
+    # return addresses in a transaction
+def get_sender_address_of_op_tx(value):
+    address = ""
+    c = 0
+    a = ""
+    # search in "vout" (decoded raw transaction information) for value-field 
+    for k , v in value.items():
+        for i in range(len(v["vin"])):
+            potential_sender_add = v["vout"][i]["scriptSig"]["asm"]
+            potential_sender_add = re.sub(r'.* ', '', potential_sender_add)
+            a = ads.PubkeyToAddress(potential_sender_add)
+            if "" == address:
+                address = str(a)
+            else:
+                address = address + ", " + str(a)
+            c = 0
+    return address
