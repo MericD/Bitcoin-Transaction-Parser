@@ -179,13 +179,17 @@ def count_slash(bin_dec):
 # databse table contains only the transaction id, block number and 
 # transaction value of the corresponding op_return field 
 
-#rpc_connection = rpc.start_connection_to_rpc()
+f = open('a.txt', 'w')
+rpc_connection = rpc.start_connection_to_rpc()
 
 def save_op_sql(numarray):
     connection = sqlite3.connect('blockchain.db')
     sql.initTabel(connection)
   
-#    raw_tx = rpc.decoded_transactions_address(rpc_connection, numarray[1])
+    raw_tx = rpc.decoded_transactions_address(rpc_connection, numarray[1])
+    senAdd = c.get_sender_address_of_op_tx(raw_tx)
+    recAdd = c.get_address_of_op_tx(raw_tx)
+
     arr=[]
     b = 0.0
     a = []
@@ -205,11 +209,12 @@ def save_op_sql(numarray):
     transaction_id  =  numarray[1]
     tx_value = a
     op_return = __OP_PRETUN__ + ' ' + numarray[3]
-    s_address= 'a' ############
+    s_address= senAdd[0]
+    pubKey= senAdd[1]
+    f.write("%s\n" % str(pubKey))
     op_length = numarray[4]
-    address_info = 'A' #c.get_address_of_op_tx(raw_tx)
-    r_address = 'a'# address_info[0]
-    address_number = 1 #address_info[1]
+    r_address = recAdd[0]
+    address_number = recAdd[1]
 
     sql.addOP(connection, transaction_id, block_number, tx_value, op_return, op_length, s_address, r_address, address_number)
     connection.close()

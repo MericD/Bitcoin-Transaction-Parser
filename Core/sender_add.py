@@ -16,5 +16,3 @@ def PubkeyToAddress(pubkey_hex):
     pubkey_hash = h.digest()
     return ConvertPKHToAddress(b'\x00', pubkey_hash)
 
-pubkey = "03d7b3bc2d0b4b72a845c469c9fee3c8cf475a2f237e379d7f75a4f463f7bd6ebd"
-print("Address: %s" % PubkeyToAddress(pubkey))
