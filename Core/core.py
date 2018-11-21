@@ -1,7 +1,7 @@
 import sqlite3
 from SQL import sqlite as sql
 from rpc import rpc
-from Core import sender_add as ads
+from Core import sender_add as addr
 import time
 import re
 
@@ -150,7 +150,7 @@ def get_sender_address_of_op_tx(value):
         for i in range(len(v["vin"])):
             potential_sender_add = v["vout"][i]["scriptSig"]["asm"]
             potential_sender_add = re.sub(r'.* ', '', potential_sender_add)
-            a = ads.PubkeyToAddress(potential_sender_add)
+            a = addr.PubkeyToAddress(potential_sender_add)
             if "" == address:
                 address = str(a)
             else:
