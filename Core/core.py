@@ -147,11 +147,12 @@ def get_sender_address_of_op_tx(value):
     # search in "vout" (decoded raw transaction information) for value-field 
     for k , v in value.items():
         for i in range(len(v["vin"])):
-            potential_sender_add = v["vin"][i]["scriptSig"]["asm"]
-            potential_sender_add = re.sub(r'.* ', '', potential_sender_add)
-            a = addr.PubkeyToAddress(potential_sender_add)
-            if "" == address:
-                address = str(a)
-            else:
-                address = address + ", " + str(a)
+            if "scriptSig" in v:
+                potential_sender_add = v["vin"][i]["scriptSig"]["asm"]
+                potential_sender_add = re.sub(r'.* ', '', potential_sender_add)
+                a = addr.PubkeyToAddress(potential_sender_add)
+                if "" == address:
+                    address = str(a)
+                else:
+                    address = address + ", " + str(a)
     return address, potential_sender_add
