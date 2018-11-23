@@ -4,6 +4,7 @@ from Core import core as c
 from rpc import rpc
 import sqlite3
 import string
+import time
 
 __OP_PRETUN__= 'OP_RETURN'
 
@@ -194,7 +195,6 @@ def save_op_sql(numarray):
     b = 0.0
     a = []
     arr = numarray[2].split(", ")
-    print(arr)
 
     for i in range(len(arr)):
         if 'E' in arr[i]:
@@ -204,17 +204,21 @@ def save_op_sql(numarray):
             b = float(arr[i])
         a.append(b)
         
+
     block_number = numarray[0] 
     transaction_id  =  numarray[1]
     tx_value = a
     op_return = __OP_PRETUN__ + ' ' + numarray[3]
     s_address= senAdd[0]
-    pubKey= senAdd[1]
+    #pubKey= senAdd[1]
     op_length = numarray[4]
     r_address = recAdd[0]
     address_number = recAdd[1]
+    tx_time = time.ctime(int(raw_tx["time"]))
+    print(raw_tx)
+    
 
-    sql.addOP(connection, transaction_id, block_number, tx_value, op_return, op_length, s_address, r_address, address_number)
+    sql.addOP(connection, transaction_id, block_number, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time)
     connection.close()
 
     #f.write("%s\n" % str(pubKey))
