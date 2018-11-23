@@ -148,7 +148,7 @@ def get_sender_address_of_op_tx(value):
     # search in "vout" (decoded raw transaction information) for value-field 
     for k , v in value.items():
         for i in range(len(v["vin"])):
-            if "scriptSig" in value:
+            try:
                 potential_sender_add = v["vin"][i]["scriptSig"]["asm"]
                 potential_sender_add = re.sub(r'.* ', '', potential_sender_add)
                 a = addr.PubkeyToAddress(potential_sender_add)
@@ -156,7 +156,7 @@ def get_sender_address_of_op_tx(value):
                     address = str(a)
                 else:
                     address = address + ", " + str(a)
-            else:
+            except:
                 address = "new coin!"
     print(address)
     return address, potential_sender_add
