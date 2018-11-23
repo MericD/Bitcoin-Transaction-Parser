@@ -196,7 +196,6 @@ def save_op_sql(numarray):
     arr = numarray[2].split(", ")
     print(arr)
 
-
     for i in range(len(arr)):
         if 'E' in arr[i]:
             b = arr[i][0]
@@ -211,10 +210,11 @@ def save_op_sql(numarray):
     op_return = __OP_PRETUN__ + ' ' + numarray[3]
     s_address= senAdd[0]
     pubKey= senAdd[1]
-    f.write("%s\n" % str(pubKey))
     op_length = numarray[4]
     r_address = recAdd[0]
     address_number = recAdd[1]
 
     sql.addOP(connection, transaction_id, block_number, tx_value, op_return, op_length, s_address, r_address, address_number)
     connection.close()
+
+    #f.write("%s\n" % str(pubKey))

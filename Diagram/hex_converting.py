@@ -54,9 +54,6 @@ def check_hex(arrayList):
                 # check if content is metadata
                 elif hf.is_metadata(bin_dec):
                     c[5] = c[5] + 1
-                    #i.append(len(j)/2)
-                    #hf.save_op_sql(i)
-                # check content is digit
                 elif  hf.hex_int(bin_dec):
                     c[6] = c[6] +1
                 # check content is hexstring
@@ -85,9 +82,7 @@ def check_hex(arrayList):
                     c[9] = c[9] +1
                 elif hf.unknown_ascii(a):
                     c[10] = c[10] +1
-                #elif (len(a) < 25) and hf.unknown_ascii(a):
-                #    c[11] = c[11] +1
-                else: #if len(binary) < 40:
+                else: 
                     c[8] = c[8] + 1
                     i.append(len(j)/2)
                     hf.save_op_sql(i)

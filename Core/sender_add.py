@@ -16,3 +16,14 @@ def PubkeyToAddress(pubkey_hex):
     pubkey_hash = h.digest()
     return ConvertPKHToAddress(b'\x00', pubkey_hash)
 
+
+
+def cluster_senderAdd(pubkey_hex, arrhex):
+    for i in pubkey_hex:
+        for j in arrhex:
+            if i in j:
+                j = i + j
+                #j = list(set(i + j)) 
+    return arrhex
+
+
