@@ -144,6 +144,7 @@ def get_address_of_op_tx(value):
 def get_sender_address_of_op_tx(value):
     address = ""
     a = ""
+    potential_sender_add = ""
     # search in "vout" (decoded raw transaction information) for value-field 
     for k , v in value.items():
         for i in range(len(v["vin"])):
