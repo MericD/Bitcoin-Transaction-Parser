@@ -215,7 +215,7 @@ def save_op_sql(numarray):
     op_length = numarray[4]
     r_address = recAdd[0]
     address_number = recAdd[1]
-    tx_time = time.ctime(int(rpc.get_transactions(rpc_connection,rpc.get_the_block_hash(rpc_connection,block_number)))[1])
+    tx_time = time.ctime(int(rpc.get_all_transactions(rpc_connection,rpc.get_the_block_hash(rpc_connection,block_number))[1]))
     print(tx_time)
 
     sql.addOP(connection, transaction_id, block_number, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time)
