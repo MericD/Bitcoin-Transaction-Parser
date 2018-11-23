@@ -204,6 +204,7 @@ def save_op_sql(numarray):
             b = float(arr[i])
         a.append(b)
         
+    print(raw_tx)
 
     block_number = numarray[0] 
     transaction_id  =  numarray[1]
@@ -215,7 +216,6 @@ def save_op_sql(numarray):
     r_address = recAdd[0]
     address_number = recAdd[1]
     tx_time = time.ctime(int(raw_tx["time"]))
-    print(raw_tx)
     
 
     sql.addOP(connection, transaction_id, block_number, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time)
