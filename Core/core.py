@@ -151,12 +151,9 @@ def get_sender_address_of_op_tx(value):
             potential_sender_add = v["vin"][i]
             if 'scriptSig' in potential_sender_add :
                 potential_sender_add = potential_sender_add["scriptSig"]["asm"]
-                print("no cut " + str(potential_sender_add))
                 potential_sender_add = re.sub(r'.*]', '', potential_sender_add)
                 if " " in potential_sender_add:
                     potential_sender_add.replace(" ", "")
-                print(potential_sender_add)
-                if len(potential_sender_add) != 0:
                     a = addr.PubkeyToAddress(potential_sender_add)
                     if "" == address:
                         address = str(a)
