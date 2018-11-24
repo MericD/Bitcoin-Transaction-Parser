@@ -158,6 +158,6 @@ def get_sender_address_of_op_tx(value):
                         address = str(a)
                     else:
                         address = address + ", " + str(a)
-                elif len(address) == 0: 
+                elif len(address) == "": 
                     address = "new coin!"
     return address, potential_sender_add
