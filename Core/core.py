@@ -152,11 +152,12 @@ def get_sender_address_of_op_tx(value):
             if 'scriptSig' in potential_sender_add :
                 potential_sender_add = potential_sender_add["scriptSig"]["asm"]
                 potential_sender_add = re.sub(r'.* ', '', potential_sender_add)
-                a = addr.PubkeyToAddress(potential_sender_add)
-                if "" == address:
-                    address = str(a)
-                else:
-                    address = address + ", " + str(a)
-            elif len(address) == 0: 
-                address = "new coin!"
+                if len(potential_sender_add) != 0:
+                    a = addr.PubkeyToAddress(potential_sender_add)
+                    if "" == address:
+                        address = str(a)
+                    else:
+                        address = address + ", " + str(a)
+                elif len(address) == 0: 
+                    address = "new coin!"
     return address, potential_sender_add

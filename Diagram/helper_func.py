@@ -204,7 +204,7 @@ def save_op_sql(numarray):
             b = float(arr[i])
         a.append(b)
         
-    print(raw_tx)
+    #print(raw_tx)
 
     block_number = numarray[0] 
     transaction_id  =  numarray[1]

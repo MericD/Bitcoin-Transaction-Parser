@@ -94,6 +94,7 @@ def check_hex(arrayList):
         'Metadata', 'Digit', 'Text', 'Undefinable < 40', 'Ascii hexstring', 'Unknown ascii > 24', 
         'Unknown ascii < 25', 'Undefinable > 39']
     
+    print(c)
     # concatinate found solutions in a list and return it
     ascii = list(zip(x,c))
     return ascii
