@@ -149,7 +149,7 @@ def get_sender_address_of_op_tx(value):
     for k , v in value.items():
         for i in range(len(v["vin"])):
             potential_sender_add = v["vin"][i]
-            if 'scriptSig' in potential_sender_add :
+            if 'scriptSig' in potential_sender_add:
                 potential_sender_add = potential_sender_add["scriptSig"]["asm"]
                 potential_sender_add = re.sub(r'.*]', '', potential_sender_add)
                 if " " in potential_sender_add:
@@ -159,6 +159,8 @@ def get_sender_address_of_op_tx(value):
                         address = str(a)
                     else:
                         address = address + ", " + str(a)
-                elif len(address) == "": 
-                    address = "new coin!"
+                else: 
+                    address = "p2pk address"
+            else: 
+                address = "new coin!"
     return address, potential_sender_add

@@ -16,7 +16,9 @@ def PubkeyToAddress(pubkey_hex):
     pubkey_hash = h.digest()
     return ConvertPKHToAddress(b'\x00', pubkey_hash)
 
+pubkey_hex="0250863ad64a87ae8a2fe83c1af1a8403cb53f53e486d8511dad8a04887e5b2352"
 
+print(PubkeyToAddress(pubkey_hex))
 
 def cluster_senderAdd(pubkey_hex, arrhex):
     for i in pubkey_hex:
