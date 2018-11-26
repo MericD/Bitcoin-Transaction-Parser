@@ -72,6 +72,8 @@ def check_hex(arrayList):
                 # unknown ascii string 
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                     #ft.freq_tab(bin_dec)
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
@@ -100,12 +102,12 @@ def check_hex(arrayList):
                     c[11] = c[11] +1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
                     c[10] = c[10] +1
-                    f.write("%s\n" % str(a))
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                     #ft.freq_tab(a)
                 else: 
                     c[8] = c[8] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    
                     
                     
 
