@@ -164,23 +164,12 @@ def is_text(bin_dec):
         return False
 
 
-def count_slash(bin_dec):
-    c = False
-    for i in bin_dec:
-        if '\\' in i:
-            c = True
-            break
-    return c
-
-
-
-
 
 # save undefinable OP_RETURN fields in an additional table for more analysis
 # databse table contains only the transaction id, block number and 
 # transaction value of the corresponding op_return field 
 
-f = open('a.txt', 'w')
+#f = open('a.txt', 'w')
 rpc_connection = rpc.start_connection_to_rpc()
 
 def save_op_sql(numarray):
@@ -204,14 +193,12 @@ def save_op_sql(numarray):
             b = float(arr[i])
         a.append(b)
         
-    #print(raw_tx)
 
     block_number = numarray[0] 
     transaction_id  =  numarray[1]
     tx_value = a
     op_return = __OP_PRETUN__ + ' ' + numarray[3]
     s_address= senAdd[0]
-    #pubKey= senAdd[1]
     op_length = numarray[4]
     r_address = recAdd[0]
     address_number = recAdd[1]

@@ -10,7 +10,7 @@ upper_alph =('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N
 symbol = ('=', '/', '+', '-', '*', '%', '_', '"', '|', '#') 
 
 unknown_ascii_word ={'PROPERTY_PROTECT', 'description"', '"address', 'a","link', 'OL TST', ':"the','='}
-unknown_ascii_word_prefix ={'@','Property', 'RT','KC','TTB-T','NF:', '"o"', 'TN!_', 'CL TST', '{"h"', 's-r','d-r'}
+unknown_ascii_word_prefix ={'@','Property', 'RT','NF:', '"o"', 'TN!_', 'CL TST', '{"h"', 's-r','d-r'}
 
 
 hex_string_prefix ={'Veri:','@COPYROBO','KEYSTAMP', 'EUK ', 'BERNSTEIN', 'COPYROBO', 'POR: ', 'POTX: ', 'AuroM',
@@ -19,10 +19,12 @@ hex_string_prefix ={'Veri:','@COPYROBO','KEYSTAMP', 'EUK ', 'BERNSTEIN', 'COPYRO
 
 website = ('https', 'http', 'www.', '.com', '.org')
 
-metadata = ('LICTIP10','** PROOF.COM **','DOCPROOF','FACTOM00' ,'Factom!!', 'Fa', 'CryptoTests-', 'CryptoProof-', 'STAMPD##', 'BITPROOF', 
+metadata = ('TTB-T','SKYE','KEYSTAMP','@COPYROBO','KC','LICTIP10','** PROOF.COM **','DOCPROOF','FACTOM00' ,'Factom!!', 'Fa', 'CryptoTests-', 'CryptoProof-', 'STAMPD##', 'BITPROOF', 
             'ProveBit', 'RMBe', 'RMBd', 'ORIGMY', 'LaPreuve', 'UNicDC','POET', 'EXONUM', 'BARD','omni', 'ASCRIBE', 
           'CNTRPRTY','SLDX:', 'CC', 'SPK', 'S1', 'S2', 'S3', 'S4', 'S5', 'BS', 'FA' ,'OA', 'id', 'MG', 'EW', 'SB.D', 
           'SW', 'DS' , 'OC', 'Mined by 1hash.com', 'FluxST', 'XY','XW', 'SS', 'KMD', 'OKT', 'CP110400', 'XX') 
+
+data = ('png', 'jpeg','.mp3', '.txt', '.avi')
 
 digit = ('1','2','3','4','5','6','7','8','9','0') 
 

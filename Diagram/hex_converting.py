@@ -1,10 +1,13 @@
 import numpy as np
 import binascii as by
 from Diagram import helper_func as hf
+from Diagram import hex_config as hc
+#from Diagram import frequenzy_table as ft
 import array
 
 
 __ASCII__= 'ascii'
+#f =open('o.txt','w')
 # analyze content of OP_RETURN fields
 def check_hex(arrayList):
   
@@ -19,9 +22,10 @@ def check_hex(arrayList):
     # c[8] count content  undefinable 
     # c[9] count content  ascii hexstring
     # c[10] count content  unknown ascii 
-    c = np.array(11)   
+    # c[11] count content  data 
+    c = np.array(12)   
     c.astype(int)
-    c= array.array('i',(0 for _ in range(13)))
+    c= array.array('i',(0 for _ in range(12)))
  
 
     # in given array[array] get hexstring, store in j and check content an OP_RETRUN has
@@ -59,13 +63,21 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(bin_dec):
                     c[9] = c[9] +1
+                elif str(bin_dec).startswith('"') and str(bin_dec).endswith('"'):
+                    b = str(bin_dec)[1:-1]
+                    if hf.is_hex_op(b):
+                        c[9] = c[9] +1
+                elif any(i in bin_dec for i in hc.data):
+                    c[11] = c[11] +1
                 # unknown ascii string 
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
+                    #ft.freq_tab(bin_dec)
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
                 else:
                     c[10] = c[10] + 1
+                    #ft.freq_tab(bin_dec)
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains url 
@@ -80,8 +92,16 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(a):
                     c[9] = c[9] +1
-                elif hf.unknown_ascii(a):
+                elif str(a).startswith('"') and str(a).endswith('"'):
+                    b = str(a)[1:-1]
+                    if hf.is_hex_op(b):
+                        c[9] = c[9] +1
+                elif any(i in a for i in hc.data):
+                    c[11] = c[11] +1
+                elif hf.unknown_ascii(a) and ('\\' not in a):
                     c[10] = c[10] +1
+                    f.write("%s\n" % str(a))
+                    #ft.freq_tab(a)
                 else: 
                     c[8] = c[8] + 1
                     i.append(len(j)/2)
@@ -91,8 +111,7 @@ def check_hex(arrayList):
 
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error', 'Not Hex', 'Odd Lenght', 'Website',   
-        'Metadata', 'Digit', 'Text', 'Undefinable < 40', 'Ascii hexstring', 'Unknown ascii > 24', 
-        'Unknown ascii < 25', 'Undefinable > 39']
+        'Metadata', 'Digit', 'Text', 'Undefinable', 'Ascii hexstring', 'Unknown ascii', 'File']
     
     print(c)
     # concatinate found solutions in a list and return it
