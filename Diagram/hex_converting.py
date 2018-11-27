@@ -2,7 +2,7 @@ import numpy as np
 import binascii as by
 from Diagram import helper_func as hf
 from Diagram import hex_config as hc
-from Diagram import frequenzy_table as ft
+#from Diagram import frequenzy_table as ft
 import array
 
 
