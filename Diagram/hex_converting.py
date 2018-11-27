@@ -107,7 +107,8 @@ def check_hex(arrayList):
                     i.append(len(j)/2)
                     hf.save_op_sql(i)
                     
-                    
+                     
+                     
                     
 
     #  (x,_) part of a tuple --> number of found contents
