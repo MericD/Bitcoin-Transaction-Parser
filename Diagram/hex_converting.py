@@ -7,8 +7,6 @@ import array
 
 
 __ASCII__= 'ascii'
-f =open('o.txt','w')
-f1 =open('o1.txt','w')
 # analyze content of OP_RETURN fields
 def check_hex(arrayList):
   
@@ -73,24 +71,12 @@ def check_hex(arrayList):
                 # unknown ascii string 
                 elif len(bin_dec) == 1 and ' ' in bin_dec:
                     c[0] = c[0] + 1
-                    f.write("%s\n" % str(bin_dec))
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
-                    #ft.freq_tab(bin_dec)
-                    #f.write("%s\n" % str(bin_dec))
-                    #f1.write("%s\n" % str(binary))
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
                 else:
                     c[10] = c[10] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
-                    #ft.freq_tab(bin_dec)
-                    #f.write("%s\n" % str(bin_dec))
-                    #f1.write("%s\n" % str(binary))
-                    
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains url 
@@ -114,14 +100,12 @@ def check_hex(arrayList):
                 elif len(binary) == 1 and (binary == (('b'+"'"+'\\x0D') or ('b'+"'"+'\\x0d') or ('b'+"'"+'\\x20'))):
                     c[0] = c[0] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
-                    c[10] = c[10] +1
-                    #f.write("%s\n" % str(a))
-                    #f1.write("%s\n" % str(binary))
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    c[10] = c[10] + 1
                     #ft.freq_tab(a)
                 else: 
                     c[8] = c[8] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                     
                     
                     
