@@ -1,6 +1,7 @@
 from rpc import rpc
 from Core import core
 from Diagram import diagram
+from Diagram import undef_diagramm
 import config
 
 
@@ -27,3 +28,4 @@ import config
 # create diagram by using created database
 diagram.create_diagrams()
 
+#undef_diagramm.create_diagrams()
