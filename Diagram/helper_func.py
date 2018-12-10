@@ -4,7 +4,8 @@ from Core import core as c
 from rpc import rpc
 import sqlite3
 import string
-import time
+import datetime
+from Diagram import weekly as w
 
 __OP_PRETUN__= 'OP_RETURN'
 
@@ -169,7 +170,6 @@ def is_text(bin_dec):
 # databse table contains only the transaction id, block number and 
 # transaction value of the corresponding op_return field 
 
-#f = open('a.txt', 'w')
 rpc_connection = rpc.start_connection_to_rpc()
 
 def save_op_sql(numarray):
@@ -202,10 +202,8 @@ def save_op_sql(numarray):
     op_length = numarray[4]
     r_address = recAdd[0]
     address_number = recAdd[1]
-    tx_time = time.ctime(int(rpc.get_all_transactions(rpc_connection,rpc.get_the_block_hash(rpc_connection,block_number))[1]))
+    tx_time = w.unix_to_date(int(rpc.get_all_transactions(rpc_connection,rpc.get_the_block_hash(rpc_connection,block_number))[1]))
     print(tx_time)
 
     sql.addOP(connection, transaction_id, block_number, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time)
     connection.close()
-
-    #f.write("%s\n" % str(pubKey))

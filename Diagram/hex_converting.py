@@ -2,8 +2,9 @@ import numpy as np
 import binascii as by
 from Diagram import helper_func as hf
 from Diagram import hex_config as hc
-#from Diagram import frequenzy_table as ft
+from Diagram import frequenzy_table as ft
 import array
+
 
 
 __ASCII__= 'ascii'
@@ -25,8 +26,8 @@ def check_hex(arrayList):
     c = np.array(12)   
     c.astype(int)
     c= array.array('i',(0 for _ in range(12)))
- 
 
+    unknown_content =[]
     # in given array[array] get hexstring, store in j and check content an OP_RETRUN has
     for i in arrayList:
         j = i[3]     
@@ -44,13 +45,14 @@ def check_hex(arrayList):
         elif len(j) %2 != 0:
             j = '0' + j
             c[3] = c[3] +1
+
         # hex is even length check content of OP_RETURN hex  
         else:
             # convert hexstring to binary data
             binary = by.unhexlify(j) 
             try: 
                 #convert binary data to ascii
-                bin_dec =binary.decode(__ASCII__)     
+                bin_dec =binary.decode(__ASCII__) 
                 # check content is website/email address
                 if hf.check_website(bin_dec):
                     c[4] = c[4] + 1
@@ -71,12 +73,20 @@ def check_hex(arrayList):
                 # unknown ascii string 
                 elif len(bin_dec) == 1 and ' ' in bin_dec:
                     c[0] = c[0] + 1
+                elif any(i in bin_dec for i in hc.text_check):
+                    c[7] = c[7] + 1
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
+                    unknown_content.append(bin_dec)
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
                 else:
                     c[10] = c[10] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
+                    unknown_content.append(bin_dec)
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains url 
@@ -97,19 +107,19 @@ def check_hex(arrayList):
                         c[9] = c[9] +1
                 elif any(i in a for i in hc.data):
                     c[11] = c[11] +1
-                elif len(binary) == 1 and (binary == (('b'+"'"+'\\x0D') or ('b'+"'"+'\\x0d') or ('b'+"'"+'\\x20'))):
-                    c[0] = c[0] + 1
+                elif any(i in a for i in hc.text_check):
+                    c[7] = c[7] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
                     c[10] = c[10] + 1
-                    #ft.freq_tab(a)
-                else: 
-                    c[8] = c[8] + 1
+                    unknown_content.append(a)
                     i.append(len(j)/2)
                     hf.save_op_sql(i)
+                else: 
+                    c[8] = c[8] + 1
+
                     
-                     
-                     
-                    
+    res_unk = ft.freq_tab(unknown_content)
+    print(len(res_unk[0]))
 
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error', 'Not Hex', 'Odd Lenght', 'Website',   

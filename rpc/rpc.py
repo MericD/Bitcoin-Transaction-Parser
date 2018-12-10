@@ -21,10 +21,11 @@ def get_transactions(block_number):
 
     rpc_connection= start_connection_to_rpc()
     block_hash = get_the_block_hash(rpc_connection, block_number)
-    block_trans = get_all_transactions(rpc_connection, block_hash)[0]
+    block_inf = get_all_transactions(rpc_connection, block_hash)
+    block_trans = block_inf[0]
     trans_decoded = decoded_transactions(rpc_connection, block_trans)
     block_trans_dec.update({block_number : trans_decoded})
-    time=get_all_transactions(rpc_connection, block_hash)[1]
+    time= block_inf [1]
     return block_trans_dec, time
 
 
