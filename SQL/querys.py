@@ -56,6 +56,7 @@ __rmv_op_and_analyze_hex = "SELECT block_number, transaction_id, tx_value, REPLA
 # op_length length of op_retun field
 __filtered_OP = """CREATE TABLE IF NOT EXISTS filter_op(
                 transaction_id text INTEGER PRIMARY KEY,
+                prev_tx text,
                 tx_value real,
                  op_return text,
                  op_length integer,
@@ -80,9 +81,9 @@ __filtered_OP = """CREATE TABLE IF NOT EXISTS filter_op(
 
 # SQL statment to add corresponding transaction information in filter_op 
 __add_op_qy = """INSERT INTO filter_op 
-    ( block_number, transaction_id, tx_value, op_return, op_length, s_address , r_address, address_number, tx_time) 
+    ( block_number, transaction_id, prev_tx, tx_value, op_return, op_length, s_address , r_address, address_number, tx_time) 
     VALUES 
-    ( "{transaction_id}","{block_number}", "{tx_value}", "{op_return}", "{op_length}", "{s_address}", "{r_address}", "{address_number}", "{tx_time}")
+    ( "{transaction_id}","{prev_tx}", "{block_number}", "{tx_value}", "{op_return}", "{op_length}", "{s_address}", "{r_address}", "{address_number}", "{tx_time}")
 ;"""
 
 # SQL statment to add corresponding block information in table-block 
@@ -114,8 +115,8 @@ def get_create_filtered_OP():
     return __filtered_OP
 
 # Returns the query to add a transaction with undefinable op_returns to table filtered_OP
-def get_add_filtered_OP( tx_id, bn, tx_v, tx_op_return, op_l, s_a, r_a, a_num, tx_t):
-    return __add_op_qy.format(transaction_id = tx_id, block_number = bn, tx_value=tx_v, op_return=tx_op_return, op_length=op_l, s_address = s_a, r_address = r_a, address_number=a_num, tx_time = tx_t) 
+def get_add_filtered_OP( tx_id, p_tx, bn, tx_v, tx_op_return, op_l, s_a, r_a, a_num, tx_t):
+    return __add_op_qy.format(transaction_id = tx_id, prev_tx = p_tx, block_number = bn, tx_value=tx_v, op_return=tx_op_return, op_length=op_l, s_address = s_a, r_address = r_a, address_number=a_num, tx_time = tx_t) 
 
 
 
