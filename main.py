@@ -26,12 +26,12 @@ import config
 #core.save_result_in_database(__databaseFile, find_block_trans)
 
 # create diagram by using created database
-#diagram.create_diagrams()
+diagram.create_diagrams()
 
 #undef_diagramm.create_diagrams()
    # aray = [data.loc[1]]
 
-from Diagram import weekly
+#from Diagram import weekly 
 
 
-weekly.diagram_weekly()
+#weekly.diagram_weekly()

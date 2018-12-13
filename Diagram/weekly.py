@@ -9,12 +9,12 @@ import threading
 import datetime
 
 
+sb.set(style="dark", color_codes=True)
 
 # connect the sqllite database and return connection
 def diagram_weekly():
     connection = sqlite3.connect("blockchain_un.db")
-    diagram_history_weekly(connection)
-
+    avarage_line_plot(connection)
 
 def unix_to_date(timestamp):
     d = datetime.datetime.fromtimestamp((timestamp))
@@ -41,47 +41,183 @@ def sort_db(dataframe):
 
 
 # create a chart showing the use of the OP_RETURN field in relation to time
-def diagram_history_weekly (connection):
+def weekly_avarage_clc (connection):
+     avarage_year2013 = []
+     avarage_year2014 = []
+     avarage_year2015 = []
+     avarage_year2016 = []
+     avarage_year2017 = []
+     avarage_year2018 = []  
+
     # create dataframe by using pandas with corresponding SQL statement and the connection to database
      read_data = ps.read_sql_query(sql.get_count_daily_op_return(), connection)
      data = sort_db(read_data)
      t1 = [tuple(x) for x in data.values]
      array_av = []
      avarage_res = []
-     start = t1[0][0]
-     x=1
-     #while len(t1) !=0:
-     #for i in range(1,len(t1)): 
-     try:
-          while t1[x][0] != t1[-1][0]:
-               if x == 7 :
-                    avarage_res.append(avarage(array_av))
-                    array_av = []
-                    x = 1
-               end = weekley_epoch(start)
-               if str(end) in t1[x][0]:
-                    #if(len(array_av) != 7):
-                    array_av.append(t1[x-1][1])
-                    array_av.append(t1[x][1])
-               #else:
-               #     avarage_res.append(avarage(array_av))
-               #     array_av = []
+     x=0
+     i = 0
+     while t1[i+1][0] not in t1[-1][0]:
+          #fehler hier 
+               if x == 0:
+                    end = weekley_epoch(t1[0][0])
+                    array_av.append(t1[i][1])
+
+               if str(end) in t1[i+1][0]:              
+                    array_av.append(t1[i+1][1])
+                    i = i+1
+                    x = x+1
+                    end = weekley_epoch(end)
                else:
-               #     if(len(array_av) != 7):
-                         array_av.append(0)
-               #     else:
-               #          avarage_res.append(avarage(array_av))
-               #          array_av = []
-               start = end
-               x = x+1
+                    array_av.append(0)
+                    x = x+1
+                    end = weekley_epoch(end)
+               
+               if (t1[-1][0] == str(end)):
+                    break
+               if len(array_av) == 7:
+                    if "2013" in end:
+                         avarage_year2013.append(avarage(array_av))
+                    elif "2014" in end:
+                         avarage_year2014.append(avarage(array_av))
+                    elif "2015" in end:
+                         avarage_year2015.append(avarage(array_av))
+                    elif "2016" in end:
+                         avarage_year2016.append(avarage(array_av))
+                    elif "2017" in end:
+                         avarage_year2017.append(avarage(array_av))
+                    elif "2018" in end:
+                         avarage_year2018.append(avarage(array_av))
+                    array_av = []
+     array_all = []
+     array_all.append(avarage_year2013)
+     array_all.append(avarage_year2014)
+     array_all.append(avarage_year2015)
+     array_all.append(avarage_year2016)
+     array_all.append(avarage_year2017)
+     array_all.append(avarage_year2018)
 
-     except:          
-          pass                    
-          
-
-     print(avarage_res)
+     print(len(avarage_year2015))
+     print(array_tup(avarage_year2013))
+     return array_all
 
 
+
+def avarage_line_plot (connection):
+     result_array = weekly_avarage_clc(connection)
+
+     result_array2013 = array_tup(result_array[0])
+     x_val13 = [x for x,_ in result_array2013]
+     y_val13 = [y for _,y in result_array2013]
+
+     result_array2014 = array_tup(result_array[1])
+     x_val14 = [x for x,_ in result_array2014]
+     y_val14 = [y for _,y in result_array2014]
+
+     result_array2015 = array_tup(result_array[2])
+     x_val15 = [x for x,_ in result_array2015]
+     y_val15 = [y for _,y in result_array2015]
+
+     result_array2016 = array_tup(result_array[3])
+     x_val16 = [x for x,_ in result_array2016]
+     y_val16 = [y for _,y in result_array2016]
+
+     result_array2017 = array_tup(result_array[4])
+     x_val17 = [x for x,_ in result_array2017]
+     y_val17 = [y for _,y in result_array2017]
+
+     result_array2018 = array_tup(result_array[5])
+     x_val18 = [x for x,_ in result_array2018]
+     y_val18 = [y for _,y in result_array2018]
+
+     d13 = {'week': x_val13, 'avarage': y_val13}
+     pdnumsqr13 = ps.DataFrame(d13)
+     sb.lineplot(x='week', y='avarage', data=pdnumsqr13,label="2013")
+
+     d14 = {'week': x_val14, 'avarage': y_val14}
+     pdnumsqr14 = ps.DataFrame(d14)
+     sb.lineplot(x='week', y='avarage', data=pdnumsqr14,label="2014")
+
+     d15 = {'week': x_val15, 'avarage': y_val15}
+     pdnumsqr15 = ps.DataFrame(d15)
+     sb.lineplot(x='week', y='avarage', data=pdnumsqr15,label="2015")
+
+     d16 = {'week': x_val16, 'avarage': y_val16}
+     pdnumsqr16 = ps.DataFrame(d16)
+     sb.lineplot(x='week', y='avarage', data=pdnumsqr16,label="2016")
+
+     d17 = {'week': x_val17, 'avarage': y_val17}
+     pdnumsqr17 = ps.DataFrame(d17)
+     sb.lineplot(x='week', y='avarage', data=pdnumsqr17,label="2017")
+
+     d18 = {'week': x_val18, 'avarage': y_val18}
+     pdnumsqr18 = ps.DataFrame(d18)
+     sb.lineplot(x='week', y='avarage', data=pdnumsqr18,label="2018")
+
+     fig2 = pyplot.gcf()
+     pyplot.show()
+     pyplot.draw()
+     fig2.savefig('numpi.png', dpi = 1000)
+     pyplot.close()
+
+
+
+     sb.barplot(x='week',y= 'avarage',data=pdnumsqr13, label="2013", color='red')
+     fig = pyplot.gcf()
+     pyplot.show()
+     pyplot.draw()
+     fig.savefig('weekley_2013.png', dpi = 1000)
+     pyplot.close()     
+
+     sb.barplot(x='week',y= 'avarage',data=pdnumsqr14, label="2014", color='gold')
+     fig = pyplot.gcf()
+     pyplot.show()
+     pyplot.draw()
+     fig.savefig('weekley_2014.png', dpi = 1000)
+     pyplot.close()    
+
+     sb.barplot(x='week',y= 'avarage',data=pdnumsqr15, label="2015", color='red')
+     fig = pyplot.gcf()
+     pyplot.show()
+     pyplot.draw()
+     fig.savefig('weekley_2015.png', dpi = 1000)
+     pyplot.close() 
+
+     sb.barplot(x='week',y= 'avarage',data=pdnumsqr16, label="2016", color='red')
+     fig = pyplot.gcf()
+     pyplot.show()
+     pyplot.draw()
+     fig.savefig('weekley_2016.png', dpi = 1000)
+     pyplot.close() 
+
+     sb.barplot(x='week',y= 'avarage',data=pdnumsqr17, label="2017", color='red')
+     fig = pyplot.gcf()
+     pyplot.show()
+     pyplot.draw()
+     fig.savefig('weekley_2017.png', dpi = 1000)
+     pyplot.close()  
+
+     sb.barplot(x='week',y= 'avarage',data=pdnumsqr18, label="2018", color='red')
+     fig = pyplot.gcf()
+     pyplot.show()
+     pyplot.draw()
+     fig.savefig('weekley_2018.png', dpi = 1000)
+     pyplot.close()    
+
+def array_tup(array):
+     con_arr = []
+     x = 1
+     for i in array:
+          if len(array) <10 and x == 0:
+               con_arr.append((52,i))
+               x= x+1
+          elif len(array) <10 :
+               con_arr.insert(52-x,(52-x,i))
+               x= x+1
+          else:
+               con_arr.append((x,i))
+               x= x+1
+     return con_arr
 
 
 
