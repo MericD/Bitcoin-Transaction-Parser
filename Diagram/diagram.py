@@ -39,7 +39,7 @@ def diagram_history_op_return (connection):
     s.plot()
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig1 = pyplot.gcf()
-    pyplot.show()
+    #pyplot.show()
     pyplot.draw()
     fig1.savefig('time1.png', dpi=100)
     pyplot.close()

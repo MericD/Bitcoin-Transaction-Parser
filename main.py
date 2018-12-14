@@ -33,5 +33,4 @@ diagram.create_diagrams()
 
 #from Diagram import weekly 
 
-
 #weekly.diagram_weekly()

@@ -101,7 +101,7 @@ def get_previous_txID_of_btc(value):
 
     for i in range(len(value["vin"])):
         potential_tx_id = value["vin"][i]
-        if potential_tx_id.startswith('txid'):
+        if 'txid' in potential_tx_id:
             potential_tx_id = value["vin"][i]["txid"]
             if "" == previous_txID:
                 previous_txID = str(potential_tx_id)
@@ -120,7 +120,7 @@ def get_op_return(value):
         potential_op_return = value["vout"][i]["scriptPubKey"]["asm"]
         #if potential_op_return.startswith('0496b53'): #For Block 1 to find a transcation
         # if you find a 'OP_RETURN' string in "vout"
-        if potential_op_return.startswith('OP_RETURN'):
+        if potential_op_return('OP_RETURN'):
             # if no more OP_RETURN is found return the object
             if "" == op_return:
                 op_return = str(potential_op_return)
