@@ -98,16 +98,16 @@ def get_tx_value(value):
 
 def get_previous_txID_of_btc(value):
     previous_txID = ""
-
-#for i in range(len(value["vin"])):
-    potential_tx_id = value["vin"]#[i]
-    if 'txid' in potential_tx_id:
-        potential_tx_id = value["vin"]["txid"]
-        if "" == previous_txID:
-            previous_txID = str(potential_tx_id)
-    else:
-        previous_txID = previous_txID + ", " + str(potential_tx_id)
-    return previous_txID 
+    for k , v in value.items():
+        for i in range(len(v["vin"])):
+            potential_tx_id = v["vin"][i]
+            if 'txid' in potential_tx_id:
+                potential_tx_id = v["vin"][i]["txid"]
+                if "" == previous_txID:
+                    previous_txID = str(potential_tx_id)
+            else:
+                previous_txID = previous_txID + ", " + str(potential_tx_id)
+        return previous_txID 
 
 
 
