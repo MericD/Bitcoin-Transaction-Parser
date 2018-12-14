@@ -107,7 +107,7 @@ def get_previous_txID_of_btc(value):
             previous_txID = str(potential_tx_id)
     else:
         previous_txID = previous_txID + ", " + str(potential_tx_id)
-return previous_txID 
+    return previous_txID 
 
 
 
