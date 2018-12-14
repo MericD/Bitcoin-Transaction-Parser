@@ -196,7 +196,7 @@ def save_op_sql(numarray):
 
     block_number = numarray[0] 
     transaction_id  =  numarray[1]
-    prev_tx_id = c.get_previous_txID_of_btc(raw_tx) 
+    prev_tx_id = c.get_previous_txID_of_btc(rpc.decoded_transactions(rpc_connection,numarray[1]))
     tx_value = a
     op_return = __OP_PRETUN__ + ' ' + numarray[3]
     s_address= senAdd[0]
