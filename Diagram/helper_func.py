@@ -177,6 +177,7 @@ def save_op_sql(numarray):
     sql.initTabel(connection)
 
     raw_tx = rpc.decoded_transactions_address(rpc_connection, numarray[1])
+    print("+++++++++++        " + str(raw_tx) + "       +++++++++++")
     senAdd = c.get_sender_address_of_op_tx(raw_tx)
     recAdd = c.get_address_of_op_tx(raw_tx)
 
