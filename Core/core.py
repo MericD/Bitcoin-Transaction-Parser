@@ -100,9 +100,9 @@ def get_previous_txID_of_btc(value):
     previous_txID = ""
 
     #for i in range(len(value["vin"])):
-    potential_tx_id = value["vin"][i]
+    potential_tx_id = value["vin"]
     if potential_tx_id.startswith('txid'):
-        potential_tx_id = value["vin"][i]["txid"]
+        potential_tx_id = value["vin"]["txid"]
         if "" == previous_txID:
             previous_txID = str(potential_tx_id)
     else:

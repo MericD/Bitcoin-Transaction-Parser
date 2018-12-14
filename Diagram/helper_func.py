@@ -198,6 +198,7 @@ def save_op_sql(numarray):
 
     x = rpc.get_all_transactions(rpc_connection,rpc.get_the_block_hash(rpc_connection,block_number))
 
+    print("---    \n    "  + str(x)  + " \n  ----")
     transaction_id  =  numarray[1]
     prev_tx_id = c.get_previous_txID_of_btc(x[0]) 
     tx_value = a
