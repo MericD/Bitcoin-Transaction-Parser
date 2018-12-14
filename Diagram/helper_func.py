@@ -195,15 +195,18 @@ def save_op_sql(numarray):
         
 
     block_number = numarray[0] 
+
+    x = rpc.get_all_transactions(rpc_connection,rpc.get_the_block_hash(rpc_connection,block_number))
+
     transaction_id  =  numarray[1]
-    prev_tx_id = c.get_previous_txID_of_btc(rpc.get_all_transactions(rpc_connection,rpc.get_the_block_hash(rpc_connection,block_number))[1]) 
+    prev_tx_id = c.get_previous_txID_of_btc(x[0]) 
     tx_value = a
     op_return = __OP_PRETUN__ + ' ' + numarray[3]
     s_address= senAdd[0]
     op_length = numarray[4]
     r_address = recAdd[0]
     address_number = recAdd[1]
-    tx_time = w.unix_to_date(int(rpc.get_all_transactions(rpc_connection,rpc.get_the_block_hash(rpc_connection,block_number))[1]))
+    tx_time = w.unix_to_date(int(x[1]))
     print(tx_time)
 
     sql.addOP(connection, transaction_id, prev_tx_id, block_number, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time)
