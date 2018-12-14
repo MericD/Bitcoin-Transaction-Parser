@@ -32,7 +32,7 @@ def addTrans(connection,  block_number, transaction_id, version, tx_size ,vin_si
 def addOP(connection, block_number, transaction_id, prev_tx, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time):
     cursor = connection.cursor()
     print("Add trans to table")
-    __execute_command(cursor,qy.get_add_filtered_OP( transaction_id, prev_tx, block_number,  tx_value, op_return, op_length, s_address, r_address, address_number, tx_time))
+    __execute_command(cursor,qy.get_add_filtered_OP( transaction_id, block_number, prev_tx, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time))
     # never forget this, if you want that the changes are saved
     connection.commit()
 
