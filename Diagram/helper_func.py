@@ -175,7 +175,7 @@ rpc_connection = rpc.start_connection_to_rpc()
 def save_op_sql(numarray):
     connection = sqlite3.connect('blockchain.db')
     sql.initTabel(connection)
-  
+
     raw_tx = rpc.decoded_transactions_address(rpc_connection, numarray[1])
     senAdd = c.get_sender_address_of_op_tx(raw_tx)
     recAdd = c.get_address_of_op_tx(raw_tx)
@@ -196,7 +196,7 @@ def save_op_sql(numarray):
 
     block_number = numarray[0] 
     transaction_id  =  numarray[1]
-    prev_tx_id = c.get_previous_txID_of_btc(rpc.decoded_transactions(rpc_connection,numarray[1]))
+    prev_tx_id = c.get_previous_txID_of_btc(raw_tx)
     tx_value = a
     op_return = __OP_PRETUN__ + ' ' + numarray[3]
     s_address= senAdd[0]
