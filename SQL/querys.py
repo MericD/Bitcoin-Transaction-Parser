@@ -58,13 +58,13 @@ __filtered_OP = """CREATE TABLE IF NOT EXISTS filter_op(
                 transaction_id text INTEGER PRIMARY KEY,
                 prev_tx text,
                 tx_value real,
-                 op_return text,
-                 op_length integer,
-                 s_address text,
-                 r_address text,
-                 address_number integer,
-                 block_number integer,
-                 tx_time integer);"""
+                op_return text,
+                op_length integer,
+                s_address text,
+                r_address text,
+                address_number integer,
+                block_number integer,
+                tx_time integer);"""
 
 
 #"""CREATE TABLE IF NOT EXISTS filter_op (

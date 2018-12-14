@@ -173,11 +173,10 @@ def is_text(bin_dec):
 rpc_connection = rpc.start_connection_to_rpc()
 
 def save_op_sql(numarray):
-    connection = sqlite3.connect('blockchain.db')
+    connection = sqlite3.connect('blockchain2.db')
     sql.initTabel(connection)
 
     raw_tx = rpc.decoded_transactions_address(rpc_connection, numarray[1])
-    print("+++++++++++        " + str(raw_tx) + "       +++++++++++")
     senAdd = c.get_sender_address_of_op_tx(raw_tx)
     recAdd = c.get_address_of_op_tx(raw_tx)
 
