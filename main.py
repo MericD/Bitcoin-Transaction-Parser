@@ -30,6 +30,6 @@ import config
 diagram.create_diagrams()
 
 #undef_diagramm.create_diagrams()
-   # aray = [data.loc[1]]
+# aray = [data.loc[1]]
 #from Diagram import weekly 
 #weekly.diagram_weekly()
