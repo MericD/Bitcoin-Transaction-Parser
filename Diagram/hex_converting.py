@@ -79,12 +79,8 @@ def check_hex(arrayList):
                     c[10] = c[10] + 1
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                 else:
                     c[10] = c[10] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains url 
@@ -109,10 +105,10 @@ def check_hex(arrayList):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
                     c[10] = c[10] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                 else: 
                     c[8] = c[8] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                     
                     
                     
@@ -122,7 +118,6 @@ def check_hex(arrayList):
     x = ['Empty',  'Error', 'Not Hex', 'Odd Lenght', 'Website',   
         'Metadata', 'Digit', 'Text', 'Undefinable', 'Ascii hexstring', 'Unknown ascii', 'File']
     
-    print(c)
     # concatinate found solutions in a list and return it
     ascii = list(zip(x,c))
     return ascii
