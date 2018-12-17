@@ -105,8 +105,12 @@ def get_previous_txID_of_btc(value):
                 potential_tx_id = v["vin"][i]["txid"]
                 if "" == previous_txID:
                     previous_txID = str(potential_tx_id)
+                else:
+                    previous_txID = previous_txID + ", " + str(potential_tx_id)
+            elif 'coinbase' in potential_tx_id:
+                 previous_txID = 'coinbase'
             else:
-                previous_txID = previous_txID + ", " + str(potential_tx_id)
+                previous_txID = 'error'
         return previous_txID 
 
 

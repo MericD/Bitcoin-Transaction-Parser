@@ -206,5 +206,5 @@ def save_op_sql(numarray):
     tx_time = w.unix_to_date(int(rpc.get_all_transactions(rpc_connection,rpc.get_the_block_hash(rpc_connection,block_number))[1]))
     print(tx_time)
 
-    sql.addOP(connection, transaction_id, block_number, prev_tx_id, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time)
+    sql.addOP(connection, prev_tx_id, block_number, transaction_id, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time)
     connection.close()
