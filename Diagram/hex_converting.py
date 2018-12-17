@@ -77,10 +77,14 @@ def check_hex(arrayList):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
                 else:
                     c[10] = c[10] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains url 
@@ -105,10 +109,10 @@ def check_hex(arrayList):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
                     c[10] = c[10] + 1
-                else: 
-                    c[8] = c[8] + 1
                     i.append(len(j)/2)
                     hf.save_op_sql(i)
+                else: 
+                    c[8] = c[8] + 1
                     
                     
                     

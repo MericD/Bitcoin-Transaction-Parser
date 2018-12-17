@@ -14,7 +14,7 @@ sb.set(style="whitegrid")
 
 # connect the sqllite database and return connection
 def create_diagrams():
-    connection = sqlite3.connect("db1.db")
+    connection = sqlite3.connect("db2.db")
     diagram_history_op_return(connection)
     diagram_content_OP_RETURN(connection)
 
