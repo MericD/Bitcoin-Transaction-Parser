@@ -13,6 +13,9 @@ FROM filter_op
 GROUP BY tx_time
 ORDER BY COUNT(*) DESC;"""
 
+__check_tx_add = """SELECT transaction_id , prev_tx, block_number 
+FROM filter_op;"""
+
 
 # Returns the query counts the number of blocks with transactions with 
 # an op_return field depending to created date of the block
@@ -21,3 +24,6 @@ def get_count_number_of_op_return():
 
 def get_count_daily_op_return():
     return __count_daily_op_return
+
+def get_check_tx_add():
+    return __check_tx_add

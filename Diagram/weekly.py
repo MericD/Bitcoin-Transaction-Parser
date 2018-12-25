@@ -13,7 +13,7 @@ sb.set(style="dark", color_codes=True)
 
 # connect the sqllite database and return connection
 def diagram_weekly():
-    connection = sqlite3.connect("blockchain_un.db")
+    connection = sqlite3.connect("db2.db")
     avarage_line_plot(connection)
 
 def unix_to_date(timestamp):

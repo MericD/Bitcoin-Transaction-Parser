@@ -173,7 +173,7 @@ def is_text(bin_dec):
 rpc_connection = rpc.start_connection_to_rpc()
 
 def save_op_sql(numarray):
-    connection = sqlite3.connect('db2.db')
+    connection = sqlite3.connect('db1.db')
     sql.initTabel(connection)
 
     raw_tx = rpc.decoded_transactions_address(rpc_connection, numarray[1])
@@ -204,7 +204,6 @@ def save_op_sql(numarray):
     r_address = recAdd[0]
     address_number = recAdd[1]
     tx_time = w.unix_to_date(int(rpc.get_all_transactions(rpc_connection,rpc.get_the_block_hash(rpc_connection,block_number))[1]))
-    print(tx_time)
 
     sql.addOP(connection, prev_tx_id, block_number, transaction_id, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time)
     connection.close()

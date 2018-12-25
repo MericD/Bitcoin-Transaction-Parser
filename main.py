@@ -33,3 +33,7 @@ diagram.create_diagrams()
 # aray = [data.loc[1]]
 #from Diagram import weekly 
 #weekly.diagram_weekly()
+
+
+#from Diagram import addressen as a
+#a.change_tx()

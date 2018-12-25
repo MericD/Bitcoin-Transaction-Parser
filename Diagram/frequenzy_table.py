@@ -2,7 +2,6 @@ import numpy as np
 import array
 from Diagram import hex_config as hc
 
-f = open('o.txt', 'w')
 
 def freq_tab(array_con):
     
