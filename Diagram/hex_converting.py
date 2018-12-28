@@ -7,6 +7,8 @@ import array
 
 
 f = open('why.txt', 'w')
+f1 = open('why1.txt', 'w')
+
 __ASCII__= 'ascii'
 # analyze content of OP_RETURN fields
 def check_hex(arrayList):
@@ -105,13 +107,15 @@ def check_hex(arrayList):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
                     c[10] = c[10] + 1
-                elif i[1] == '38ab1a5023456ea434e84c3194b03b233af056d3ae4c1ff2f866b4d332b57a6d':
-                    pass
                 else:
-                    c[8] = c[8] + 1
-                    f.write("%s\n" % str(i[1]))
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    try:
+                        c[8] = c[8] + 1
+                        f.write("%s\n" % str(i[1]))
+                        i.append(len(j)/2)
+                        hf.save_op_sql(i)
+                    except: 
+                        f1.write("%s\n" % str(i[1]))
+
                     
                     
                     
