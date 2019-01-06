@@ -4,10 +4,14 @@ from Diagram import helper_func as hf
 from Diagram import hex_config as hc
 from Diagram import frequenzy_table as ft
 import array
+import magic 
 
 
-f = open('why.txt', 'w')
-f1 = open('why1.txt', 'w')
+
+f = open('unknown_magic.txt', 'w')
+f1 = open('undef_magic.txt', 'w')
+f2 = open('undef.txt', 'w')
+
 
 __ASCII__= 'ascii'
 # analyze content of OP_RETURN fields
@@ -79,10 +83,18 @@ def check_hex(arrayList):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1
+                    mimetype = magic.from_buffer(binary)
+                    f.write("%s\n" % str(mimetype))
+                    f.write("%s\n" % str(j))
+                    f.write("%s\n" % str(bin_dec))                    
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
                 else:
                     c[10] = c[10] + 1
+                    mimetype = magic.from_buffer(binary)
+                    f.write("%s\n" % str(bin_dec))                    
+                    f.write("%s\n" % str(mimetype))
+                    f.write("%s\n" % str(j))
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains url 
@@ -107,18 +119,24 @@ def check_hex(arrayList):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
                     c[10] = c[10] + 1
+                    f.write("%s\n" % str(mimetype))
+                    f.write("%s\n" % str(j))
+                    f.write("%s\n" % str(a))                    
                 else:
+                    #try:
+                    c[8] = c[8] + 1
                     try:
-                        c[8] = c[8] + 1
-                        f.write("%s\n" % str(i[1]))
-                        i.append(len(j)/2)
-                        hf.save_op_sql(i)
-                    except: 
-                        f1.write("%s\n" % str(i[1]))
+                        mimetype = magic.from_buffer(binary)
+                        f.write("%s\n" % str(mimetype))
+                        f.write("%s\n" % str(j))
+                        f.write("%s\n" % str(a))
 
-                    
-                    
-                    
+                    except:
+                        f2.write("%s\n" % str(j))
+                    #    i.append(len(j)/2)
+                    #    hf.save_op_sql(i)
+                    #except: 
+                    #    f1.write("%s\n" % str(i[1]))
 
 
     #  (x,_) part of a tuple --> number of found contents
@@ -128,4 +146,5 @@ def check_hex(arrayList):
     # concatinate found solutions in a list and return it
     ascii = list(zip(x,c))
     return ascii
+
 

@@ -17,6 +17,10 @@ __check_tx_add = """SELECT transaction_id , prev_tx, block_number
 FROM filter_op;"""
 
 
+__img = """select  transaction_id, prev_tx, op_return 
+from filter_op 
+where r_address Like '%1AoZifhjtSaWpZokUn7ggknPkm5nKQZWpR%';"""
+
 # Returns the query counts the number of blocks with transactions with 
 # an op_return field depending to created date of the block
 def get_count_number_of_op_return():
@@ -27,3 +31,6 @@ def get_count_daily_op_return():
 
 def get_check_tx_add():
     return __check_tx_add
+
+def get_img():
+    return __img
