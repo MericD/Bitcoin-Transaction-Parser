@@ -27,7 +27,7 @@ import config
 
 
 # create diagram by using created database
-#diagram.create_diagrams()
+diagram.create_diagrams()
 
 #undef_diagramm.create_diagrams()
 # aray = [data.loc[1]]
@@ -39,7 +39,7 @@ import config
 #a.change_tx()
 
 #import magic
-import binascii as by
+#import binascii as by
  
 #data = ''
 
@@ -58,13 +58,13 @@ import binascii as by
 #f.write("%s\n" % str(a))
 
 
-s = ''
-f = open('res.txt','w')
-with open('data.txt') as my_file:
-    testsite_array = my_file.readlines()
+#s = ''
+#f = open('res.txt','w')
+#with open('data.txt') as my_file:
+#    testsite_array = my_file.readlines()
 
-    for i in testsite_array:
-        i = i[10:]
-        s = s + i.replace("\n","")
-    f.write("%s\n" % str(s))
+#    for i in testsite_array:
+#        i = i[10:]
+#        s = s + i.replace("\n","")
+#    f.write("%s\n" % str(s))
 

@@ -11,6 +11,7 @@ import datetime
 
 sb.set(style="dark", color_codes=True)
 
+f = open("w.txt", 'w')
 # connect the sqllite database and return connection
 def diagram_weekly():
     connection = sqlite3.connect("db2.db")
@@ -155,52 +156,80 @@ def avarage_line_plot (connection):
      sb.lineplot(x='week', y='avarage', data=pdnumsqr18,label="2018")
 
      fig2 = pyplot.gcf()
-     pyplot.show()
      pyplot.draw()
      fig2.savefig('numpi.png', dpi = 1000)
      pyplot.close()
 
 
 
-     sb.barplot(x='week',y= 'avarage',data=pdnumsqr13, label="2013", color='red')
+     for i in y_val13:
+          f.write("%s\n" % str(round(i,2)))
+
+     f.write("-----------------------\n")
+     
+     for i in y_val14:
+          f.write("%s\n" % str(round(i,2)))
+     
+     f.write("-----------------------\n")
+     
+     for i in y_val15:
+          f.write("%s\n" % str(round(i,2)))
+     
+     f.write("-----------------------\n")
+     
+     for i in y_val16:
+          f.write("%s\n" % str(round(i,2)))
+     
+     f.write("-----------------------\n")
+     
+     for i in y_val17:
+          f.write("%s\n" % str(round(i,2)))
+     
+     f.write("-----------------------\n")
+     
+     for i in y_val18:
+          f.write("%s\n" % str(round(i,2)))
+
+     bar1 = sb.barplot(x='week',y= 'avarage',data=pdnumsqr13, label="2013", color='#2A649F')
+     bar1.set(xlabel = "Week", ylabel = "Average Total amount", title = "Average Total amount by Week")
      fig = pyplot.gcf()
-     pyplot.show()
      pyplot.draw()
+     fig.autofmt_xdate()
      fig.savefig('weekley_2013.png', dpi = 1000)
      pyplot.close()     
 
-     sb.barplot(x='week',y= 'avarage',data=pdnumsqr14, label="2014", color='gold')
+     sb.barplot(x='week',y= 'avarage',data=pdnumsqr14, label="2014", color= '#2A649F')
      fig = pyplot.gcf()
-     pyplot.show()
      pyplot.draw()
+     fig.autofmt_xdate()
      fig.savefig('weekley_2014.png', dpi = 1000)
      pyplot.close()    
 
-     sb.barplot(x='week',y= 'avarage',data=pdnumsqr15, label="2015", color='red')
+     sb.barplot(x='week',y= 'avarage',data=pdnumsqr15, label="2015", color='#2A649F')
      fig = pyplot.gcf()
-     pyplot.show()
      pyplot.draw()
+     fig.autofmt_xdate()
      fig.savefig('weekley_2015.png', dpi = 1000)
      pyplot.close() 
 
-     sb.barplot(x='week',y= 'avarage',data=pdnumsqr16, label="2016", color='red')
+     sb.barplot(x='week',y= 'avarage',data=pdnumsqr16, label="2016", color='#2A649F')
      fig = pyplot.gcf()
-     pyplot.show()
      pyplot.draw()
+     fig.autofmt_xdate()
      fig.savefig('weekley_2016.png', dpi = 1000)
      pyplot.close() 
 
-     sb.barplot(x='week',y= 'avarage',data=pdnumsqr17, label="2017", color='red')
+     sb.barplot(x='week',y= 'avarage',data=pdnumsqr17, label="2017", color='#2A649F')
      fig = pyplot.gcf()
-     pyplot.show()
      pyplot.draw()
+     fig.autofmt_xdate()
      fig.savefig('weekley_2017.png', dpi = 1000)
      pyplot.close()  
 
-     sb.barplot(x='week',y= 'avarage',data=pdnumsqr18, label="2018", color='red')
+     sb.barplot(x='week',y= 'avarage',data=pdnumsqr18, label="2018", color='#2A649F')
      fig = pyplot.gcf()
-     pyplot.show()
      pyplot.draw()
+     fig.autofmt_xdate()
      fig.savefig('weekley_2018.png', dpi = 1000)
      pyplot.close()    
 

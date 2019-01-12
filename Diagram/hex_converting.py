@@ -32,7 +32,6 @@ def check_hex(arrayList):
     c = np.array(12)   
     c.astype(int)
     c= array.array('i',(0 for _ in range(12)))
-
     unknown_content =[]
     # in given array[array] get hexstring, store in j and check content an OP_RETRUN has
     for i in arrayList:
@@ -46,7 +45,9 @@ def check_hex(arrayList):
             elif '[error]' in str(j):
                 c[1] = c[1] + 1
             else:
-                c[2] = c[2] + 1  
+                print(i[1])
+                f.write("%s\n" % str(j))
+                c[2] = c[2] + 1
         # hex is odd length add '0' at beginning
         elif len(j) %2 != 0:
             j = '0' + j
@@ -65,11 +66,14 @@ def check_hex(arrayList):
                 # check if content is metadata
                 elif hf.is_metadata(bin_dec):
                     c[5] = c[5] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 elif  hf.hex_int(bin_dec):
                     c[6] = c[6] +1
                 # check content is hexstring
                 elif hf.is_hex_op(bin_dec):
                     c[9] = c[9] +1
+                    print(i[1])
                 elif str(bin_dec).startswith('"') and str(bin_dec).endswith('"'):
                     b = str(bin_dec)[1:-1]
                     if hf.is_hex_op(b):
@@ -82,19 +86,13 @@ def check_hex(arrayList):
                 elif any(i in bin_dec for i in hc.text_check):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(bin_dec):
-                    c[10] = c[10] + 1
-                    mimetype = magic.from_buffer(binary)
-                    f.write("%s\n" % str(mimetype))
-                    f.write("%s\n" % str(j))
-                    f.write("%s\n" % str(bin_dec))                    
+                    c[10] = c[10] + 1                 
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
+                        #i.append(len(j)/2)
+                        #hf.save_op_sql(i)
                     c[7] = c[7] + 1
                 else:
                     c[10] = c[10] + 1
-                    mimetype = magic.from_buffer(binary)
-                    f.write("%s\n" % str(bin_dec))                    
-                    f.write("%s\n" % str(mimetype))
-                    f.write("%s\n" % str(j))
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains url 
@@ -103,6 +101,8 @@ def check_hex(arrayList):
                 # check binary data contains document 
                 elif hf.is_metadata(a):
                     c[5] = c[5] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 # check content is digit
                 elif  hf.hex_int(a):
                     c[6] = c[6] +1
@@ -113,32 +113,15 @@ def check_hex(arrayList):
                     b = str(a)[1:-1]
                     if hf.is_hex_op(b):
                         c[9] = c[9] +1
-                elif any(i in a for i in hc.data):
-                    c[11] = c[11] +1
                 elif any(i in a for i in hc.text_check):
                     c[7] = c[7] + 1
-                elif hf.unknown_ascii(a) and ('\\' not in a):
-                    c[10] = c[10] + 1
-                    f.write("%s\n" % str(mimetype))
-                    f.write("%s\n" % str(j))
-                    f.write("%s\n" % str(a))                    
-                else:
-                    #try:
-                    c[8] = c[8] + 1
-                    try:
-                        mimetype = magic.from_buffer(binary)
-                        f.write("%s\n" % str(mimetype))
-                        f.write("%s\n" % str(j))
-                        f.write("%s\n" % str(a))
-
-                    except:
-                        f2.write("%s\n" % str(j))
                     #    i.append(len(j)/2)
                     #    hf.save_op_sql(i)
-                    #except: 
-                    #    f1.write("%s\n" % str(i[1]))
-
-
+                elif hf.unknown_ascii(a) and ('\\' not in a):
+                    c[10] = c[10] + 1                 
+                else:
+                    c[8] = c[8] + 1
+                
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error', 'Not Hex', 'Odd Lenght', 'Website',   
         'Metadata', 'Digit', 'Text', 'Undefinable', 'Ascii hexstring', 'Unknown ascii', 'File']

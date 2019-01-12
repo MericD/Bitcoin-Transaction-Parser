@@ -36,12 +36,15 @@ def diagram_history_op_return (connection):
     # bulid with the values for x and y an series for plotting 
     s = ps.Series(y_val, index=x_val)
     # plot line diagram with corresponing x and y values and show it
-    s.plot()
+    pyplot.ylim([0, np.max(y_val)])
+    s.plot(color='#2A649F')
+
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig1 = pyplot.gcf()
+
     #pyplot.show()
     pyplot.draw()
-    fig1.savefig('time1.png', dpi=100)
+    fig1.savefig('time1.png', dpi=1000)
     pyplot.close()
 
 
@@ -59,13 +62,13 @@ def diagram_content_OP_RETURN (connection):
     # get values for x-axis
     y_val = [y for _,y in result_array]
     #plot bar chart with corresponing x and y values and show it
-    dia = sb.barplot(x=x_val,y= y_val, palette="rocket")
+    dia = sb.barplot(x=x_val,y= y_val, palette="vlag")
     dia.set_xticklabels(fontsize = 7, labels=x_val, rotation=26, ha='right')
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig2 = pyplot.gcf()
     #pyplot.show()
     pyplot.draw()
-    fig2.savefig('number.png', dpi = 150)
+    fig2.savefig('number.png', dpi = 1000)
     pyplot.close()
 
 
