@@ -22,8 +22,7 @@ website = ('https', 'http', 'www.', '.com', '.org', '.info')
 metadata = ('TTB-T','SKYE','KEYSTAMP','@COPYROBO','KC','LICTIP10','** PROOF.COM **','DOCPROOF','FACTOM00' ,'Factom!!', 'Fa', 'CryptoTests-', 'CryptoProof-', 'STAMPD##', 'BITPROOF', 
             'ProveBit', 'RMBe', 'RMBd', 'ORIGMY', 'LaPreuve', 'UNicDC','POET', 'EXONUM', 'BARD','omni', 'ASCRIBE', 
           'CNTRPRTY','SLDX:', 'CC', 'SPK', 'S1', 'S2', 'S3', 'S4', 'S5', 'BS', 'FA' ,'OA', 'id', 'MG', 'EW', 'SB.D', 
-          'SW', 'DS' , 'OC', 'Mined by 1hash.com', 'FluxST', 'XY','XW', 'SS', 'KMD', 'OKT', 'CP110400', 'XX','aa21a9', '5888','5808',
-          '1f00', '41534', '444f4', '424954', '4d4700', '415343', '415443') 
+          'SW', 'DS' , 'OC', 'Mined by 1hash.com', 'FluxST', 'XY','XW', 'SS', 'KMD', 'OKT', 'CP110400', 'XX','OL', 'CL', 'OS', 'CS','EUK') 
 
 data = ('png', 'jpeg','.mp3', '.txt', '.avi', '.pdf')
 
@@ -38,4 +37,4 @@ text_check = ('word','Test','ello','test','single', 'itcoin')
 #        'Bitcoin: A Peer-to-Peer Electronic Cash System', ' double-spend attempt')
 
 prefix_meta = ('455720', '4f410100', '444f4350524f4f46','53422e44', '554e6963444320', '4352454400010004','6964', 
-               'aa21a9','1f00', '5808', '5808' , '53504b', '4f43')
+               'aa21a9','1f00', '5808', '5808' , '53504b', '4f43','41534', '444f4', '424954', '4d4700', '415343', '415443') 

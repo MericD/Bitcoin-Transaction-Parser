@@ -4,14 +4,10 @@ from Diagram import helper_func as hf
 from Diagram import hex_config as hc
 from Diagram import frequenzy_table as ft
 import array
-import magic 
 
 
 
 f = open('unknown_magic.txt', 'w')
-f1 = open('undef_magic.txt', 'w')
-f2 = open('undef.txt', 'w')
-
 
 __ASCII__= 'ascii'
 # analyze content of OP_RETURN fields
@@ -29,6 +25,25 @@ def check_hex(arrayList):
     # c[9] count content  ascii hexstring
     # c[10] count content  unknown ascii 
     # c[11] count content  data 
+
+
+    docproof = 0
+    factom=0
+    omni=0
+    ascribe =0
+    oa=0
+    ida = 0
+    s = 0
+    ew=0
+    kc=0
+    copy=0
+    cc=0
+    other = 0
+    bs =0
+    spk=0
+    samp =('S1', 'S2', 'S3', 'S4', 'S5')
+    faco =('FACTOM00' ,'Factom!!', 'Fa','FA')
+
     c = np.array(12)   
     c.astype(int)
     c= array.array('i',(0 for _ in range(12)))
@@ -45,8 +60,6 @@ def check_hex(arrayList):
             elif '[error]' in str(j):
                 c[1] = c[1] + 1
             else:
-                print(i[1])
-                f.write("%s\n" % str(j))
                 c[2] = c[2] + 1
         # hex is odd length add '0' at beginning
         elif len(j) %2 != 0:
@@ -60,20 +73,48 @@ def check_hex(arrayList):
             try: 
                 #convert binary data to ascii
                 bin_dec =binary.decode(__ASCII__) 
-                # check content is website/email address
-                if hf.check_website(bin_dec):
-                    c[4] = c[4] + 1
                 # check if content is metadata
-                elif hf.is_metadata(bin_dec) or hf.is_metadata(str(j)):
+                if hf.is_metadata(bin_dec):
                     c[5] = c[5] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    if bin_dec.startswith('DOCPROOF'):
+                        docproof = docproof +1
+                    elif any( i in bin_dec for i in faco):                        
+                        factom = factom +1
+                    elif bin_dec.startswith('omni'):
+                        omni = omni +1
+                    elif bin_dec.startswith('ASCRIBE'):
+                        ascribe = ascribe + 1
+                    elif bin_dec.startswith('OA'):
+                        oa=oa+1
+                    elif bin_dec.startswith('id'):
+                        ida=ida+1
+                    elif any( i in bin_dec for i in samp):
+                        s = s+1
+                    elif bin_dec.startswith('EW'):
+                        ew=ew+1
+                    elif bin_dec.startswith('KC'):
+                        kc=kc+1
+                    elif bin_dec.startswith('SPK'):
+                        spk=spk+1
+                    elif bin_dec.startswith('@COPYROBO'):
+                        copy=copy+1
+                    elif bin_dec.startswith('SPK'):
+                        copy=copy+1
+                    elif bin_dec.startswith('CC'):
+                        cc=cc+1
+                    elif bin_dec.startswith('BS'):
+                        bs=bs+1
+                    else:
+                        other = other +1
+                # check content is website/email address
+                elif hf.check_website(bin_dec):
+                    c[4] = c[4] + 1
+                    print(bin_dec)
                 elif  hf.hex_int(bin_dec):
                     c[6] = c[6] +1
                 # check content is hexstring
                 elif hf.is_hex_op(bin_dec):
                     c[9] = c[9] +1
-                    print(i[1])
                 elif str(bin_dec).startswith('"') and str(bin_dec).endswith('"'):
                     b = str(bin_dec)[1:-1]
                     if hf.is_hex_op(b):
@@ -85,24 +126,54 @@ def check_hex(arrayList):
                     c[0] = c[0] + 1
                 elif any(i in bin_dec for i in hc.text_check):
                     c[7] = c[7] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1                 
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
-                        #i.append(len(j)/2)
-                        #hf.save_op_sql(i)
                     c[7] = c[7] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 else:
                     c[10] = c[10] + 1
             except:
                 a = str(binary)[2:-1]
-                # check binary data contains url 
-                if hf.check_website(a):
-                    c[4] = c[4] + 1 
                 # check binary data contains document 
-                elif hf.is_metadata(a) or hf.is_metadata(str(j)):
+                if hf.is_metadata(a):
                     c[5] = c[5] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    if a.startswith('DOCPROOF'):
+                        docproof = docproof +1
+                    elif any( i in a for i in faco):
+                        factom = factom +1
+                    elif a.startswith('omni'):
+                        omni = omni +1
+                    elif a.startswith('ASCRIBE'):
+                        ascribe = ascribe + 1
+                    elif a.startswith('OA'):
+                        oa=oa+1
+                    elif a.startswith('id'):
+                        ida=ida+1
+                    elif any( i in a for i in samp):
+                        s = s+1
+                    elif a.startswith('EW'):
+                        ew=ew+1
+                    elif a.startswith('KC'):
+                        kc=kc+1
+                    elif a.startswith('@COPYROBO'):
+                        copy=copy+1
+                    elif a.startswith('SPK'):
+                        copy=copy+1
+                    elif a.startswith('CC'):
+                        cc=cc+1
+                    elif a.startswith('BS'):
+                        bs=bs+1
+                    elif a.startswith('BS'):
+                        spk=spk+1
+                    else:
+                        other = other +1
+                # check binary data contains url 
+                elif hf.check_website(a):
+                    c[4] = c[4] + 1 
                 # check content is digit
                 elif  hf.hex_int(a):
                     c[6] = c[6] +1
@@ -115,13 +186,36 @@ def check_hex(arrayList):
                         c[9] = c[9] +1
                 elif any(i in a for i in hc.text_check):
                     c[7] = c[7] + 1
-                    #    i.append(len(j)/2)
-                    #    hf.save_op_sql(i)
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 elif hf.unknown_ascii(a) and ('\\' not in a):
                     c[10] = c[10] + 1                 
+                elif any( str(j).startswith(i) for i in hc.prefix_meta):
+                    c[5] = c[5] + 1
+                    other = other +1
                 else:
                     c[8] = c[8] + 1
-                
+    
+    arr = []
+    arr.append(docproof)
+    arr.append(factom)
+    arr.append(omni)
+    arr.append(ascribe)
+    arr.append(oa)
+    arr.append(ida)
+    arr.append(s)
+    arr.append(ew)
+    arr.append(kc)
+    arr.append(copy)
+    arr.append(spk)
+    arr.append(other)
+    arr.append(bs)
+
+    cc = np.sum(arr)
+
+
+    print(arr)
+    print(cc)
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error', 'Not Hex', 'Odd Lenght', 'Website',   
         'Metadata', 'Digit', 'Text', 'Undefinable', 'Ascii hexstring', 'Unknown ascii', 'File']
@@ -131,48 +225,6 @@ def check_hex(arrayList):
     return ascii
 
 
-def cat_metadata(bin_dec):
-    docproof =0
-    factom=0
-    omni=0
-    ascribe =0
-    oa=0
-    ida = 0
-    s = 0
-    ew=0
-    kc=0
-    copy=0
-    if bin_dec.startswith('DOCPROOF'):
-        docproof = docproof +1
-    elif bin_dec.startswith('FACTOM00') or bin_dec.startswith('Factom!!') or bin_dec.startswith('Fa') or bin_dec.startswith('FA'):
-        factom = factom +1
-    elif bin_dec.startswith('omni'):
-        omni = omni +1
-    elif bin_dec.startswith('ASCRIBE'):
-        ascribe = ascribe + 1
-    elif bin_dec.startswith('OA'):
-        oa=oa+1
-    elif bin_dec.startswith('id'):
-        ida=ida+1
-    elif bin_dec.startswith('S1') or bin_dec.startswith('S2') or bin_dec.startswith('S3') or bin_dec.startswith('S4')or bin_dec.startswith('S5'):
-        s = s+1
-    elif bin_dec.startswith('EW'):
-        ew=ew+1
-    elif bin_dec.startswith('KC'):
-        kc=kc+1
-    elif bin_dec.startswith('CC'):
-        kc=kc+1
-    elif bin_dec.startswith('@COPYROBO'):
-        copy=copy+1
-    elif bin_dec.startswith('SPK'):
-        copy=copy+1
-
-
-#    metadata = ('TTB-T','SKYE','KEYSTAMP','LICTIP10','** PROOF.COM **', 'CryptoTests-', 'CryptoProof-', 'STAMPD##', 'BITPROOF', 
-#            'ProveBit', 'RMBe', 'RMBd', 'ORIGMY', 'LaPreuve', 'UNicDC','POET', 'EXONUM', 'BARD','', , 
-#          'CNTRPRTY','SLDX:', 'SPK',  'BS', '' ,'', '', 'MG', 'SB.D', 
-#          'SW', 'DS' , 'OC', 'Mined by 1hash.com', 'FluxST', 'XY','XW', 'SS', 'KMD', 'OKT', 'CP110400', 'XX') 
 
 
 
-    
