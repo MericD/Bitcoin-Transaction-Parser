@@ -106,6 +106,8 @@ def check_hex(arrayList):
                         bs=bs+1
                     else:
                         other = other +1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 # check content is website/email address
                 elif hf.check_website(bin_dec):
                     c[4] = c[4] + 1
@@ -126,14 +128,10 @@ def check_hex(arrayList):
                     c[0] = c[0] + 1
                 elif any(i in bin_dec for i in hc.text_check):
                     c[7] = c[7] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1                 
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                 else:
                     c[10] = c[10] + 1
             except:
@@ -171,6 +169,8 @@ def check_hex(arrayList):
                         spk=spk+1
                     else:
                         other = other +1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 # check binary data contains url 
                 elif hf.check_website(a):
                     c[4] = c[4] + 1 
@@ -186,13 +186,13 @@ def check_hex(arrayList):
                         c[9] = c[9] +1
                 elif any(i in a for i in hc.text_check):
                     c[7] = c[7] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                 elif hf.unknown_ascii(a) and ('\\' not in a):
                     c[10] = c[10] + 1                 
                 elif any( str(j).startswith(i) for i in hc.prefix_meta):
                     c[5] = c[5] + 1
                     other = other +1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 else:
                     c[8] = c[8] + 1
     
