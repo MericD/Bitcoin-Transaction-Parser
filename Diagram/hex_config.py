@@ -22,7 +22,8 @@ website = ('https', 'http', 'www.', '.com', '.org', '.info')
 metadata = ('TTB-T','SKYE','KEYSTAMP','@COPYROBO','KC','LICTIP10','** PROOF.COM **','DOCPROOF','FACTOM00' ,'Factom!!', 'Fa', 'CryptoTests-', 'CryptoProof-', 'STAMPD##', 'BITPROOF', 
             'ProveBit', 'RMBe', 'RMBd', 'ORIGMY', 'LaPreuve', 'UNicDC','POET', 'EXONUM', 'BARD','omni', 'ASCRIBE', 
           'CNTRPRTY','SLDX:', 'CC', 'SPK', 'S1', 'S2', 'S3', 'S4', 'S5', 'BS', 'FA' ,'OA', 'id', 'MG', 'EW', 'SB.D', 
-          'SW', 'DS' , 'OC', 'Mined by 1hash.com', 'FluxST', 'XY','XW', 'SS', 'KMD', 'OKT', 'CP110400', 'XX') 
+          'SW', 'DS' , 'OC', 'Mined by 1hash.com', 'FluxST', 'XY','XW', 'SS', 'KMD', 'OKT', 'CP110400', 'XX','aa21a9', '5888','5808',
+          '1f00', '41534', '444f4', '424954', '4d4700', '415343', '415443') 
 
 data = ('png', 'jpeg','.mp3', '.txt', '.avi', '.pdf')
 

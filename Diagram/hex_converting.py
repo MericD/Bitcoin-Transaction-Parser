@@ -64,7 +64,7 @@ def check_hex(arrayList):
                 if hf.check_website(bin_dec):
                     c[4] = c[4] + 1
                 # check if content is metadata
-                elif hf.is_metadata(bin_dec):
+                elif hf.is_metadata(bin_dec) or hf.is_metadata(str(j)):
                     c[5] = c[5] + 1
                     i.append(len(j)/2)
                     hf.save_op_sql(i)
@@ -99,7 +99,7 @@ def check_hex(arrayList):
                 if hf.check_website(a):
                     c[4] = c[4] + 1 
                 # check binary data contains document 
-                elif hf.is_metadata(a):
+                elif hf.is_metadata(a) or hf.is_metadata(str(j)):
                     c[5] = c[5] + 1
                     i.append(len(j)/2)
                     hf.save_op_sql(i)
@@ -131,3 +131,48 @@ def check_hex(arrayList):
     return ascii
 
 
+def cat_metadata(bin_dec):
+    docproof =0
+    factom=0
+    omni=0
+    ascribe =0
+    oa=0
+    ida = 0
+    s = 0
+    ew=0
+    kc=0
+    copy=0
+    if bin_dec.startswith('DOCPROOF'):
+        docproof = docproof +1
+    elif bin_dec.startswith('FACTOM00') or bin_dec.startswith('Factom!!') or bin_dec.startswith('Fa') or bin_dec.startswith('FA'):
+        factom = factom +1
+    elif bin_dec.startswith('omni'):
+        omni = omni +1
+    elif bin_dec.startswith('ASCRIBE'):
+        ascribe = ascribe + 1
+    elif bin_dec.startswith('OA'):
+        oa=oa+1
+    elif bin_dec.startswith('id'):
+        ida=ida+1
+    elif bin_dec.startswith('S1') or bin_dec.startswith('S2') or bin_dec.startswith('S3') or bin_dec.startswith('S4')or bin_dec.startswith('S5'):
+        s = s+1
+    elif bin_dec.startswith('EW'):
+        ew=ew+1
+    elif bin_dec.startswith('KC'):
+        kc=kc+1
+    elif bin_dec.startswith('CC'):
+        kc=kc+1
+    elif bin_dec.startswith('@COPYROBO'):
+        copy=copy+1
+    elif bin_dec.startswith('SPK'):
+        copy=copy+1
+
+
+#    metadata = ('TTB-T','SKYE','KEYSTAMP','LICTIP10','** PROOF.COM **', 'CryptoTests-', 'CryptoProof-', 'STAMPD##', 'BITPROOF', 
+#            'ProveBit', 'RMBe', 'RMBd', 'ORIGMY', 'LaPreuve', 'UNicDC','POET', 'EXONUM', 'BARD','', , 
+#          'CNTRPRTY','SLDX:', 'SPK',  'BS', '' ,'', '', 'MG', 'SB.D', 
+#          'SW', 'DS' , 'OC', 'Mined by 1hash.com', 'FluxST', 'XY','XW', 'SS', 'KMD', 'OKT', 'CP110400', 'XX') 
+
+
+
+    
