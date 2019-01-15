@@ -18,6 +18,7 @@ def is_hex(op):
 
 
 
+
 # check if hex is a OP_RETURN
 def is_OP(op):
     if __OP_PRETUN__ in str(op):
@@ -173,7 +174,7 @@ def is_text(bin_dec):
 rpc_connection = rpc.start_connection_to_rpc()
 
 def save_op_sql(numarray):
-    connection = sqlite3.connect('db3.db')
+    connection = sqlite3.connect('db4.db')
     sql.initTabel(connection)
 
     raw_tx = rpc.decoded_transactions_address(rpc_connection, numarray[1])
