@@ -43,7 +43,7 @@ def check_hex(arrayList):
     spk=0
     samp =('S1', 'S2', 'S3', 'S4', 'S5')
     faco =('FACTOM00' ,'Factom!!', 'Fa','FA')
-
+    xxxxx = 0
     c = np.array(12)   
     c.astype(int)
     c= array.array('i',(0 for _ in range(12)))
@@ -82,6 +82,9 @@ def check_hex(arrayList):
                         factom = factom +1
                     elif bin_dec.startswith('omni'):
                         omni = omni +1
+                        print(len(j)/2)
+                        f.write("%s\n" % str(bin_dec))
+                        f.write("%s\n" % str(j))
                     elif bin_dec.startswith('ASCRIBE'):
                         ascribe = ascribe + 1
                     elif bin_dec.startswith('OA'):
@@ -106,6 +109,7 @@ def check_hex(arrayList):
                         bs=bs+1
                     else:
                         other = other +1
+                    xxxxx = xxxxx +(len(j)/2)
                 # check content is website/email address
                 elif hf.check_website(bin_dec):
                     c[4] = c[4] + 1
@@ -115,14 +119,10 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(bin_dec):
                     c[9] = c[9] +1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                 elif str(bin_dec).startswith('"') and str(bin_dec).endswith('"'):
                     b = str(bin_dec)[1:-1]
                     if hf.is_hex_op(b):
                         c[9] = c[9] +1
-                        i.append(len(j)/2)
-                        hf.save_op_sql(i)
                 elif any(i in bin_dec for i in hc.data):
                     c[11] = c[11] +1
                 # unknown ascii string 
@@ -131,11 +131,15 @@ def check_hex(arrayList):
                 elif any(i in bin_dec for i in hc.text_check):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(bin_dec):
-                    c[10] = c[10] + 1                 
+                    c[10] = c[10] + 1     
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)            
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
                 else:
                     c[10] = c[10] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains document 
@@ -147,6 +151,7 @@ def check_hex(arrayList):
                         factom = factom +1
                     elif a.startswith('omni'):
                         omni = omni +1
+                        print(len(j)/2)
                     elif a.startswith('ASCRIBE'):
                         ascribe = ascribe + 1
                     elif a.startswith('OA'):
@@ -171,6 +176,7 @@ def check_hex(arrayList):
                         spk=spk+1
                     else:
                         other = other +1
+                    xxxxx = xxxxx +(len(j)/2)
                 # check binary data contains url 
                 elif hf.check_website(a):
                     c[4] = c[4] + 1 
@@ -180,18 +186,16 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(a):
                     c[9] = c[9] +1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                 elif str(a).startswith('"') and str(a).endswith('"'):
                     b = str(a)[1:-1]
                     if hf.is_hex_op(b):
                         c[9] = c[9] +1
-                        i.append(len(j)/2)
-                        hf.save_op_sql(i)
                 elif any(i in a for i in hc.text_check):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
-                    c[10] = c[10] + 1                 
+                    c[10] = c[10] + 1 
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)                
                 elif any( str(j).startswith(i) for i in hc.prefix_meta):
                     c[5] = c[5] + 1
                     other = other +1
@@ -215,7 +219,8 @@ def check_hex(arrayList):
 
     cc = np.sum(arr)
 
-
+    xxx = xxxxx / c[5]
+    print(xxx)
     print(arr)
     print(cc)
     #  (x,_) part of a tuple --> number of found contents

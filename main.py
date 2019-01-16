@@ -67,4 +67,3 @@ diagram.create_diagrams()
 #        i = i[10:]
 #        s = s + i.replace("\n","")
 #    f.write("%s\n" % str(s))
-
