@@ -119,14 +119,10 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(bin_dec):
                     c[9] = c[9] +1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                 elif str(bin_dec).startswith('"') and str(bin_dec).endswith('"'):
                     b = str(bin_dec)[1:-1]
                     if hf.is_hex_op(b):
                         c[9] = c[9] +1
-                        i.append(len(j)/2)
-                        hf.save_op_sql(i)
                 elif any(i in bin_dec for i in hc.data):
                     c[11] = c[11] +1
                 # unknown ascii string 
@@ -186,14 +182,10 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(a):
                     c[9] = c[9] +1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                 elif str(a).startswith('"') and str(a).endswith('"'):
                     b = str(a)[1:-1]
                     if hf.is_hex_op(b):
                         c[9] = c[9] +1
-                        i.append(len(j)/2)
-                        hf.save_op_sql(i)
                 elif any(i in a for i in hc.text_check):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
@@ -203,6 +195,8 @@ def check_hex(arrayList):
                     other = other +1
                 else:
                     c[8] = c[8] + 1   
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
     
     arr = []
     arr.append(docproof)
