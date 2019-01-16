@@ -131,15 +131,11 @@ def check_hex(arrayList):
                 elif any(i in bin_dec for i in hc.text_check):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(bin_dec):
-                    c[10] = c[10] + 1     
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)            
+                    c[10] = c[10] + 1             
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
                 else:
                     c[10] = c[10] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains document 
@@ -193,14 +189,14 @@ def check_hex(arrayList):
                 elif any(i in a for i in hc.text_check):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
-                    c[10] = c[10] + 1 
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)                
+                    c[10] = c[10] + 1              
                 elif any( str(j).startswith(i) for i in hc.prefix_meta):
                     c[5] = c[5] + 1
                     other = other +1
                 else:
                     c[8] = c[8] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)   
     
     arr = []
     arr.append(docproof)
