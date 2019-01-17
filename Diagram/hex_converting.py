@@ -75,6 +75,8 @@ def check_hex(arrayList):
                 # check if content is metadata
                 if hf.is_metadata(bin_dec):
                     c[5] = c[5] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                     if bin_dec.startswith('DOCPROOF'):
                         docproof = docproof +1
                     elif any( i in bin_dec for i in faco):                        
@@ -139,6 +141,8 @@ def check_hex(arrayList):
                 # check binary data contains document 
                 if hf.is_metadata(a):
                     c[5] = c[5] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                     if a.startswith('DOCPROOF'):
                         docproof = docproof +1
                     elif any( i in a for i in faco):
@@ -191,11 +195,11 @@ def check_hex(arrayList):
                 elif any( str(j).startswith(i) for i in hc.prefix_meta):
                     c[5] = c[5] + 1
                     other = other +1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 else:
                     try:
                         c[8] = c[8] + 1   
-                        i.append(len(j)/2)
-                        hf.save_op_sql(i)
                     except:
                         pass
     
