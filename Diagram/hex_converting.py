@@ -43,7 +43,6 @@ def check_hex(arrayList):
     spk=0
     samp =('S1', 'S2', 'S3', 'S4', 'S5')
     faco =('FACTOM00' ,'Factom!!', 'Fa','FA')
-    xxxxx = 0
     c = np.array(12)   
     c.astype(int)
     c= array.array('i',(0 for _ in range(12)))
@@ -82,9 +81,6 @@ def check_hex(arrayList):
                         factom = factom +1
                     elif bin_dec.startswith('omni'):
                         omni = omni +1
-                        print(len(j)/2)
-                        f.write("%s\n" % str(bin_dec))
-                        f.write("%s\n" % str(j))
                     elif bin_dec.startswith('ASCRIBE'):
                         ascribe = ascribe + 1
                     elif bin_dec.startswith('OA'):
@@ -109,11 +105,9 @@ def check_hex(arrayList):
                         bs=bs+1
                     else:
                         other = other +1
-                    xxxxx = xxxxx +(len(j)/2)
                 # check content is website/email address
                 elif hf.check_website(bin_dec):
                     c[4] = c[4] + 1
-                    print(bin_dec)
                 elif  hf.hex_int(bin_dec):
                     c[6] = c[6] +1
                 # check content is hexstring
@@ -131,11 +125,15 @@ def check_hex(arrayList):
                 elif any(i in bin_dec for i in hc.text_check):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(bin_dec):
-                    c[10] = c[10] + 1             
+                    c[10] = c[10] + 1 
+                    if (i[0] > 414253) and (i[0] < 422962):
+                        f.write("%s\n" % str(bin_dec))      
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
                 else:
                     c[10] = c[10] + 1
+                    if (i[0] > 414253) and (i[0] < 422962):
+                        f.write("%s\n" % str(bin_dec))  
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains document 
@@ -147,7 +145,6 @@ def check_hex(arrayList):
                         factom = factom +1
                     elif a.startswith('omni'):
                         omni = omni +1
-                        print(len(j)/2)
                     elif a.startswith('ASCRIBE'):
                         ascribe = ascribe + 1
                     elif a.startswith('OA'):
@@ -172,7 +169,6 @@ def check_hex(arrayList):
                         spk=spk+1
                     else:
                         other = other +1
-                    xxxxx = xxxxx +(len(j)/2)
                 # check binary data contains url 
                 elif hf.check_website(a):
                     c[4] = c[4] + 1 
@@ -189,14 +185,20 @@ def check_hex(arrayList):
                 elif any(i in a for i in hc.text_check):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
-                    c[10] = c[10] + 1              
+                    c[10] = c[10] + 1         
+                    if (i[0] > 414253) and (i[0] < 422962):
+                        f.write("%s\n" % str(a))     
                 elif any( str(j).startswith(i) for i in hc.prefix_meta):
                     c[5] = c[5] + 1
                     other = other +1
                 else:
-                    c[8] = c[8] + 1   
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    try:
+                        c[8] = c[8] + 1   
+                        i.append(len(j)/2)
+                        hf.save_op_sql(i)
+                    except:
+                        pass
+    
     
     arr = []
     arr.append(docproof)
@@ -215,10 +217,7 @@ def check_hex(arrayList):
 
     cc = np.sum(arr)
 
-    xxx = xxxxx / c[5]
-    print(xxx)
-    print(arr)
-    print(cc)
+   
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error', 'Not Hex', 'Odd Lenght', 'Website',   
         'Metadata', 'Digit', 'Text', 'Undefinable', 'Ascii hexstring', 'Unknown ascii', 'File']
