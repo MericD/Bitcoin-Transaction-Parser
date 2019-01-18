@@ -26,7 +26,7 @@ def check_hex(arrayList):
     # c[10] count content  unknown ascii 
     # c[11] count content  data 
 
-
+    counttt =0
     docproof = 0
     factom=0
     omni=0
@@ -77,8 +77,8 @@ def check_hex(arrayList):
                 # check if content is metadata
                 if hf.is_metadata(bin_dec):
                     c[5] = c[5] + 1
-                    #i.append(len(j)/2)
-                    #hf.save_op_sql(i)
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                     if bin_dec.startswith('DOCPROOF'):
                         docproof = docproof +1
                     elif any( i in bin_dec for i in faco):                        
@@ -149,8 +149,8 @@ def check_hex(arrayList):
                 # check binary data contains document 
                 if hf.is_metadata(a):
                     c[5] = c[5] + 1
-                    #i.append(len(j)/2)
-                    #hf.save_op_sql(i)
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                     if a.startswith('DOCPROOF'):
                         docproof = docproof +1
                     elif any( i in a for i in faco):
@@ -209,11 +209,14 @@ def check_hex(arrayList):
                 elif any( str(j).startswith(i) for i in hc.prefix_meta):
                     c[5] = c[5] + 1
                     other = other +1
-                    #i.append(len(j)/2)
-                    #hf.save_op_sql(i)
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 else:
                     try:
-                        c[8] = c[8] + 1   
+                        c[8] = c[8] + 1  
+                        #if hf.zcoin_string(j):
+                        #    counttt = counttt + 1
+                        #    print(True) 
                     except:
                         pass
     
@@ -240,7 +243,7 @@ def check_hex(arrayList):
     #print(sss[0])
 
 
-    #print(xxxxxxx)
+    print(counttt)
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error', 'Not Hex', 'Odd Lenght', 'Website',   
         'Metadata', 'Digit', 'Text', 'Undefinable', 'Ascii hexstring', 'Unknown ascii', 'File']
