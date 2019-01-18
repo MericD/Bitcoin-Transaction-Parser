@@ -16,7 +16,7 @@ sb.set(style="whitegrid")
 def create_diagrams():
     connection = sqlite3.connect("db_met.db")
     diagram_history_op_return(connection)
-    #diagram_content_OP_RETURN(connection)
+    diagram_content_OP_RETURN(connection)
 
 
 
