@@ -109,8 +109,8 @@ def check_hex(arrayList):
                         bs=bs+1
                     else:
                         other = other +1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    #i.append(len(j)/2)
+                    #hf.save_op_sql(i)
                 # check content is website/email address
                 elif hf.check_website(bin_dec):
                     c[4] = c[4] + 1
@@ -181,8 +181,8 @@ def check_hex(arrayList):
                         spk=spk+1
                     else:
                         other = other +1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    #i.append(len(j)/2)
+                    #hf.save_op_sql(i)
                 # check binary data contains url 
                 elif hf.check_website(a):
                     c[4] = c[4] + 1 
@@ -209,8 +209,8 @@ def check_hex(arrayList):
                 elif any( str(j).startswith(i) for i in hc.prefix_meta):
                     c[5] = c[5] + 1
                     other = other +1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    #i.append(len(j)/2)
+                    #hf.save_op_sql(i)
                 else:
                     try:
                         c[8] = c[8] + 1   
@@ -233,7 +233,7 @@ def check_hex(arrayList):
     arr.append(other)
     arr.append(bs)
 
-    cc = np.sum(arr)
+    #cc = np.sum(arr)
 
     #sss = ft.freq_tab(unknown_content)
     #print(sss)
