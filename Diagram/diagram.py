@@ -16,7 +16,7 @@ sb.set(style="whitegrid")
 def create_diagrams():
     connection = sqlite3.connect("db3.db")
     diagram_history_op_return(connection)
-    diagram_content_OP_RETURN(connection)
+    #diagram_content_OP_RETURN(connection)
 
 
 
@@ -36,13 +36,14 @@ def diagram_history_op_return (connection):
     # bulid with the values for x and y an series for plotting 
     s = ps.Series(y_val, index=x_val)
     # plot line diagram with corresponing x and y values and show it
-    pyplot.ylim([0, np.max(y_val)])
+    pyplot.ylim([0, np.max(y_val)+200])
     s.plot(color='#2A649F')
 
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig1 = pyplot.gcf()
 
     #pyplot.show()
+    pyplot.margins(x=0)
     pyplot.draw()
     fig1.savefig('time1.png', dpi=1000)
     pyplot.close()

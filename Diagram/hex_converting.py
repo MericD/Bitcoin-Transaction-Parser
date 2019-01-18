@@ -40,6 +40,8 @@ def check_hex(arrayList):
     cc=0
     other = 0
     bs =0
+
+    xxxxxxx = 0
     spk=0
     samp =('S1', 'S2', 'S3', 'S4', 'S5')
     faco =('FACTOM00' ,'Factom!!', 'Fa','FA')
@@ -75,8 +77,8 @@ def check_hex(arrayList):
                 # check if content is metadata
                 if hf.is_metadata(bin_dec):
                     c[5] = c[5] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    #i.append(len(j)/2)
+                    #hf.save_op_sql(i)
                     if bin_dec.startswith('DOCPROOF'):
                         docproof = docproof +1
                     elif any( i in bin_dec for i in faco):                        
@@ -107,6 +109,8 @@ def check_hex(arrayList):
                         bs=bs+1
                     else:
                         other = other +1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 # check content is website/email address
                 elif hf.check_website(bin_dec):
                     c[4] = c[4] + 1
@@ -115,10 +119,12 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(bin_dec):
                     c[9] = c[9] +1
+                    xxxxxxx = xxxxxxx + (len(j)/2)
                 elif str(bin_dec).startswith('"') and str(bin_dec).endswith('"'):
                     b = str(bin_dec)[1:-1]
                     if hf.is_hex_op(b):
                         c[9] = c[9] +1
+                        xxxxxxx = xxxxxxx + (len(j)/2)
                 elif any(i in bin_dec for i in hc.data):
                     c[11] = c[11] +1
                 # unknown ascii string 
@@ -128,21 +134,23 @@ def check_hex(arrayList):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1 
-                    if (i[0] > 414253) and (i[0] < 422962):
-                        f.write("%s\n" % str(bin_dec))      
+                    unknown_content.append(bin_dec)
+                    f.write("%s\n" % str(bin_dec))    
+                    f.write("%s\n" % str(j))        
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
                 else:
                     c[10] = c[10] + 1
-                    if (i[0] > 414253) and (i[0] < 422962):
-                        f.write("%s\n" % str(bin_dec))  
+                    unknown_content.append(bin_dec)
+                    f.write("%s\n" % str(bin_dec))    
+                    f.write("%s\n" % str(j))   
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains document 
                 if hf.is_metadata(a):
                     c[5] = c[5] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    #i.append(len(j)/2)
+                    #hf.save_op_sql(i)
                     if a.startswith('DOCPROOF'):
                         docproof = docproof +1
                     elif any( i in a for i in faco):
@@ -173,6 +181,8 @@ def check_hex(arrayList):
                         spk=spk+1
                     else:
                         other = other +1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
                 # check binary data contains url 
                 elif hf.check_website(a):
                     c[4] = c[4] + 1 
@@ -182,16 +192,20 @@ def check_hex(arrayList):
                 # check content is hexstring
                 elif hf.is_hex_op(a):
                     c[9] = c[9] +1
+                    xxxxxxx = xxxxxxx + (len(j)/2)
                 elif str(a).startswith('"') and str(a).endswith('"'):
                     b = str(a)[1:-1]
                     if hf.is_hex_op(b):
                         c[9] = c[9] +1
+                        xxxxxxx = xxxxxxx + (len(j)/2)
                 elif any(i in a for i in hc.text_check):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
+                    unknown_content.append(bin_dec)
+                    f.write("%s\n" % str(a))    
+                    f.write("%s\n" % str(j))    
                     c[10] = c[10] + 1         
-                    if (i[0] > 414253) and (i[0] < 422962):
-                        f.write("%s\n" % str(a))     
+                        
                 elif any( str(j).startswith(i) for i in hc.prefix_meta):
                     c[5] = c[5] + 1
                     other = other +1
@@ -221,7 +235,12 @@ def check_hex(arrayList):
 
     cc = np.sum(arr)
 
-   
+    #sss = ft.freq_tab(unknown_content)
+    #print(sss)
+    #print(sss[0])
+
+
+    #print(xxxxxxx)
     #  (x,_) part of a tuple --> number of found contents
     x = ['Empty',  'Error', 'Not Hex', 'Odd Lenght', 'Website',   
         'Metadata', 'Digit', 'Text', 'Undefinable', 'Ascii hexstring', 'Unknown ascii', 'File']
