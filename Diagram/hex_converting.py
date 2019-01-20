@@ -49,6 +49,10 @@ def check_hex(arrayList):
     c.astype(int)
     c= array.array('i',(0 for _ in range(12)))
     unknown_content =[]
+
+    count_coin = 0
+
+
     # in given array[array] get hexstring, store in j and check content an OP_RETRUN has
     for i in arrayList:
         j = i[3]     
@@ -77,8 +81,6 @@ def check_hex(arrayList):
                 # check if content is metadata
                 if hf.is_metadata(bin_dec):
                     c[5] = c[5] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                     if bin_dec.startswith('DOCPROOF'):
                         docproof = docproof +1
                     elif any( i in bin_dec for i in faco):                        
@@ -149,8 +151,6 @@ def check_hex(arrayList):
                 # check binary data contains document 
                 if hf.is_metadata(a):
                     c[5] = c[5] + 1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
                     if a.startswith('DOCPROOF'):
                         docproof = docproof +1
                     elif any( i in a for i in faco):
@@ -209,17 +209,18 @@ def check_hex(arrayList):
                 elif any( str(j).startswith(i) for i in hc.prefix_meta):
                     c[5] = c[5] + 1
                     other = other +1
-                    i.append(len(j)/2)
-                    hf.save_op_sql(i)
+                    #i.append(len(j)/2)
+                    #hf.save_op_sql(i)
                 else:
                     try:
                         c[8] = c[8] + 1  
-                        #if hf.zcoin_string(j):
-                        #    counttt = counttt + 1
-                        #    print(True) 
+                        if hf.zcoin_string(j):
+                            counttt = counttt + 1
+                            print(True) 
                     except:
                         pass
-    
+            if hf.check_coinbase(i[1]):
+                count_coin = count_coin +1
     
     arr = []
     arr.append(docproof)

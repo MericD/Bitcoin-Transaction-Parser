@@ -208,3 +208,19 @@ def save_op_sql(numarray):
 
     sql.addOP(connection, prev_tx_id, block_number, transaction_id, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time)
     connection.close()
+
+
+def check_coinbase(txid):
+    raw_tx = rpc.decoded_transactions_address(rpc_connection,txid)
+    prev_tx_id = c.get_previous_txID_of_btc(raw_tx)
+    if prev_tx_id == 'coinbase':
+         return True
+    else:
+        return False 
+
+
+
+def zcoin_string(bin_dec):
+    for zc in hc.zcoin:
+        if zc == str(bin_dec):
+            return True
