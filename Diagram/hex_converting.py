@@ -221,6 +221,8 @@ def check_hex(arrayList):
                         pass
             if hf.check_coinbase(i[1]):
                 count_coin = count_coin +1
+    ss = open("ss",'w')
+    ss.write("%s\n" % str(count_coin))
     
     arr = []
     arr.append(docproof)
