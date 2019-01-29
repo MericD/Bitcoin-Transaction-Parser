@@ -28,20 +28,23 @@ def diagram_history_op_return (connection):
     
     # get corresponding columns for the axes
     data = ps.DataFrame(read_data,columns=['create_date','Count_Duplicate'])
+    data=data.rename(columns = {'create_date':'year'}) 
+    data=data.rename(columns = {'Count_Duplicate':'transaction'}) 
     # x-axis: get create_date of blocks that ar containing OP_RETURNS in datetime 
-    x_val = ps.Series(ps.to_datetime(data['create_date']))
+    x_val = ps.Series(ps.to_datetime(data['year']))
     # y-axis: get number of OP_RETURNS in a Block depending on create_date as an array
-    y_val = np.array(data['Count_Duplicate'])
+    y_val = np.array(data['transaction'])
 
     # bulid with the values for x and y an series for plotting 
     s = ps.Series(y_val, index=x_val)
     # plot line diagram with corresponing x and y values and show it
     pyplot.ylim([0, np.max(y_val)+200])
-    s.plot(color='#2A649F')
+    pyplot.margins(x=0)
+    s.plot(color='#2A649F',label='All OP_RETURN Transactions')
 
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig1 = pyplot.gcf()
-
+    pyplot.ylabel('transaction')
     #pyplot.show()
     pyplot.margins(x=0)
     pyplot.draw()

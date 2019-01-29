@@ -4,10 +4,17 @@ from Diagram import helper_func as hf
 from Diagram import hex_config as hc
 from Diagram import frequenzy_table as ft
 import array
+import codecs
+
 
 
 
 f = open('unknown_magic.txt', 'w')
+f1 = open('unknown_magic1.txt', 'w')
+f2 = open('unknown_magic2.txt', 'w')
+f3 = open('unknown_magic3.txt', 'w')
+f4 = open('unknown_magic4.txt', 'w')
+f5 = open('unknown_magic5.txt', 'w')
 
 __ASCII__= 'ascii'
 # analyze content of OP_RETURN fields
@@ -136,16 +143,12 @@ def check_hex(arrayList):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(bin_dec):
                     c[10] = c[10] + 1 
-                    unknown_content.append(bin_dec)
-                    f.write("%s\n" % str(bin_dec))    
-                    f.write("%s\n" % str(j))        
+                    unknown_content.append(bin_dec)   
                 elif  (' ' in bin_dec) or (len(bin_dec)==1):
                     c[7] = c[7] + 1
                 else:
                     c[10] = c[10] + 1
                     unknown_content.append(bin_dec)
-                    f.write("%s\n" % str(bin_dec))    
-                    f.write("%s\n" % str(j))   
             except:
                 a = str(binary)[2:-1]
                 # check binary data contains document 
@@ -202,8 +205,6 @@ def check_hex(arrayList):
                     c[7] = c[7] + 1
                 elif hf.unknown_ascii(a) and ('\\' not in a):
                     unknown_content.append(bin_dec)
-                    f.write("%s\n" % str(a))    
-                    f.write("%s\n" % str(j))    
                     c[10] = c[10] + 1         
                         
                 elif any( str(j).startswith(i) for i in hc.prefix_meta):
@@ -213,16 +214,36 @@ def check_hex(arrayList):
                     #hf.save_op_sql(i)
                 else:
                     try:
-                        c[8] = c[8] + 1  
-                        if hf.zcoin_string(j):
-                            counttt = counttt + 1
-                            print(True) 
+                        c[8] = c[8] + 1
+                        try:
+                            xa = codecs.decode(str(j), "hex").decode('utf-8')
+                            f.write("%s\n" % str(xa))
+                        except:
+                            try:
+                                xaa = codecs.decode(str(j), "hex").decode('utf-16-le')
+                                f2.write("%s\n" % str(xaa))
+                            except:
+                                try:
+                                    xaaa = codecs.decode(str(j), "hex").decode('utf-16-be')
+                                    f3.write("%s\n" % str(xaaa))
+                                except:
+                                    try:
+                                        xaaa = codecs.decode(str(j), "hex").decode('utf32-le')
+                                        f4.write("%s\n" % str(xaaa))
+                                    except:
+                                        try:
+                                            xaaa = codecs.decode(str(j), "hex").decode('utf32-be')
+                                            f5.write("%s\n" % str(xaaa))
+                                        except:
+                                            i.append(len(j)/2)
+                                            hf.save_op_sql(i)
                     except:
                         pass
-            if hf.check_coinbase(i[1]):
-                count_coin = count_coin +1
-    ss = open("ss",'w')
-    ss.write("%s\n" % str(count_coin))
+    
+            #if hf.check_coinbase(i[1]):
+    #            count_coin = count_coin +1
+    #ss = open("ss",'w')
+    #ss.write("%s\n" % str(count_coin))
     
     arr = []
     arr.append(docproof)
@@ -244,7 +265,6 @@ def check_hex(arrayList):
     #sss = ft.freq_tab(unknown_content)
     #print(sss)
     #print(sss[0])
-
 
     print(counttt)
     #  (x,_) part of a tuple --> number of found contents
