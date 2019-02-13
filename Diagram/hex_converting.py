@@ -111,10 +111,10 @@ def check_hex(arrayList):
                     unknown_content.append(a)
                 elif any( str(j).startswith(i) for i in hc.prefix_meta):
                     c[5] = c[5] + 1
-                    #i.append(len(j)/2)
-                    #hf.save_op_sql(i)
                 else:
                     c[8] = c[8] + 1
+                    i.append(len(j)/2)
+                    hf.save_op_sql(i)
     
     # frequenzy table for unknown ASCII strings
     ft.freq_tab(unknown_content)
