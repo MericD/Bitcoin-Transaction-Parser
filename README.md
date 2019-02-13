@@ -85,8 +85,6 @@ $ python3 main.py
 
 4. #I am using the following Project: https://github.com/garethjns/PyBC to parse the .dat files
 
-
-### Example outputs
 ### Example outputs
 
 - After running the script a database file is created that contains two tables. This file can be open with the tool [DB Browser for SQLite](https://sqlitebrowser.org)
