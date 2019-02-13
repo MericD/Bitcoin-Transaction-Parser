@@ -17,8 +17,6 @@ def is_hex(op):
         return False
 
 
-
-
 # check if hex is a OP_RETURN
 def is_OP(op):
     if __OP_PRETUN__ in str(op):
@@ -26,16 +24,12 @@ def is_OP(op):
     else:
         return False
 
-
-
 # check if hex is a website/Email
 def check_website(bin_dec):
     if any(i in str(bin_dec) for i in hc.website):
         return True
     else:
         return False
-
-
 
 
 # check if hex is a integer
@@ -54,16 +48,8 @@ def is_metadata(bin_dec):
         return True
     elif (len(bin_dec) ==1) and (' ' in bin_dec):
         return False
-    #elif any(i in str(bin_dec) for i in hc.metadata):
-    #    return True
-    #elif any(bin_dec.startwith("b'"+i) for i in hc.metadata):
-    #    return True
-    #elif any(bin_dec.startwith("b"+str('"')+i) for i in hc.metadata):
-    #    return True
     else:
         return False
-
-
 
 
 
@@ -79,8 +65,7 @@ def is_metadata_hex(hex_str):
         return False
 
 
-
-
+# check content is hexstring
 def is_hex_op(binary):
     if all(i in hc.hex_dig for i in binary):
         return True
@@ -101,38 +86,16 @@ def is_hex_op(binary):
 
 # find all unknown ascii 
 def unknown_ascii(bin_dec):
-    alpha = hc.lower_alph + hc.upper_alph + hc.digit #+ hc.symbol
+    alpha = hc.lower_alph + hc.upper_alph + hc.digit 
     if ' ' not in bin_dec:
         if all(i in alpha for i in bin_dec):
             return True
-        elif any(str(bin_dec).startswith(i) for i in hc.unknown_ascii_word_prefix):
-            #for i in hc.unknown_ascii_word:
-            #    if bin_dec.startswith(i):
-            #        bin_dec = bin_dec[len(i):]
-            #        break
-            #if all(i in alpha for i in bin_dec):    
+        elif any(str(bin_dec).startswith(i) for i in hc.unknown_ascii_word_prefix):  
             return True
         elif any(i in bin_dec for i in hc.unknown_ascii_word):
             return True
         else:
             return False
-
-
-
-
-
-def spacer(binary):
-    c =0
-    for i in binary:
-        if i == ' ':
-            c = c+1
-    if c > 3:
-        return True
-    else: 
-        return False
-
-
-
 
 
 # check if hex is ascii and contains only letters or words
@@ -143,15 +106,12 @@ def no_digit(bin_dec):
         return True
 
 
-
 # check if hex is ascii 
 def is_ascii(bin_dec):
     if(all(ord(char) < 128 for char in bin_dec)):
         return True
     else:
         return False
-
-
 
 
 # personal text checker to find some words in OP_Retrun and classify as text
@@ -164,8 +124,6 @@ def is_text(bin_dec):
         return True       
     else:
         return False
-
-
 
 # save undefinable OP_RETURN fields in an additional table for more analysis
 # databse table contains only the transaction id, block number and 
@@ -208,19 +166,3 @@ def save_op_sql(numarray):
 
     sql.addOP(connection, prev_tx_id, block_number, transaction_id, tx_value, op_return, op_length, s_address, r_address, address_number, tx_time)
     connection.close()
-
-
-def check_coinbase(txid):
-    raw_tx = rpc.decoded_transactions_address(rpc_connection,txid)
-    prev_tx_id = c.get_previous_txID_of_btc(raw_tx)
-    if prev_tx_id == 'coinbase':
-         return True
-    else:
-        return False 
-
-
-
-def zcoin_string(bin_dec):
-    for zc in hc.zcoin:
-        if zc == str(bin_dec):
-            return True

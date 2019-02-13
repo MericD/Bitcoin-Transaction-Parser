@@ -1,7 +1,8 @@
 import sqlite3
 from SQL import sqlite as sql
 from rpc import rpc
-from Core import sender_add as addr
+from hashlib import *
+from base58 import *
 import time
 import re
 
@@ -59,7 +60,6 @@ def save_result_in_database(__databaseFile, find_block_trans):
     connection.close()
 
 
-
 # filter all transactions that contains an OP_RETURN
 def transaction_contains_op_return(trans):
     #initialize a dictionary 
@@ -78,7 +78,6 @@ def transaction_contains_op_return(trans):
     return trans_result
 
 
-
 # return all sent Bitcoin value fields in an transaction 
 # value contains decoded raw transaction information 
 def get_tx_value(value):
@@ -86,7 +85,6 @@ def get_tx_value(value):
     # search in "vout" (decoded raw transaction information) for value-field 
     for i in range(len(value["vout"])):
         potential_tx_value = value["vout"][i]["value"]
-        # if no one value-field is found return empty string
         if "" == tx_val:
             tx_val = str(potential_tx_value)
         # else return value-field in transaction or add found value-field to tx_val
@@ -95,18 +93,22 @@ def get_tx_value(value):
     return tx_val 
 
 
-
+# returns all previous transaction ID contained in a transaction
+# value contains decoded raw transaction information 
 def get_previous_txID_of_btc(value):
     previous_txID = ""
     for k , v in value.items():
+        # search in "vin" (decoded raw transaction information) for previous transaction IDs 
         for i in range(len(v["vin"])):
             potential_tx_id = v["vin"][i]
             if 'txid' in potential_tx_id:
                 potential_tx_id = v["vin"][i]["txid"]
                 if "" == previous_txID:
                     previous_txID = str(potential_tx_id)
+                # concatenate all found prev. transaction IDs
                 else:
                     previous_txID = previous_txID + ", " + str(potential_tx_id)
+            # if first transaction in a block return coinbase transaction
             elif 'coinbase' in potential_tx_id:
                  previous_txID = 'coinbase'
             else:
@@ -128,38 +130,41 @@ def get_op_return(value):
             # if no more OP_RETURN is found return the object
             if "" == op_return:
                 op_return = str(potential_op_return)
-
-             # else add every OP_RETURN to the object if one more is found 
+                # concatenate all found OP_RETURN contents
             else:
                 op_return = op_return + ", " + str(potential_op_return)
     # return string of found OP_RETURN fields
     return op_return 
 
 
-
-# return addresses in a transaction
+# return receiver addresses in a transaction and nuber of all found addresses
+# value contains decoded raw transaction information 
 def get_address_of_op_tx(value):
     address = ""
     c = 0
     # search in "vout" (decoded raw transaction information) for value-field 
     for k , v in value.items():
+        # search in "vin" (decoded raw transaction information) for all Bitcoin addresses contained in a transaction
         for i in range(len(v["vout"])):
             potential_tx_value = v["vout"][i]["scriptPubKey"]
             if 'addresses' in potential_tx_value:
                 potential_tx_value = potential_tx_value["addresses"]
                 for i in range(len(potential_tx_value)):
+                    # if no more addresses are found return the object and counter
                     if "" == address:
                         address = str(potential_tx_value)
                         c = c+1
+                    # concatenate all found addresses contents
                     else:
                         address = address + ", " + str(potential_tx_value)
                         c = c+1
             else:
                 pass
+    # return found addresses and counter
     return address,c
 
 
-    # return addresses in a transaction
+    # return sender addresses in a transaction
 def get_sender_address_of_op_tx(value):
     address = ""
     a = ""
@@ -173,13 +178,31 @@ def get_sender_address_of_op_tx(value):
                 potential_sender_add = re.sub(r'.*]', '', potential_sender_add)
                 if " " in potential_sender_add:
                     potential_sender_add.replace(" ", "")
-                    a = addr.PubkeyToAddress(potential_sender_add)
+                    a = pubkey_to_address(potential_sender_add)
                     if "" == address:
                         address = str(a)
+                     # concatenate all found addresses contents
                     else:
                         address = address + ", " + str(a)
+                # no sender address as public key hash found --> p2pk transaktion
                 else: 
                     address = "p2pk address"
+            # no any address is contained in scriptSig --> coinbase transaction
             else: 
                 address = "new coin!"
     return address, potential_sender_add
+
+
+
+
+# converts hex string to public key hash (address)
+def pubkey_to_address(pubkey_hex):
+    pubkey = bytearray.fromhex(pubkey_hex)
+    round1 = sha256(pubkey).digest()
+    h = new('ripemd160')
+    h.update(round1)
+    pubkey_hash = h.digest()
+    data = b'\x00' + pubkey_hash
+    address = b58encode(data + sha256(sha256(data).digest()).digest()[:4])
+    return address
+    

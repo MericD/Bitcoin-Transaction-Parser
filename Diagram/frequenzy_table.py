@@ -3,8 +3,9 @@ import array
 from Diagram import hex_config as hc
 
 
+# frequenzy table for unknown ASCII strings 
 def freq_tab(array_con):
-    
+    contents = open("frequency.txt",'w')
     c = np.array(30)   
     c.astype(int)
     c= array.array('i',(0 for _ in range(30)))
@@ -13,7 +14,6 @@ def freq_tab(array_con):
     content = [[] for x in range(0,30)]
 
     for binary in array_con:
-
         if str(binary).startswith('@') and len(binary) < 40:
             c[1] +=1
             content[1].append(binary)
@@ -92,8 +92,7 @@ def freq_tab(array_con):
                 content[24].append(binary)
         else:
             c[0] +=1
-            content[0].append(binary)
-    print(str(content[24]) + str(c[24]))
+            content[0].append(binary)      
     
-  
-    return c, content
+    contents.write("%s\n" % str(c))
+    contents.write("%s\n" % str(content))

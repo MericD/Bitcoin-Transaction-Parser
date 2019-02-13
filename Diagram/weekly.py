@@ -1,5 +1,5 @@
 import matplotlib.pyplot as pyplot
-from SQL import undef_qu as sql
+from SQL import querys as sql
 from Diagram import hex_converting
 import seaborn as sb
 import numpy as np
@@ -7,22 +7,23 @@ import pandas as ps
 import sqlite3
 import threading 
 import datetime
+import config
 
 
+__databaseFile = config.CONFIG['database_file_name']
 sb.set(style="dark", color_codes=True)
 
-f = open("w.txt", 'w')
 # connect the sqllite database and return connection
 def diagram_weekly():
-    connection = sqlite3.connect("db2.db")
+    connection = sqlite3.connect(__databaseFile)
     avarage_line_plot(connection)
 
+# converte datetime
 def unix_to_date(timestamp):
     d = datetime.datetime.fromtimestamp((timestamp))
     formatted_time = d.strftime('%Y-%m-%d')
     return formatted_time
-
-
+# 
 def weekley_epoch(start_date):
     date_1 = datetime.datetime.strptime(start_date, '%Y-%m-%d')
     end_date = date_1 + datetime.timedelta(days=1)
@@ -34,7 +35,7 @@ def avarage(intarray):
     avg_weekly= sum(intarray) / len(intarray)
     return avg_weekly
 
-
+# sort dataframe by date
 def sort_db(dataframe):
      df = dataframe.sort_values(by=['tx_time'])
      return df
@@ -55,11 +56,9 @@ def weekly_avarage_clc (connection):
      data = sort_db(read_data)
      t1 = [tuple(x) for x in data.values]
      array_av = []
-     avarage_res = []
      x=0
      i = 0
      while t1[i+1][0] not in t1[-1][0]:
-          #fehler hier 
                if x == 0:
                     end = weekley_epoch(t1[0][0])
                     array_av.append(t1[i][1])
@@ -103,7 +102,7 @@ def weekly_avarage_clc (connection):
      return array_all
 
 
-
+# plooting yearly occurences of OP_RETURN in weekly avarage
 def avarage_line_plot (connection):
      result_array = weekly_avarage_clc(connection)
 
@@ -159,37 +158,8 @@ def avarage_line_plot (connection):
      pyplot.draw()
      fig2.savefig('numpi.png', dpi = 1000)
      pyplot.close()
-
-
-
-     for i in y_val13:
-          f.write("%s\n" % str(round(i,2)))
-
-     f.write("-----------------------\n")
      
-     for i in y_val14:
-          f.write("%s\n" % str(round(i,2)))
-     
-     f.write("-----------------------\n")
-     
-     for i in y_val15:
-          f.write("%s\n" % str(round(i,2)))
-     
-     f.write("-----------------------\n")
-     
-     for i in y_val16:
-          f.write("%s\n" % str(round(i,2)))
-     
-     f.write("-----------------------\n")
-     
-     for i in y_val17:
-          f.write("%s\n" % str(round(i,2)))
-     
-     f.write("-----------------------\n")
-     
-     for i in y_val18:
-          f.write("%s\n" % str(round(i,2)))
-
+     # bar chart for every yar separatly
      bar1 = sb.barplot(x='week',y= 'avarage',data=pdnumsqr13, label="2013", color='#2A649F')
      bar1.set(xlabel = "Week", ylabel = "Average Total amount", title = "Average Total amount by Week")
      fig = pyplot.gcf()
@@ -232,6 +202,7 @@ def avarage_line_plot (connection):
      fig.autofmt_xdate()
      fig.savefig('weekley_2018.png', dpi = 1000)
      pyplot.close()    
+
 
 def array_tup(array):
      con_arr = []

@@ -87,9 +87,9 @@ def decoded_transactions(rpc_connection,block_trans):
                 return trans_decoded
     return trans_decoded
 
+#return raw data for addresses contained in transactions
 def decoded_transactions_address(rpc_connection,txid):
     trans_decoded = {}
-    #Step 3 get decode raw transactions
     try:
         rawtx = rpc_connection.getrawtransaction(txid)
         decodedtx = rpc_connection.decoderawtransaction(rawtx)

@@ -40,7 +40,7 @@ __create_tx_table_qy = """CREATE TABLE IF NOT EXISTS tx (
 __count_number_of_op_return = """SELECT block_number, create_date , COUNT(*) Count_Duplicate
 FROM tx , block
 WHERE block_number = block_nummber
-GROUP BY block_nummber
+GROUP BY block_number
 ORDER BY COUNT(*) DESC;"""
 
 # a private (SQL statment) query for selecting columns in tx 
@@ -67,16 +67,25 @@ __filtered_OP = """CREATE TABLE IF NOT EXISTS filter_op(
                 tx_time integer);"""
 
 
-#"""CREATE TABLE IF NOT EXISTS filter_op (
-#block_number integer INTEGER PRIMARY KEY,
-#transaction_id text,
-#tx_value text,
-#op_return text,
-#op_length integer,
-#tx_address text,
-#address_number integer,
-#FOREIGN KEY (transaction_id) REFERENCES tx (transaction_id));"""
 
+
+# a private (SQL statment) query for selecting cloums in table tx and block 
+# count dublicates in tx where block_number in block = block_number in tx
+__count_number_of_op_return_undef = """SELECT block_number, tx_time , COUNT(*) Count_Duplicate
+FROM filter_op
+GROUP BY block_number
+ORDER BY COUNT(*) DESC;"""
+
+  # a private (SQL statment) query for selecting cloums in table tx and block 
+# count dublicates in tx where block_number in block = block_number in tx
+__count_daily_op_return = """SELECT tx_time , COUNT(*) Count_Duplicate
+FROM filter_op
+GROUP BY tx_time
+ORDER BY COUNT(*) DESC;"""
+
+
+__check_tx_add = """SELECT transaction_id , prev_tx, block_number 
+FROM filter_op;"""
 
 
 # SQL statment to add corresponding transaction information in filter_op 
@@ -103,6 +112,17 @@ __add_tx_qy = """INSERT INTO tx
 
 # Returns the query counts the number of blocks with transactions with 
 # an op_return field depending to created date of the block
+def get_count_number_of_op_return_undef():
+    return __count_number_of_op_return_undef
+
+
+# Returns the query to get daily occurences 
+def get_count_daily_op_return():
+    return __count_daily_op_return
+
+
+# Returns the query counts the number of blocks with transactions with 
+# an op_return field depending to created date of the block
 def get_count_number_of_op_return():
     return __count_number_of_op_return
 
@@ -117,8 +137,6 @@ def get_create_filtered_OP():
 # Returns the query to add a transaction with undefinable op_returns to table filtered_OP
 def get_add_filtered_OP( tx_id, p_tx, bn, tx_v, tx_op_return, op_l, s_a, r_a, a_num, tx_t):
     return __add_op_qy.format(transaction_id = tx_id, block_number = bn, prev_tx = p_tx, tx_value=tx_v, op_return=tx_op_return, op_length=op_l, s_address = s_a, r_address = r_a, address_number=a_num, tx_time = tx_t) 
-
-
 
 # Returns the query to generate the table
 def get_create_table_query():
@@ -135,6 +153,9 @@ def get_create_tx_table_query():
 # Returns the query to add a transaction and the information of it to the table-tx
 def get_add_tx_query(tx_id, tx_v, tx_s ,tx_vin_size, tx_vout_size, tx_ti, tx_val, tx_op_return, tx_block_id):
     return __add_tx_qy.format(transaction_id=tx_id, version=tx_v, tx_size=tx_s, vin_size=tx_vin_size, vout_size=tx_vout_size, tx_time=tx_ti, tx_value=tx_val, op_return=tx_op_return, block_number=tx_block_id) 
+
+
+
 
 
 
