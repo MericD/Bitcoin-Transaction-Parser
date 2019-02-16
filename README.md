@@ -83,7 +83,7 @@ or
 $ python3 main.py
 ```
 
-4. #I am using the following Project: https://github.com/garethjns/PyBC to parse the .dat files
+4. The following Project is used: https://github.com/garethjns/PyBC to parse the .dat files, which has a BSD 3-Clause "New" or "Revised" License.
 
 ### Example outputs
 
