@@ -119,6 +119,11 @@ $ python3 main.py
 
 ![numpi](https://user-images.githubusercontent.com/23129546/52919893-4829d700-3307-11e9-8c79-aa1d549d8c85.png)
 
+* The average weekly occurrence of OP_RETURN content is plotted in a line chart for each year
+
+![numpi](https://user-images.githubusercontent.com/23129546/52919893-4829d700-3307-11e9-8c79-aa1d549d8c85.png)
+
+* The average weekly occurrence of OP_RETURN content is plotted in a bar chart for each year
 
 ### Extension of the database 
 * In hex_converting.py, adding the code lines can create an additional table with transaction information for the corresponding category. The default category is 'Non-ASCII decodable strings'
@@ -127,13 +132,12 @@ $ python3 main.py
 i.append(len(j)/2)
 hf.save_op_sql(i)
 ```
+### Additional
+* For some categories, the script creates a frequency table for content analysis which is put into a file
+* 
 
 ![bildschirmfoto 2019-02-17 um 22 17 44](https://user-images.githubusercontent.com/23129546/52919423-9ab4c480-3302-11e9-8c21-18aad8d392f1.png)
 
-
-## Authors
-
-* **Emine Saracoglu** - *Initial work* - [Py-BitcoinTransactionFilter](https://github.com/MericD/Python-Bitcoin-Transaction-Parser.git)
 
 ## Copyright and License Information
 The file "LICENSE" contains information on the history of this software, terms & conditions for usage, and a DISCLAIMER OF ALL WARRANTIES.
