@@ -9,13 +9,13 @@ This script was developed to analyze the content of the OP_RETURN fields in the 
 
 ## Bitcoin Blockchain Data
 
-The Bitcoin blockchain data is loaded from binary .dat files. These were downloaded via the Bitcoin Core Wallet. The tool and the entire Bitcoin blockchain can be downloaded from the following website: https://bitcoincore.org/en/download/
+The Bitcoin blockchain data is loaded from binary .dat files. These were downloaded via the Bitcoin Core Wallet. The tool and the entire Bitcoin blockchain can be downloaded for Windows, Linux and Mac OS from the following website: https://bitcoincore.org/en/download/
 
 
 ##  Installation
 
 ### Python
-* Instructions for installing Python3 for Linux and Mac OS operating systems:
+* Instructions for installing Python3 for Windows, Linux and Mac OS operating systems:
 https://realpython.com/installing-python/
 
 * pip3
@@ -23,17 +23,14 @@ https://realpython.com/installing-python/
 sudo apt-get install python3-pip
 ```
 
-Following projects are used:
+Following liebraries are needed:
 
 * https://github.com/garethjns/PyBC to parse the .dat files
 * https://github.com/jgarzik/python-bitcoinrpc 
-
-Following libraries are needed:
-
-*  python-bitcoinrpc
 ```
 pip install python-bitcoinrpc
 ```
+
 * base58
 ```
 pip3 install base58
@@ -50,7 +47,7 @@ pip3 install numpy
 ```
 pip3 install -U matplotlib
 ```
-* seaborn
+* seaborn: https://github.com/mwaskom/seaborn
 ```
 pip3 install seaborn
 ```
@@ -58,9 +55,9 @@ pip3 install seaborn
 ```
 pip3 install pandas
 ```
-* sqlite3
+* sqlite3: https://github.com/ghaering/pysqlite
 ```
-pip install pysqlite
+pip install pysqlite 
 ```
 * logging
 ```
@@ -109,6 +106,3 @@ $ python3 main.py
 ## Copyright and License Information
 The file "LICENSE" contains information on the history of this software, terms & conditions for usage, and a DISCLAIMER OF ALL WARRANTIES.
 
-GNU Lesser General Public License v2.1 https://github.com/jgarzik/python-bitcoinrpc/blob/master/LICENSE
-
-* https://github.com/garethjns/PyBC to parse the .dat files, which has a BSD 3-Clause "New" or "Revised" License.
