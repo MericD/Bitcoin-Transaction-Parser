@@ -11,21 +11,19 @@ This script was developed to analyze the content of the OP_RETURN fields in the 
 
 The Bitcoin blockchain data is loaded from binary .dat files. These were downloaded via the Bitcoin Core Wallet. The tool and the entire Bitcoin blockchain can be downloaded from the following website: https://bitcoincore.org/en/download/
 
-## Python
 
-##  Installing
-Further development requires python3 and pip3.
+##  Installation
 
-Instructions for installing Python3 for Linux and Mac OS operating systems:
-
+### Python
+* Instructions for installing Python3 for Linux and Mac OS operating systems:
 https://realpython.com/installing-python/
 
-
-Instructions for installing Pip3:
-
+* pip3
 ```
 sudo apt-get install python3-pip
 ```
+
+
 
 After installing/updating python and pip the following libraries are needed:
 
