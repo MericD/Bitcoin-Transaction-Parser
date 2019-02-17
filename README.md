@@ -111,7 +111,12 @@ $ python3 main.py
 
 ![time1](https://user-images.githubusercontent.com/23129546/52919735-c5544c80-3305-11e9-8268-8cdda58a249c.png)
 
-* The found OP_RETURN contents can be dencoded in ASCII, categories and plotted in a bar chart
+* The found OP_RETURN contents can be dencoded in ASCII, categoriesed and plotted in a bar chart
+
+
+* The average weekly occurrence of OP_RETURN content is plotted in a line chart for each year
+
+![numpi](https://user-images.githubusercontent.com/23129546/52919893-4829d700-3307-11e9-8c79-aa1d549d8c85.png)
 
 
 ### Extension of the database 
