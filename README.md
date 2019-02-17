@@ -24,14 +24,17 @@ sudo apt-get install python3-pip
 ```
 
 
+Following libraries are needed:
 
-After installing/updating python and pip the following libraries are needed:
-
-For decoding:
+* base58
 ```
-pip3 install hashlib
 pip3 install base58
 ```
+* hashlib
+```
+pip3 install hashlib
+```
+
 
 For displaying diagrams:
 ```
