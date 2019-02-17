@@ -106,6 +106,19 @@ $ python3 main.py
 
 ![bildschirmfoto 2019-02-17 um 22 16 29](https://user-images.githubusercontent.com/23129546/52919417-87095e00-3302-11e9-86b3-69382015d119.png)
 
+###  For statistic visualsation diagramms are plotted
+* A line chart plots the occurrences of OP_RETURN field containing transactions 
+
+![time](https://user-images.githubusercontent.com/23129546/46921047-d5c28680-cff6-11e8-8192-abefaee24a82.png)
+
+
+- After running the script a database file is created that contains two tables. This file can be open with the tool [DB Browser for SQLite](https://sqlitebrowser.org)
+
+- For statistic visualsation diagramms are plotted
+
+
+
+
 * In hex_converting.py, adding the code lines can create an additional table with transaction information for the corresponding category. The default category is 'Non-ASCII decodable strings'
 
 ```ruby
@@ -113,36 +126,7 @@ i.append(len(j)/2)
 hf.save_op_sql(i)
 ```
 
-ReadBlocks
-Reading binary data from disk
-HashBlock
-Compile the relevant information in a block header
-Hash it to verify it's valid
-HashTransaction
-Compile the relevant transaction data
-Hash it to verify it's valid
-DecodeOutputScripts
-Process transaction output script to list of OP_CODES and data
-GetOuputAddress
-Convert data in output script to a bitcoin address
-BlockChainInfoAPI
-How to query Blockchain.info's api
-And use it to verify transactions and blocks
-Export
-Explorting blocks to other formats indlucing dicts and Pandas DataFrames.
-
-
-
-- After running the script a database file is created that contains two tables. This file can be open with the tool [DB Browser for SQLite](https://sqlitebrowser.org)
-
-- For statistic visualsation diagramms are plotted
-
-![time](https://user-images.githubusercontent.com/23129546/46921047-d5c28680-cff6-11e8-8192-abefaee24a82.png)
-
-
-
 ![bildschirmfoto 2019-02-17 um 22 17 44](https://user-images.githubusercontent.com/23129546/52919423-9ab4c480-3302-11e9-8c21-18aad8d392f1.png)
-
 
 
 ## Authors
