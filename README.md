@@ -107,6 +107,8 @@ $ python3 main.py
 * **Emine Saracoglu** - *Initial work* - [Python-Bitcoin-Transaction-Parser](https://github.com/MericD/Python-Bitcoin-Transaction-Parser.git)
 
 ## Copyright and License Information
+The file "LICENSE" contains information on the history of this software, terms & conditions for usage, and a DISCLAIMER OF ALL WARRANTIES.
+
 GNU Lesser General Public License v2.1 https://github.com/jgarzik/python-bitcoinrpc/blob/master/LICENSE
 
 * https://github.com/garethjns/PyBC to parse the .dat files, which has a BSD 3-Clause "New" or "Revised" License.
