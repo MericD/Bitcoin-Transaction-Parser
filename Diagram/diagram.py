@@ -7,7 +7,7 @@ import pandas as ps
 import sqlite3
 import time
 import config
-import weekly
+from Diagram import weekly
 
 
 __databaseFile = config.CONFIG['database_file_name']
@@ -65,7 +65,7 @@ def diagram_content_OP_RETURN (connection):
     # get values for x-axis
     y_val = [y for _,y in result_array]
     #plot bar chart with corresponing x and y values and show it
-    dia = sb.barplot(x=x_val,y= y_val, palette="vlag")
+    dia = sb.barplot(x=x_val,y= y_val, palette="rocket")
     dia.set_xticklabels(fontsize = 7, labels=x_val, rotation=26, ha='right')
     # store current diagram, show it, store it as file and close it for drawing other diagrams
     fig2 = pyplot.gcf()

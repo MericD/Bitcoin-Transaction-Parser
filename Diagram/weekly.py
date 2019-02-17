@@ -5,7 +5,6 @@ import seaborn as sb
 import numpy as np
 import pandas as ps
 import sqlite3
-import threading 
 import datetime
 import config
 
@@ -198,6 +197,7 @@ def avarage_line_plot (connection):
 
      sb.barplot(x='week',y= 'avarage',data=pdnumsqr18, label="2018", color='#2A649F')
      fig = pyplot.gcf()
+     pyplot.show()
      pyplot.draw()
      fig.autofmt_xdate()
      fig.savefig('weekley_2018.png', dpi = 1000)

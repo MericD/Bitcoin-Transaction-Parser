@@ -4,7 +4,6 @@ from Diagram import helper_func as hf
 from Diagram import hex_config as hc
 from Diagram import frequenzy_table as ft
 import array
-import codecs
 import base64
 
 

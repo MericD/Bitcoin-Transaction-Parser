@@ -1,7 +1,6 @@
 from rpc import rpc
 from Core import core
 from Diagram import diagram
-from Diagram import undef_diagramm
 import config
 
 
