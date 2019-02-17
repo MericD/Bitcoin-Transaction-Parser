@@ -117,7 +117,7 @@ $ python3 main.py
 
 * The average weekly occurrence of OP_RETURN content is plotted in a line chart for each year
 
-![numpi](https://user-images.githubusercontent.com/23129546/52919893-4829d700-3307-11e9-8c79-aa1d549d8c85.png)
+![bildschirmfoto 2019-02-17 um 23 24 05](https://user-images.githubusercontent.com/23129546/52920286-2a5e7100-330b-11e9-9ed7-2259a4b1052f.png)
 
 
 * The average weekly occurrence of OP_RETURN content is plotted in a bar chart for each year (Example for 2018)
