@@ -102,7 +102,7 @@ $ python3 main.py
 
 ## Authors
 
-* **Emine Saracoglu** - *Initial work* - [Python-Bitcoin-Transaction-Parser](https://github.com/MericD/Python-Bitcoin-Transaction-Parser.git)
+* **Emine Saracoglu** - *Initial work* - [Py-BitcoinTransactionFilter](https://github.com/MericD/Python-Bitcoin-Transaction-Parser.git)
 
 ## Copyright and License Information
 The file "LICENSE" contains information on the history of this software, terms & conditions for usage, and a DISCLAIMER OF ALL WARRANTIES.
