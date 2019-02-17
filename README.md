@@ -64,6 +64,11 @@ pip install pysqlite
 pip install logging
 ```
 
+## Built With
+
+* [Visual Studio Code](https://code.visualstudio.com) - Programming tool
+* [DB Browser for SQLite](https://sqlitebrowser.org) - Showing Database
+
 
 ### Prerequisites
 
@@ -86,16 +91,12 @@ $ python3 main.py
 ```
 
 
-### Example outputs
+# Examples
 
 - After running the script a database file is created that contains two tables. This file can be open with the tool [DB Browser for SQLite](https://sqlitebrowser.org)
 
 - For statistic visualsation diagramms are plotted
 
-## Built With
-
-* [Visual Studio Code](https://code.visualstudio.com) - Programming tool
-* [DB Browser for SQLite](https://sqlitebrowser.org) - Showing Database
 
 
 
