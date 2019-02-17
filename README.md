@@ -1,5 +1,6 @@
-# Bitcoin-Transaction-Parser
-A python3 script that searches the Bitcoin blockchain and filters the transactions which contains an OP_RETURN field.
+# Py-BitcoinTransactionFilter
+Bitcoin transaction filter is a Python3 script that filters all Bitcoin transactions which contains an OP_RETURN field.
+
 
 ## Motivation
 This script was developed to analyze the content of op_return fields of bitcoin transactions on different contents.
