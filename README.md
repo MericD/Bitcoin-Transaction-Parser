@@ -124,6 +124,8 @@ $ python3 main.py
 ![numpi](https://user-images.githubusercontent.com/23129546/52919893-4829d700-3307-11e9-8c79-aa1d549d8c85.png)
 
 * The average weekly occurrence of OP_RETURN content is plotted in a bar chart for each year
+![bildschirmfoto 2019-02-17 um 23 15 59](https://user-images.githubusercontent.com/23129546/52920201-5a594480-330a-11e9-8113-b190bec67949.png)
+
 
 ### Extension of the database 
 * In hex_converting.py, adding the code lines can create an additional table with transaction information for the corresponding category. The default category is 'Non-ASCII decodable strings'
