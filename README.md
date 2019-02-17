@@ -113,6 +113,7 @@ $ python3 main.py
 
 * The found OP_RETURN contents can be dencoded in ASCII, categoriesed and plotted in a bar chart
 
+![number](https://user-images.githubusercontent.com/23129546/52920115-67296880-3309-11e9-8c2c-36542f87d8d5.png)
 
 * The average weekly occurrence of OP_RETURN content is plotted in a line chart for each year
 
