@@ -134,11 +134,11 @@ $ python3 main.py
 i.append(len(j)/2)
 hf.save_op_sql(i)
 ```
-### Additional
-* For some categories, the script creates a frequency table for content analysis which is put into a file
-* 
 
 ![bildschirmfoto 2019-02-17 um 22 17 44](https://user-images.githubusercontent.com/23129546/52919423-9ab4c480-3302-11e9-8c21-18aad8d392f1.png)
+
+### Additional
+* For some categories, the script creates a frequency table for content analysis which is put into a file
 
 
 ## Copyright and License Information
