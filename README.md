@@ -5,11 +5,13 @@ Bitcoin transaction filter is a Python3 script that filters all Bitcoin transact
 ## Motivation
 This script was developed to analyze the content of the OP_RETURN fields in the output script of Bitcoin transactions. 
 
-## Requirements
+# Requirements
 
-Bitcoin Blockchain Data
+## Bitcoin Blockchain Data
 
 The Bitcoin blockchain data is loaded from binary .dat files. These were downloaded via the Bitcoin Core Wallet. The tool and the entire Bitcoin blockchain can be downloaded from the following website: https://bitcoincore.org/en/download/
+
+## Python
 
 ##  Installing
 Further development requires python3 and pip3.
