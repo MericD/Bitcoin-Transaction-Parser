@@ -97,6 +97,9 @@ $ python3 main.py
 
 - For statistic visualsation diagramms are plotted
 
+![time](https://user-images.githubusercontent.com/23129546/46921047-d5c28680-cff6-11e8-8192-abefaee24a82.png)
+
+
 
 
 
