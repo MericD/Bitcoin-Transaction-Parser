@@ -9,7 +9,7 @@ This script was developed to analyze the content of the OP_RETURN fields in the 
 
 Bitcoin Blockchain Data
 
-The Bitcoin blockchain data is loaded from binary .dat files. These were downloaded via the Bitcoin Core Wallet.
+The Bitcoin blockchain data is loaded from binary .dat files. These were downloaded via the Bitcoin Core Wallet https://bitcoincore.org/en/download/.
 
 After the corresponding transactions have been filtered, the found transactions are saved in a SQLite3 Database with their corresponding information. Finally, the transactions can be graphically displayed with the seaborn library.
 
