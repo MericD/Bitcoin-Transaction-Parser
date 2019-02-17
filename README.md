@@ -1,10 +1,15 @@
 # Py-BitcoinTransactionFilter
-Bitcoin transaction filter is a Python3 script that filters all Bitcoin transactions which contains an OP_RETURN field.
+Bitcoin transaction filter is a Python3 script that filters all Bitcoin transactions which contains an OP_RETURN field. The found transactions are stored in a SQLite3 database with additional transaction information. Finally, the transactions can be graphically displayed.
 
 
 ## Motivation
-This script was developed to analyze the content of op_return fields of bitcoin transactions on different contents.
-## More Information
+This script was developed to analyze the content of the OP_RETURN fields in the output script of Bitcoin transactions. 
+
+## Requirements
+
+Bitcoin Blockchain Data
+
+The Bitcoin blockchain data is loaded from binary .dat files. These were downloaded via the Bitcoin Core Wallet.
 
 After the corresponding transactions have been filtered, the found transactions are saved in a SQLite3 Database with their corresponding information. Finally, the transactions can be graphically displayed with the seaborn library.
 
