@@ -106,6 +106,8 @@ $ python3 main.py
 
 ![bildschirmfoto 2019-02-17 um 22 16 29](https://user-images.githubusercontent.com/23129546/52919417-87095e00-3302-11e9-86b3-69382015d119.png)
 
+![bildschirmfoto 2019-02-17 um 22 17 44](https://user-images.githubusercontent.com/23129546/52919423-9ab4c480-3302-11e9-8c21-18aad8d392f1.png)
+
 
 
 ## Authors
