@@ -70,7 +70,7 @@ pip install logging
 * [DB Browser for SQLite](https://sqlitebrowser.org) - Showing Database
 
 
-### Prerequisites
+## Prerequisites
 
 * Before running the script, the parameters for a full node connection in config.py must be set. Mainly the searchrange of the blocks and the database name:
 
@@ -111,14 +111,10 @@ $ python3 main.py
 
 ![time](https://user-images.githubusercontent.com/23129546/46921047-d5c28680-cff6-11e8-8192-abefaee24a82.png)
 
-
-- After running the script a database file is created that contains two tables. This file can be open with the tool [DB Browser for SQLite](https://sqlitebrowser.org)
-
-- For statistic visualsation diagramms are plotted
+* The found OP_RETURN contents can be dencoded in ASCII, categories and plotted in a bar chart
 
 
-
-
+### Extension of the database 
 * In hex_converting.py, adding the code lines can create an additional table with transaction information for the corresponding category. The default category is 'Non-ASCII decodable strings'
 
 ```ruby
