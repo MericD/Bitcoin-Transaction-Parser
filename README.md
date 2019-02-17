@@ -104,6 +104,7 @@ $ python3 main.py
 
 ![bildschirmfoto 2019-02-17 um 22 16 09](https://user-images.githubusercontent.com/23129546/52919404-748f2480-3302-11e9-8a7d-1b98f29e839c.png)
 
+![bildschirmfoto 2019-02-17 um 22 16 29](https://user-images.githubusercontent.com/23129546/52919417-87095e00-3302-11e9-86b3-69382015d119.png)
 
 
 
