@@ -109,7 +109,7 @@ $ python3 main.py
 ###  For statistic visualsation diagramms are plotted
 * A line chart plots the occurrences of OP_RETURN field containing transactions 
 
-![time](https://user-images.githubusercontent.com/23129546/46921047-d5c28680-cff6-11e8-8192-abefaee24a82.png)
+![time1](https://user-images.githubusercontent.com/23129546/52919735-c5544c80-3305-11e9-8268-8cdda58a249c.png)
 
 * The found OP_RETURN contents can be dencoded in ASCII, categories and plotted in a bar chart
 
