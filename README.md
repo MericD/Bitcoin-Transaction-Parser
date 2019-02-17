@@ -73,6 +73,7 @@ pip install logging
 ### Prerequisites
 
 * Before running the script, the parameters for a full node connection in config.py must be set. Mainly the searchrange of the blocks and the database name:
+
 ![bildschirmfoto 2019-02-17 um 21 42 40](https://user-images.githubusercontent.com/23129546/52919363-03e80800-3302-11e9-939c-8b5d7f91873d.png)
 
 * Run the full node
