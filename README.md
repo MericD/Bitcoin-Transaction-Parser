@@ -107,7 +107,7 @@ $ python3 main.py
 ![bildschirmfoto 2019-02-17 um 22 16 29](https://user-images.githubusercontent.com/23129546/52919417-87095e00-3302-11e9-86b3-69382015d119.png)
 
 ###  For statistic visualsation
-* A line chart plots the occurrences of OP_RETURN field containing transactions 
+* A line chart plots the occurrences of OP_RETURN field containing transactions. The plots will be created as PNG and PDF files and stored in the plots folder.
 
 ![time1](https://user-images.githubusercontent.com/23129546/52919735-c5544c80-3305-11e9-8268-8cdda58a249c.png)
 
