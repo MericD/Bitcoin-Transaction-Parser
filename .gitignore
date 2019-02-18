@@ -9,3 +9,5 @@ blockchain.db
 *.log
 *.png
 *.txt
+*.pdf
+plots

@@ -12,6 +12,8 @@ from Diagram import weekly
 
 __databaseFile = config.CONFIG['database_file_name']
 sb.set(style="whitegrid")
+save_plots = 'plots/'
+
 
 
 # connect the sqllite database and return connection
@@ -48,7 +50,8 @@ def diagram_history_op_return (connection):
     pyplot.show()
     pyplot.margins(x=0)
     pyplot.draw()
-    fig1.savefig('time1.png', dpi=1000)
+    fig1.savefig(save_plots+'time_line.png', dpi=1000)
+    fig1.savefig(save_plots+'time_line.pdf', dpi=1000)
     pyplot.close()
 
 
@@ -71,7 +74,8 @@ def diagram_content_OP_RETURN (connection):
     fig2 = pyplot.gcf()
     pyplot.show()
     pyplot.draw()
-    fig2.savefig('number.png', dpi = 1000)
+    fig2.savefig(save_plots+'category_bar_chart.png', dpi = 1000)
+    fig2.savefig(save_plots+'category_bar_chart.pdf', dpi = 1000)
     pyplot.close()
 
 
