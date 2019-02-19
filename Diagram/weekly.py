@@ -161,7 +161,6 @@ def avarage_line_plot (connection):
      
      # bar chart for every yar separatly
      bar1 = sb.barplot(x='week',y= 'avarage',data=pdnumsqr13, label="2013", color='#2A649F')
-     bar1.set(xlabel = "Week", ylabel = "Average Total amount", title = "Average Total amount by Week")
      fig = pyplot.gcf()
      pyplot.draw()
      fig.autofmt_xdate()

@@ -6,12 +6,12 @@ from Diagram import hex_config as hc
 # frequenzy table for unknown ASCII strings 
 def freq_tab(array_con):
     contents = open("frequency.txt",'w')
-    c = np.array(30)   
+    c = np.array(25)   
     c.astype(int)
     c= array.array('i',(0 for _ in range(30)))
 
     content = []
-    content = [[] for x in range(0,30)]
+    content = [[] for x in range(0,25)]
 
     for binary in array_con:
         if str(binary).startswith('@') and len(binary) < 40:
@@ -94,5 +94,8 @@ def freq_tab(array_con):
             c[0] +=1
             content[0].append(binary)      
     
-    contents.write("%s\n" % str(c))
-    contents.write("%s\n" % str(content))
+    # store reslut in a txt file 
+    for i in range(len(content)):
+        contents.write("%s\n" % str(c[i]))
+        contents.write("%s\n" % str(content[i]))
+        contents.write("\n" + "---------------------")
